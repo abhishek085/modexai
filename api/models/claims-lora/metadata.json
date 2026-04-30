@@ -1,0 +1,19 @@
+{
+  "id": "claims-lora-v1",
+  "name": "Claims LoRA v1",
+  "niche": "claims",
+  "base_model": "phi-3-mini",
+  "ollama_model": "phi3:mini",
+  "description": "Phi-3-mini fine-tuned on insurance claims processing: adjudication, fraud detection, and policy interpretation.",
+  "version": "1.0.0",
+  "price_usd": 3.99,
+  "file": "claims-lora-v1.gguf",
+  "size_mb": 47,
+  "benchmarks": {
+    "accuracy": 0.89,
+    "latency_ms": 115,
+    "claims_f1": 0.86,
+    "dataset": "InsuranceClaims-v2"
+  },
+  "tags": ["insurance", "claims", "fraud", "lora", "phi-3"]
+}

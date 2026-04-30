@@ -1,0 +1,19 @@
+{
+  "id": "finance-lora-v1",
+  "name": "Finance LoRA v1",
+  "niche": "finance",
+  "base_model": "phi-3-mini",
+  "ollama_model": "phi3:mini",
+  "description": "Phi-3-mini fine-tuned on financial analysis datasets: earnings reports, P&L statements, and equity research.",
+  "version": "1.0.0",
+  "price_usd": 4.99,
+  "file": "finance-lora-v1.gguf",
+  "size_mb": 48,
+  "benchmarks": {
+    "accuracy": 0.91,
+    "latency_ms": 120,
+    "finance_qa_f1": 0.88,
+    "dataset": "FinanceBench-mini"
+  },
+  "tags": ["finance", "earnings", "equity", "lora", "phi-3"]
+}

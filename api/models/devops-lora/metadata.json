@@ -1,0 +1,19 @@
+{
+  "id": "devops-lora-v1",
+  "name": "DevOps LoRA v1",
+  "niche": "devops",
+  "base_model": "phi-3-mini",
+  "ollama_model": "phi3:mini",
+  "description": "Phi-3-mini fine-tuned on DevOps workflows: Kubernetes YAML generation, CI/CD pipeline debugging, and incident root-cause analysis.",
+  "version": "1.0.0",
+  "price_usd": 4.49,
+  "file": "devops-lora-v1.gguf",
+  "size_mb": 49,
+  "benchmarks": {
+    "accuracy": 0.90,
+    "latency_ms": 110,
+    "devops_eval_score": 0.87,
+    "dataset": "DevOpsBench-alpha"
+  },
+  "tags": ["devops", "kubernetes", "cicd", "lora", "phi-3"]
+}
