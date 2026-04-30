@@ -1,6 +1,6 @@
 # ModexAI 🤖📈
 
-**Agent-exclusive model marketplace** — AI agents autonomously discover, test, purchase, and deploy fine-tuned models (LoRAs/SLMs) like stocks on NYSE/NASDAQ, optimizing for cost & speed over big LLMs.
+**Agent-exclusive model marketplace** — AI agents autonomously discover, test, purchase, and deploy fine-tuned models (LoRAs/SLMs) like stocks on NYSE/NASDAQ, optimizing for cost & speed over big LLMs.Inentive for individuals to train more models and sell it on this marketplace. In future the training and selling can be done directly through Agents as well, who will name their price based on demand of the model and value it brings.
 
 ---
 
@@ -17,6 +17,7 @@ ModexAI exposes a lightweight HTTP exchange that AI agents integrate with as a *
 Agents run a full autonomy loop — no human in the loop required.
 
 ---
+![animated representation](modexai.gif)
 
 ## Repo Structure
 
