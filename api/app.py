@@ -26,6 +26,7 @@ from __future__ import annotations
 import json
 import os
 import secrets
+import re
 import shutil
 import time
 from datetime import datetime, timezone
@@ -50,6 +51,30 @@ MODELS_DIR = Path(os.getenv("MODELS_DIR", "/app/models"))
 STATIC_DIR = Path(os.getenv("STATIC_DIR", "/app/static"))
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 STRIPE_MOCK_KEY = os.getenv("STRIPE_MOCK_KEY", "mock")
+
+# Maximum GGUF file size accepted from sellers (200 MB)
+MAX_UPLOAD_BYTES = int(os.getenv("MAX_UPLOAD_MB", "200")) * 1024 * 1024
+
+
+def _safe_child(parent: Path, child: Path) -> Path:
+    """Resolve *child* and verify it is strictly inside *parent*.
+
+    Raises HTTPException 400 if the resolved path escapes the parent directory.
+    """
+    try:
+        resolved = child.resolve()
+        parent_resolved = parent.resolve()
+        resolved.relative_to(parent_resolved)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid path: must stay within the models directory")
+    return resolved
+
+
+def _slugify(text: str) -> str:
+    """Convert a string to a filesystem-safe slug (alphanumeric + hyphens only)."""
+    slug = text.lower()
+    slug = re.sub(r"[^a-z0-9]+", "-", slug)
+    return slug.strip("-")
 
 # ---------------------------------------------------------------------------
 # FastAPI app
@@ -331,7 +356,8 @@ async def download_model(
         raise HTTPException(status_code=404, detail=f"Model '{model_id}' not found")
 
     model_path = Path(model["_path"])
-    gguf_file = model_path / model.get("file", f"{model_id}.gguf")
+    raw_file = model_path / model.get("file", f"{model_id}.gguf")
+    gguf_file = _safe_child(MODELS_DIR, raw_file)
 
     if not gguf_file.exists():
         raise HTTPException(
@@ -419,12 +445,15 @@ async def seller_upload_model(
     model file.  The API assigns a slug ID, creates a directory under MODELS_DIR,
     writes metadata.json, and saves the file if provided.
     """
-    # Derive a URL-safe ID from the name
-    slug = name.lower().replace(" ", "-").replace("_", "-")
-    model_id = f"{slug}-v{version.split('.')[0]}"
+    # Derive a filesystem-safe ID (alphanumeric + hyphens only)
+    slug = _slugify(name)
+    if not slug:
+        raise HTTPException(status_code=400, detail="Model name produces an empty slug. Use alphanumeric characters.")
+    major = re.sub(r"[^0-9]", "", version.split(".")[0]) or "1"
+    model_id = f"{slug}-v{major}"
 
-    # Ensure no duplicate IDs
-    target_dir = MODELS_DIR / model_id
+    # Validate target directory stays within MODELS_DIR
+    target_dir = _safe_child(MODELS_DIR, MODELS_DIR / model_id)
     if target_dir.exists():
         raise HTTPException(
             status_code=409,
@@ -434,12 +463,34 @@ async def seller_upload_model(
 
     # Save GGUF file if provided
     file_name = f"{model_id}.gguf"
-    size_mb = 0
+    size_mb: float = 0
     if model_file and model_file.filename:
-        file_name = model_file.filename
-        dest = target_dir / file_name
-        with dest.open("wb") as fh:
-            shutil.copyfileobj(model_file.file, fh)
+        # Sanitise the uploaded filename — keep only the basename
+        safe_filename = Path(model_file.filename).name
+        if not safe_filename:
+            safe_filename = f"{model_id}.gguf"
+        dest = _safe_child(MODELS_DIR, target_dir / safe_filename)
+        bytes_written = 0
+        try:
+            with dest.open("wb") as fh:
+                chunk_size = 1024 * 64  # 64 KB
+                while True:
+                    chunk = await model_file.read(chunk_size)
+                    if not chunk:
+                        break
+                    bytes_written += len(chunk)
+                    if bytes_written > MAX_UPLOAD_BYTES:
+                        dest.unlink(missing_ok=True)
+                        raise HTTPException(
+                            status_code=413,
+                            detail=f"File too large. Maximum allowed size is {MAX_UPLOAD_BYTES // (1024*1024)} MB.",
+                        )
+                    fh.write(chunk)
+        except HTTPException:
+            # Clean up the partially-created directory on validation failure
+            shutil.rmtree(target_dir, ignore_errors=True)
+            raise
+        file_name = safe_filename
         size_mb = round(dest.stat().st_size / (1024 * 1024), 1)
 
     tag_list = [t.strip() for t in tags.split(",") if t.strip()]
@@ -465,7 +516,16 @@ async def seller_upload_model(
     (target_dir / "metadata.json").write_text(json.dumps(metadata, indent=2))
 
     return SellerModelInfo(
-        **{k: v for k, v in metadata.items() if k != "ollama_model"},
+        id=model_id,
+        name=name,
+        niche=niche,
+        base_model=base_model,
+        description=description,
+        version=version,
+        price_usd=price_usd,
+        size_mb=int(size_mb),
+        benchmarks={"accuracy": accuracy, "latency_ms": latency_ms},
+        tags=tag_list,
         purchase_count=0,
         revenue_usd=0.0,
     )
@@ -478,7 +538,7 @@ async def seller_delete_model(model_id: str) -> dict[str, str]:
 
     In production this would be scoped to the authenticated seller's models.
     """
-    target_dir = MODELS_DIR / model_id
+    target_dir = _safe_child(MODELS_DIR, MODELS_DIR / model_id)
     if not target_dir.exists():
         raise HTTPException(status_code=404, detail=f"Model '{model_id}' not found")
     shutil.rmtree(target_dir)

@@ -191,6 +191,14 @@
     let pendingDeleteId = null;
 
     /* ── Utilities ─────────────────────────────────────────── */
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
     function toast(msg, ok = true) {
       const el = document.getElementById('toast');
       el.textContent = msg;
@@ -287,8 +295,8 @@
           <td class="px-4 py-3 text-emerald-300 font-medium">${fmtUSD(m.revenue_usd)}</td>
           <td class="px-4 py-3 text-slate-400">${m.size_mb > 0 ? m.size_mb + ' MB' : '—'}</td>
           <td class="px-4 py-3">
-            <button onclick="openDeleteModal('${m.id}', '${m.name.replace(/'/g, "\\'")}')"
-                    class="px-3 py-1 text-xs rounded border border-red-700 text-red-400 hover:bg-red-900/40 transition">
+            <button class="delete-btn px-3 py-1 text-xs rounded border border-red-700 text-red-400 hover:bg-red-900/40 transition"
+                    data-id="${m.id}" data-name="${escapeHtml(m.name)}">
               Delete
             </button>
           </td>
@@ -367,6 +375,14 @@
     });
 
     /* ── Init ──────────────────────────────────────────────── */
+    // Event delegation for dynamically-rendered delete buttons
+    document.getElementById('models-table-wrap').addEventListener('click', (e) => {
+      const btn = e.target.closest('.delete-btn');
+      if (btn) {
+        openDeleteModal(btn.dataset.id, btn.dataset.name);
+      }
+    });
+
     Promise.all([loadEarnings(), loadModels()]);
   </script>
 </body>
