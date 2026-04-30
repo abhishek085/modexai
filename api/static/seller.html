@@ -276,27 +276,27 @@
     function modelRow(m) {
       const acc = m.benchmarks?.accuracy ?? '—';
       const tags = m.tags.slice(0, 3).map(t =>
-        `<span class="inline-block px-2 py-0.5 rounded bg-slate-700 text-xs text-slate-300">${t}</span>`
+        `<span class="inline-block px-2 py-0.5 rounded bg-slate-700 text-xs text-slate-300">${escapeHtml(t)}</span>`
       ).join(' ');
       return `
         <tr class="border-b border-slate-700/50 hover:bg-slate-700/30 transition">
           <td class="px-4 py-3">
-            <p class="font-medium text-white">${m.name}</p>
-            <p class="text-xs text-slate-500 mt-0.5">${m.id} · v${m.version}</p>
+            <p class="font-medium text-white">${escapeHtml(m.name)}</p>
+            <p class="text-xs text-slate-500 mt-0.5">${escapeHtml(m.id)} · v${escapeHtml(m.version)}</p>
             <div class="flex flex-wrap gap-1 mt-1">${tags}</div>
           </td>
           <td class="px-4 py-3">
-            <span class="px-2 py-1 rounded-full bg-indigo-900/60 text-indigo-300 text-xs font-medium">${m.niche}</span>
+            <span class="px-2 py-1 rounded-full bg-indigo-900/60 text-indigo-300 text-xs font-medium">${escapeHtml(m.niche)}</span>
           </td>
-          <td class="px-4 py-3 text-slate-300">${m.base_model}</td>
+          <td class="px-4 py-3 text-slate-300">${escapeHtml(m.base_model)}</td>
           <td class="px-4 py-3 text-emerald-400 font-semibold">${fmtUSD(m.price_usd)}</td>
-          <td class="px-4 py-3 text-slate-300">${typeof acc === 'number' ? (acc * 100).toFixed(1) + '%' : acc}</td>
+          <td class="px-4 py-3 text-slate-300">${typeof acc === 'number' ? (acc * 100).toFixed(1) + '%' : escapeHtml(String(acc))}</td>
           <td class="px-4 py-3 text-slate-200 font-medium">${m.purchase_count}</td>
           <td class="px-4 py-3 text-emerald-300 font-medium">${fmtUSD(m.revenue_usd)}</td>
           <td class="px-4 py-3 text-slate-400">${m.size_mb > 0 ? m.size_mb + ' MB' : '—'}</td>
           <td class="px-4 py-3">
             <button class="delete-btn px-3 py-1 text-xs rounded border border-red-700 text-red-400 hover:bg-red-900/40 transition"
-                    data-id="${m.id}" data-name="${escapeHtml(m.name)}">
+                    data-id="${escapeHtml(m.id)}" data-name="${escapeHtml(m.name)}">
               Delete
             </button>
           </td>

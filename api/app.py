@@ -467,7 +467,8 @@ async def seller_upload_model(
     if model_file and model_file.filename:
         # Sanitise the uploaded filename — keep only the basename
         safe_filename = Path(model_file.filename).name
-        if not safe_filename:
+        # Reject empty, dot-only, or filenames with path separators remaining
+        if not safe_filename or safe_filename.strip(".") == "" or "/" in safe_filename or "\\" in safe_filename:
             safe_filename = f"{model_id}.gguf"
         dest = _safe_child(MODELS_DIR, target_dir / safe_filename)
         bytes_written = 0
