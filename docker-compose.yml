@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: modexai-api
+    ports:
+      - "8000:8000"
+    environment:
+      - STRIPE_MOCK_KEY=${STRIPE_MOCK_KEY:-mock}
+      - OLLAMA_HOST=http://ollama:11434
+    volumes:
+      - ./api/models:/app/models:ro
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: modexai-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
