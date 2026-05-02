@@ -6,8 +6,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy application code and static assets
 COPY app.py .
+COPY static/ ./static/
 
 # Models are mounted at runtime via docker-compose volume
 RUN mkdir -p /app/models

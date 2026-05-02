@@ -11,8 +11,11 @@ services:
     environment:
       - STRIPE_MOCK_KEY=${STRIPE_MOCK_KEY:-mock}
       - OLLAMA_HOST=http://ollama:11434
+      - MODELS_DIR=/app/models
+      - STATIC_DIR=/app/static
     volumes:
-      - ./api/models:/app/models:ro
+      # read-write so sellers can upload new model files via the API
+      - ./api/models:/app/models
     depends_on:
       - ollama
     restart: unless-stopped
