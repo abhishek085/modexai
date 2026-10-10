@@ -15,6 +15,11 @@
     "type": "ollama",
     "tag": "qwen3.5:0.8b"
   },
+  "weights": {
+    "safetensors": "Qwen/Qwen3.5-0.8B",
+    "gguf": "ggml-org/Qwen3.5-0.8B-GGUF",
+    "mlx": "mlx-community/Qwen3.5-0.8B-4bit"
+  },
   "links": {
     "card": "https://huggingface.co/Qwen/Qwen3.5-0.8B"
   }

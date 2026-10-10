@@ -11,6 +11,7 @@ from . import config
 from .backends import Backend, BackendError
 from .checks import grade
 from .registry import Registry
+from .runtimes import served_name
 from .suites import Suite
 
 Event = Callable[[str, str, dict[str, Any]], None]
@@ -89,7 +90,7 @@ def run_benchmark(
     results: list[ModelResult] = []
     for ref in models:
         reg = registry.get(ref) if registry else None
-        tag = reg.ollama_tag if reg else ref
+        tag = served_name(reg, ref, backend.name)
         res = ModelResult(
             model=tag, suite=suite.ref, suite_sha=suite.sha, backend=backend.name,
             registry_id=reg.id if reg else None, size_gb=reg.size_gb if reg and reg.size_gb else None,

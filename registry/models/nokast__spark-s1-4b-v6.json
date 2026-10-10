@@ -17,6 +17,9 @@
     "type": "hf-decision",
     "repo": "abhishek085/spark-s1-4b-v6"
   },
+  "weights": {
+    "safetensors": "abhishek085/spark-s1-4b-v6"
+  },
   "links": {
     "card": "https://huggingface.co/abhishek085/spark-s1-4b-v6",
     "code": "https://github.com/abhishek085/open-spark-jev"

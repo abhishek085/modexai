@@ -14,6 +14,12 @@
     "type": "ollama",
     "tag": "gemma3:270m"
   },
+  "weights": {
+    "safetensors": "google/gemma-3-270m-it",
+    "gguf": "ggml-org/gemma-3-270m-it-GGUF",
+    "mlx": "mlx-community/gemma-3-270m-it-4bit",
+    "gated": true
+  },
   "links": {
     "card": "https://huggingface.co/google/gemma-3-270m"
   }

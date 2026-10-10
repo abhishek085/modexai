@@ -17,6 +17,11 @@
     "type": "ollama",
     "tag": "phi4-mini"
   },
+  "weights": {
+    "safetensors": "microsoft/Phi-4-mini-instruct",
+    "gguf": "unsloth/Phi-4-mini-instruct-GGUF",
+    "mlx": "mlx-community/Phi-4-mini-instruct-4bit"
+  },
   "links": {
     "card": "https://huggingface.co/microsoft/Phi-4-mini-instruct"
   }

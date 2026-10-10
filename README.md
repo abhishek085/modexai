@@ -44,7 +44,9 @@ ModexAI answers that, and makes the answer shareable:
 
 ## Quick start
 
-You need [Ollama](https://ollama.com) running. Then, in Claude Code:
+You need a local runtime: MLX, llama.cpp, vLLM, LM Studio or [Ollama](https://ollama.com). ModexAI uses
+whichever is serving, and `how_to_run` tells your agent how to start the best one for your machine. Then,
+in Claude Code:
 
 ```bash
 claude mcp add modexai -- uvx --from git+https://github.com/abhishek085/modexai modexai mcp

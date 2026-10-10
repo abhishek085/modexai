@@ -17,6 +17,11 @@
     "type": "ollama",
     "tag": "qwen3:1.7b"
   },
+  "weights": {
+    "safetensors": "Qwen/Qwen3-1.7B",
+    "gguf": "ggml-org/Qwen3-1.7B-GGUF",
+    "mlx": "mlx-community/Qwen3-1.7B-4bit"
+  },
   "links": {
     "card": "https://huggingface.co/Qwen/Qwen3-1.7B"
   }

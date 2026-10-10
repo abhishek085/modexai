@@ -15,6 +15,10 @@
     "type": "ollama",
     "tag": "qwen3-embedding:0.6b"
   },
+  "weights": {
+    "safetensors": "Qwen/Qwen3-Embedding-0.6B",
+    "gguf": "Qwen/Qwen3-Embedding-0.6B-GGUF"
+  },
   "links": {
     "card": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B"
   }

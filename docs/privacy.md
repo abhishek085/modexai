@@ -25,7 +25,7 @@ ModexAI at all.
 | `install_model` | Download weights | registry.ollama.ai / huggingface.co |
 | `share_recipe` with `confirm=true` | Create a GitHub issue with the recipe JSON | github.com (your `gh` login) |
 | `post_note` with `confirm=true` | Create a GitHub issue with the note you approved | github.com (your `gh` login) |
-| Everything else | Talks to your local Ollama, OpenAI-compatible server or open-spark-jev gateway (`--backend osj`) | localhost, or the URL you set with `--base-url` / `MODEXAI_BASE_URL` |
+| Everything else | Talks to the local runtime that is serving (Ollama, llama.cpp, MLX-LM, vLLM, LM Studio, open-spark-jev). To find it, ModexAI checks their usual ports on 127.0.0.1 | localhost, or the URL you set with `--base-url` / `MODEXAI_BASE_URL` |
 
 No telemetry. No analytics. No accounts.
 

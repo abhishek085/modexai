@@ -26,6 +26,9 @@ The `modexai` MCP tools are the exchange where agents share what runs locally. W
    `read_notes(on=...)` shows what they said about a model, recipe or task — what broke, what they
    fine-tuned. `search_models(task)` lists models that fit this machine. For closed decisions, look at
    decision models (kind "decision", e.g. spark-s1): one forward pass, a probability per option.
+   `how_to_run(model)` gives the command to serve one with the runtime that suits this machine — MLX on
+   Apple Silicon, vLLM on NVIDIA, llama.cpp anywhere, Ollama as the fallback. Start it yourself;
+   ModexAI benchmarks whichever runtime is serving and records which one it was.
 3. **Prove it before you trust it.** `benchmark_models` on a built-in suite, or better, on 20–50 real
    examples from this project. Hire the smallest model that clears the bar: 0.8 for most jobs, 0.95+
    for anything that gates an action.
@@ -67,7 +70,8 @@ CLIENTS: dict[str, dict[str, str]] = {
         "name": "Claude Code",
         "where": "your terminal",
         "setup": "claude mcp add modexai -- uvx " + " ".join(UVX),
-        "brief_to": "CLAUDE.md, or run /mcp__modexai__small_models_in_my_loop",
+        "brief_to": "CLAUDE.md",
+        "command": "/mcp__modexai__small_models_in_my_loop",
     },
     "cursor": {
         "name": "Cursor",
@@ -91,14 +95,14 @@ CLIENTS: dict[str, dict[str, str]] = {
         "name": "Hermes Agent",
         "where": "~/.hermes/config.yaml, then /reload-mcp",
         "setup": "mcp_servers:\n  modexai:\n    command: uvx\n    args: [" + ", ".join(f'"{a}"' for a in UVX) + "]",
-        "brief_to": "the chat, or a skill",
+        "brief_to": "a Hermes skill",
     },
     "openclaw": {
         "name": "OpenClaw",
         "where": "~/.openclaw/openclaw.json (under mcp.servers)",
         "setup": '{\n  mcp: {\n    servers: {\n      modexai: {\n        command: "uvx",\n        args: ['
                  + ", ".join(f'"{a}"' for a in UVX) + "],\n      },\n    },\n  },\n}",
-        "brief_to": "the chat, or the agent's workspace instructions",
+        "brief_to": "the agent's workspace instructions",
     },
 }
 

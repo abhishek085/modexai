@@ -14,6 +14,10 @@
     "type": "ollama",
     "tag": "nuextract"
   },
+  "weights": {
+    "safetensors": "numind/NuExtract",
+    "gguf": "bartowski/NuExtract-GGUF"
+  },
   "links": {
     "card": "https://huggingface.co/numind/NuExtract"
   }

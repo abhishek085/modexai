@@ -14,6 +14,11 @@
     "type": "ollama",
     "tag": "smollm2:1.7b"
   },
+  "weights": {
+    "safetensors": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+    "gguf": "unsloth/SmolLM2-1.7B-Instruct-GGUF",
+    "mlx": "mlx-community/SmolLM2-1.7B-Instruct"
+  },
   "links": {
     "card": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct"
   }

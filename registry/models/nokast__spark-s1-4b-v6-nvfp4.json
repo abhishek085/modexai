@@ -17,6 +17,9 @@
     "type": "hf-decision",
     "repo": "abhishek085/spark-s1-4b-v6-nvfp4"
   },
+  "weights": {
+    "nvfp4": "abhishek085/spark-s1-4b-v6-nvfp4"
+  },
   "links": {
     "card": "https://huggingface.co/abhishek085/spark-s1-4b-v6-nvfp4",
     "code": "https://github.com/abhishek085/open-spark-jev"

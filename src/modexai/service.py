@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from . import agents, config, hardware, ledger, notes, recipes, shadow
+from . import agents, config, hardware, ledger, notes, recipes, runtimes, shadow
 from .backends import Backend, BackendError, OllamaBackend, get_backend
 from .bench import ModelResult, run_benchmark, verdict
 from .install import install as _install
@@ -42,8 +42,9 @@ class Context:
             return set()
 
     def resolve(self, ref: str) -> tuple[str, Any]:
+        """The name the current runtime serves this model under, and its listing (if any)."""
         m = self.registry.get(ref)
-        return (m.ollama_tag if m else ref), m
+        return runtimes.served_name(m, ref, self.backend.name), m
 
 
 def _model_card(m, installed: set[str], task: str | None = None) -> dict[str, Any]:
@@ -84,6 +85,9 @@ def system_info(ctx: Context) -> dict[str, Any]:
     }
     if isinstance(ctx.backend, OllamaBackend):
         out["ollama"] = {"host": ctx.backend.host, "running": ctx.backend.available(), "version": ctx.backend.version()}
+    out["runtimes_running"] = runtimes.detect()
+    out["hint"] = ("Start the runtime that fits this machine (how_to_run shows the commands) — MLX on Apple Silicon, "
+                   "vLLM on NVIDIA, llama.cpp anywhere, Ollama as the fallback. ModexAI uses whichever is serving.")
     inst = ctx.installed()
     out["installed_models"] = sorted(inst)
     out["installed_and_listed"] = [m.id for m in ctx.registry.models if is_tag_installed(m.ollama_tag, inst)]
@@ -181,14 +185,34 @@ def benchmark(ctx: Context, models: list[str], suite: str | None = None, task: s
 # ---------------------------------------------------------------------------
 
 
-def install(ctx: Context, model: str, progress=None) -> dict[str, Any]:
+def how_to_run(ctx: Context, model: str, everywhere: bool = False) -> dict[str, Any]:
+    """Commands to serve a listed model with each runtime that fits this machine — the agent runs one."""
     m = ctx.registry.get(model)
-    if m is not None and m.kind == "decision":
-        raise BackendError(f"{m.id} is a decision model, served by open-spark-jev rather than installed into "
-                           f"Ollama: run `osj serve --pull {m.source['repo']}` and use the osj backend "
-                           "(see docs/decision-models.md)")
+    if m is None:
+        raise KeyError(f"{model} is not in the registry; search_models lists what is")
+    hw = hardware.detect()
+    opts = runtimes.run_options(m, None if everywhere else hw.get("accelerator"))
+    fits = bool(opts) or everywhere
+    if not opts:
+        opts = runtimes.run_options(m)
+    return {
+        "model": m.id, "machine": hardware.label(hw), "size_gb": m.size_gb or None, "license": m.license,
+        "fits_this_machine": fits, "options": opts,
+        "next": ("Run one command (in the background), then benchmark_models with the model name in its 'then' "
+                 "block. ModexAI picks up the running server automatically, or set MODEXAI_BACKEND / "
+                 "MODEXAI_BASE_URL to choose one."),
+    }
+
+
+def install(ctx: Context, model: str, progress=None) -> dict[str, Any]:
+    """Pull a model into Ollama (the fallback runtime). With any other runtime, returns how to serve it."""
+    m = ctx.registry.get(model)
+    if m is not None and (m.kind == "decision" or not isinstance(ctx.backend, OllamaBackend)):
+        return {"installed": False, **how_to_run(ctx, m.id),
+                "note": "ModexAI doesn't download models for this runtime — serve it with one of these commands."}
     if not isinstance(ctx.backend, OllamaBackend):
-        raise BackendError("install_model needs the Ollama backend")
+        raise BackendError("this model isn't listed, so there is no command to serve it; install_model only "
+                           "pulls unlisted models into Ollama")
     if m is None:
         from .install import pull
         pull(model, ctx.backend, progress or (lambda *_: None))
@@ -253,6 +277,17 @@ def recommend(ctx: Context, task: str, samples: list[dict] | None = None, max_si
     s = _pick_suite(task, None, samples, None)
     inst = ctx.installed()
     budget = max_size_gb if max_size_gb is not None else hardware.memory_budget_gb()
+    if ctx.backend.name in runtimes.ENGINE_FORMATS:
+        # A vLLM / llama.cpp / MLX server serves what the agent started: test that, and say what else to try.
+        served = sorted(inst)
+        out = benchmark(ctx, served[:candidates], suite=s.id if s.builtin else None, task=task, samples=samples,
+                        limit=limit, min_score=min_score, on_event=on_event)
+        acc = hardware.detect().get("accelerator")
+        others = [m for m in ctx.registry.search(task=s.task if s.builtin else None, max_size_gb=budget)
+                  if not any(m is ctx.registry.get(x) for x in served)][:candidates]
+        out["candidates_considered"] = served
+        out["also_worth_trying"] = [{"model": m.id, "how": runtimes.run_options(m, acc)[:1]} for m in others]
+        return out
     picks: list[str] = []
     kind = "decision" if ctx.backend.name == "osj" else "chat"
 
@@ -399,11 +434,14 @@ def try_recipe(ctx: Context, recipe_id: str, auto_install: bool = False, on_even
     if not r.get("eval"):
         raise ValueError("this recipe was measured on private data; it can't be reproduced directly — "
                          "test the model on your own samples with benchmark_models instead")
-    tag = r["model"]["tag"]
-    if tag not in ctx.installed():
-        if not auto_install:
-            return {"recipe": recipe_id, "status": "needs_install", "model": tag,
-                    "next": f"install_model('{tag}') then try_recipe again (or pass auto_install=true)"}
+    # Same weights, whatever runtime is serving here: a recipe from Ollama can be reproduced on MLX or vLLM.
+    tag, m = ctx.resolve(r["model"].get("registry_id") or r["model"]["tag"])
+    if not is_tag_installed(tag, ctx.installed()):
+        if not auto_install or not isinstance(ctx.backend, OllamaBackend):
+            how = how_to_run(ctx, m.id)["options"] if m else []
+            return {"recipe": recipe_id, "status": "needs_model", "model": tag, "how_to_run": how,
+                    "next": "Serve the model with one of these commands, then try_recipe again"
+                            + (" (or pass auto_install=true to pull it into Ollama)." if isinstance(ctx.backend, OllamaBackend) else ".")}
         install(ctx, tag)
     suite = get_suite(r["eval"]["suite"])
     if suite.sha[:16] != r["eval"].get("suite_sha", suite.sha[:16]):
@@ -413,12 +451,13 @@ def try_recipe(ctx: Context, recipe_id: str, auto_install: bool = False, on_even
     res = run_benchmark([tag], suite, ctx.backend, registry=ctx.registry, on_event=on_event)[0]
     if res.error:
         raise BackendError(res.error)
-    rep = recipes.from_result(res, task=r["task"], model=ctx.registry.get(tag), reproduces=recipe_id,
+    rep = recipes.from_result(res, task=r["task"], model=m, reproduces=recipe_id,
                               runtime_version=ctx.backend.version() if isinstance(ctx.backend, OllamaBackend) else None)
     recipes.save_local(rep)
     return {
         "recipe": recipe_id,
         "claimed": r["eval"]["score"], "measured_here": res.score,
+        "runtime": {"claimed": r.get("runtime", {}).get("engine"), "here": ctx.backend.name},
         "claimed_p50_ms": r["eval"].get("p50_ms"), "p50_ms_here": res.p50_ms,
         "hardware_here": hardware.label(), "suite_check": note,
         "reproduced": abs(res.score - r["eval"]["score"]) <= 0.1,

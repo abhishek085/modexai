@@ -18,6 +18,11 @@
     "type": "ollama",
     "tag": "qwen3:4b-instruct"
   },
+  "weights": {
+    "safetensors": "Qwen/Qwen3-4B-Instruct-2507",
+    "gguf": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+    "mlx": "mlx-community/Qwen3-4B-Instruct-2507-4bit"
+  },
   "links": {
     "card": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507"
   }

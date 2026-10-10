@@ -19,6 +19,9 @@
     "type": "hf-decision",
     "repo": "abhishek085/jev-control-core"
   },
+  "weights": {
+    "safetensors": "abhishek085/jev-control-core"
+  },
   "links": {
     "card": "https://huggingface.co/abhishek085/jev-control-core",
     "code": "https://github.com/abhishek085/open-spark-jev"

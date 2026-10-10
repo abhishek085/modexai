@@ -78,8 +78,9 @@ def test_decision_models_show_in_search_but_not_in_chat_recommendations():
 
 
 def test_install_explains_how_to_serve_a_decision_model():
-    with pytest.raises(BackendError, match="osj serve --pull abhishek085/spark-s1-4b-v6"):
-        service.install(service.Context(backend=get_backend("simulated")), "nokast/spark-s1-4b-v6")
+    out = service.install(service.Context(backend=get_backend("simulated")), "nokast/spark-s1-4b-v6")
+    assert out["installed"] is False
+    assert out["options"][0]["command"] == "osj serve --pull abhishek085/spark-s1-4b-v6"
 
 
 def test_ask_with_labels_returns_the_decision_and_confidence():

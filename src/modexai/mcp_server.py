@@ -25,7 +25,9 @@ When to use it
 
 The loop
 1. find_recipes(task) — what already works on hardware like this (community findings, no weights).
-2. search_models / recommend_model — pick candidates that fit in memory; install_model if needed.
+2. search_models / recommend_model — pick candidates that fit in memory. how_to_run gives the command to
+   serve one with the runtime that suits this machine (MLX on a Mac, vLLM on NVIDIA, llama.cpp anywhere,
+   Ollama as the fallback); start it yourself. ModexAI benchmarks whichever runtime is serving.
 3. benchmark_models — ALWAYS test on a built-in suite or on samples from the real task before delegating.
 4. ask_local_model / ask_local_model_batch — delegate. Spot-check a few outputs yourself.
 5. Shadow mode: while you do a repetitive task yourself, call record_example(task, input, your_answer).
@@ -60,7 +62,7 @@ LOCAL_COMPUTE = ToolAnnotations(read_only_hint=True, open_world_hint=False, idem
 
 @mcp.tool(annotations=RO)
 def system_info() -> dict[str, Any]:
-    """Describe this machine (chip, memory, model-size budget), the Ollama status and installed models."""
+    """Describe this machine (chip, memory, model-size budget), which local runtimes are serving, and their models."""
     return service.system_info(_ctx)
 
 
@@ -84,7 +86,8 @@ def list_benchmark_suites() -> dict[str, Any]:
 
 @mcp.tool(annotations=LOCAL_COMPUTE)
 def benchmark_models(
-    models: Annotated[list[str], Field(description="Ollama tags or registry ids, e.g. ['qwen3:1.7b', 'gemma3:1b']")],
+    models: Annotated[list[str], Field(description="Registry ids or the names your runtime serves, e.g. "
+                                                   "['qwen/qwen3-1.7b', 'mlx-community/Qwen3-1.7B-4bit', 'gemma3:1b']")],
     suite: Annotated[str | None, Field(description="Built-in suite id, e.g. 'ticket-triage'")] = None,
     task: Annotated[str | None, Field(description="Or a task: uses shadow examples if recorded, else a matching suite")] = None,
     samples: Annotated[
@@ -115,8 +118,20 @@ def recommend_model(
 @mcp.tool(annotations=ToolAnnotations(read_only_hint=False, destructive_hint=False, idempotent_hint=True,
                                       open_world_hint=True))
 def install_model(model: Annotated[str, Field(description="Registry id or Ollama tag")]) -> dict[str, Any]:
-    """Download and set up a model in Ollama (may be several GB — confirm with the user for large models)."""
+    """Pull a model into Ollama, the fallback runtime (may be several GB — confirm with the user). With any other
+    runtime it returns how_to_run instead: prefer the runtime that fits this machine."""
     return service.install(_ctx, model)
+
+
+@mcp.tool(annotations=RO)
+def how_to_run(
+    model: Annotated[str, Field(description="Registry id, e.g. 'qwen/qwen3-1.7b'")],
+    everywhere: Annotated[bool, Field(description="Show every platform, not just this machine")] = False,
+) -> dict[str, Any]:
+    """The commands to serve a model with each runtime that fits this machine — MLX on Apple Silicon, vLLM on
+    NVIDIA, llama.cpp anywhere, Ollama as the fallback, osj for decision models. You run the command; ModexAI
+    then benchmarks whatever is serving."""
+    return service.how_to_run(_ctx, model, everywhere)
 
 
 @mcp.tool(annotations=LOCAL_COMPUTE)

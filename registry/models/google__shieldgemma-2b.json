@@ -15,6 +15,11 @@
     "type": "ollama",
     "tag": "shieldgemma:2b"
   },
+  "weights": {
+    "safetensors": "google/shieldgemma-2b",
+    "gguf": "QuantFactory/shieldgemma-2b-GGUF",
+    "gated": true
+  },
   "links": {
     "card": "https://huggingface.co/google/shieldgemma-2b"
   }

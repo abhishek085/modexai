@@ -124,16 +124,34 @@ def cmd_doctor(args) -> int:
     t = Table(box=None, show_header=False, padding=(0, 2))
     t.add_row("machine", f"[bold]{hw['label']}[/] [dim]({hw['os']} {hw['arch']}, {hw['accelerator']})[/]")
     t.add_row("model budget", f"~{info['model_budget_gb']} GB [dim](override: MODEXAI_MAX_MODEL_GB)[/]")
+    running = info.get("runtimes_running") or []
+    t.add_row("runtimes", ", ".join(f"[green]{r['runtime']}[/] ({len(r['models'])} models)" for r in running)
+              or "[yellow]none running[/] — `modexai how-to-run <model>` shows how to start one")
+    t.add_row("using", f"[bold]{info['backend']}[/] [dim](choose with --backend or MODEXAI_BACKEND)[/]")
     o = info.get("ollama")
-    if o:
-        state = f"[green]running[/] v{o['version']}" if o["running"] else "[red]not running[/] — install from ollama.com and run `ollama serve`"
-        t.add_row("ollama", f"{state} [dim]{o['host']}[/]")
     t.add_row("installed", f"{len(info['installed_models'])} models · {len(info['installed_and_listed'])} listed in the registry")
     t.add_row("registry", f"{info['registry_models']} models · {len(recipes.load_index())} community recipes")
     t.add_row("local data", f"[dim]{info['data_dir']}[/] (shadow examples, receipts, ledger — never uploaded)")
     console.print(t)
     if o and o["running"] and not info["installed_and_listed"]:
         console.print("\n[bold]next:[/] `modexai recommend classification --auto-install` or `modexai install qwen/qwen3-1.7b`")
+    return 0
+
+
+def cmd_how_to_run(args) -> int:
+    res = service.how_to_run(_ctx(args), args.model, args.everywhere)
+    if args.json:
+        _dump(res)
+        return 0
+    if not res["fits_this_machine"]:
+        console.print(Text(f"none of these fit {res['machine']}; shown for other machines", style="yellow"))
+    for o in res["options"]:
+        console.print(Text(f"{o['runtime']} ({', '.join(o['platforms'])})", style="bold"))
+        console.print(Text(f"  {o['command']}"))
+        if o.get("note"):
+            console.print(Text(f"  {o['note']}", style=GRAY))
+        t = o["then"]
+        console.print(Text(f"  then: modexai --backend {o['runtime']} bench {t['model']} --suite <suite>\n", style=GRAY))
     return 0
 
 
@@ -287,6 +305,11 @@ def cmd_install(args) -> int:
         except BackendError as e:
             err.print(f"[red]{e}[/]")
             return 1
+    if out["installed"] is False:  # not Ollama, or a decision model: show how to serve it instead
+        console.print(Text(out["note"], style="yellow"))
+        for o in out["options"]:
+            console.print(Text(f"  {o['runtime']}: {o['command']}"))
+        return 0
     from .suites import suite_for_task
     m = ctx.registry.get(out["installed"])
     suite = next((s for s in (suite_for_task(t) for t in (m.tasks if m else [])) if s), None)
@@ -594,7 +617,12 @@ def parser() -> argparse.ArgumentParser:
     s.add_argument("--min-score", type=float, default=0.8)
     s.add_argument("--json", action="store_true")
 
-    s = add("install", cmd_install, "install a listed model into Ollama")
+    s = add("how-to-run", cmd_how_to_run, "commands to serve a model with the runtimes that fit this machine")
+    s.add_argument("model")
+    s.add_argument("--everywhere", action="store_true", help="every platform, not just this machine")
+    s.add_argument("--json", action="store_true")
+
+    s = add("install", cmd_install, "pull a listed model into Ollama (the fallback runtime)")
     s.add_argument("model")
 
     s = add("run", cmd_run, "run a prompt on a local model")

@@ -14,6 +14,10 @@
     "type": "ollama",
     "tag": "sqlcoder:7b"
   },
+  "weights": {
+    "safetensors": "defog/sqlcoder-7b-2",
+    "gguf": "QuantFactory/sqlcoder-7b-2-GGUF"
+  },
   "links": {
     "card": "https://huggingface.co/defog/sqlcoder-7b-2"
   }

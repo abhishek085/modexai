@@ -20,6 +20,14 @@ from . import config
 
 SOURCE_TYPES = ("ollama", "hf-gguf", "hf-safetensors", "hf-decision")
 KINDS = ("chat", "embedding", "decision")
+WEIGHT_FORMATS = ("safetensors", "gguf", "mlx", "nvfp4")
+_REPO_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*$")
+
+
+def _repo_key(name: str) -> str:
+    """Normalise a served model name: case-insensitive, without a ':quant' suffix or 'hf.co/' prefix."""
+    name = name.strip().lower().removeprefix("hf.co/").removeprefix("https://huggingface.co/")
+    return name.split(":", 1)[0] if "/" in name else name
 _ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]*/[a-z0-9][a-z0-9._-]*$")
 _TASK_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
 
@@ -71,6 +79,26 @@ class Model:
         return self.raw.get("source", {})
 
     @property
+    def weights(self) -> dict[str, Any]:
+        """Hugging Face repos per format: safetensors, gguf, mlx, nvfp4 (+ gated)."""
+        return self.raw.get("weights") or {}
+
+    @property
+    def repos(self) -> list[str]:
+        """Every Hugging Face repo that serves this model — the names runtimes other than Ollama use."""
+        out = [v for k, v in self.weights.items() if k in WEIGHT_FORMATS]
+        if self.source.get("repo"):
+            out.append(self.source["repo"])
+        return out
+
+    def format_of(self, served: str) -> str | None:
+        """Which weights format a served model name refers to ('gguf', 'mlx', ...), if any."""
+        key = _repo_key(served)
+        if key == _repo_key(self.ollama_tag) and self.source.get("type") in ("ollama", "hf-gguf", "hf-safetensors"):
+            return "ollama"
+        return next((k for k, v in self.weights.items() if k in WEIGHT_FORMATS and _repo_key(v) == key), None)
+
+    @property
     def ollama_tag(self) -> str:
         """The name this model has inside Ollama once installed."""
         src = self.source
@@ -107,6 +135,7 @@ class Registry:
         self.meta = meta or {}
         self._by_id = {m.id: m for m in models}
         self._by_tag = {m.ollama_tag: m for m in models}
+        self._by_repo = {_repo_key(r): m for m in models for r in m.repos}
 
     def __len__(self) -> int:
         return len(self.models)
@@ -121,7 +150,7 @@ class Registry:
             return self._by_tag[f"{ref}:latest"]
         if ref.endswith(":latest") and ref[: -len(":latest")] in self._by_tag:
             return self._by_tag[ref[: -len(":latest")]]
-        return None
+        return self._by_repo.get(_repo_key(ref))  # e.g. 'Qwen/Qwen3-1.7B' as vLLM or MLX serve it
 
     def tasks(self) -> dict[str, int]:
         counts: dict[str, int] = {}
@@ -309,6 +338,20 @@ def validate_listing(d: Any) -> list[str]:
             errs.append("hf-decision sources need 'repo' (e.g. 'org/spark-s1-4b-v6')")
         if (t == "hf-decision") != (kind == "decision"):
             errs.append("decision models use source.type 'hf-decision' and kind 'decision', together")
+
+    w = d.get("weights")
+    if w is not None:
+        if not isinstance(w, dict):
+            errs.append("'weights' must be an object")
+        else:
+            for k, v in w.items():
+                if k == "gated":
+                    if not isinstance(v, bool):
+                        errs.append("'weights.gated' must be true or false")
+                elif k not in WEIGHT_FORMATS:
+                    errs.append(f"unknown weights format {k!r} (use {WEIGHT_FORMATS})")
+                elif not isinstance(v, str) or not _REPO_RE.match(v):
+                    errs.append(f"'weights.{k}' must be a Hugging Face repo id like 'org/name'")
 
     mf = d.get("modelfile")
     if mf is not None:

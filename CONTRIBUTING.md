@@ -39,8 +39,10 @@ Add `registry/models/<publisher>__<name>.json`:
 Source types: `ollama` (`tag`), `hf-gguf` (`repo`, optional `quant`), `hf-safetensors` (`repo`,
 `ollama_tag`, plus an optional `modelfile` with `template` / `system` / `parameters`), `hf-decision`
 (`repo`; with `"kind": "decision"`, for System One models served by open-spark-jev — see
-[docs/decision-models.md](docs/decision-models.md)). Then run
-`modexai registry` (add `--refresh-sizes` to look up sizes) and open a PR. Listings with at least one
+[docs/decision-models.md](docs/decision-models.md)). Add a `weights` block naming
+the Hugging Face repos agents can serve it from — `safetensors` (vLLM), `gguf` (llama.cpp), `mlx`, `nvfp4`,
+plus `"gated": true` if the licence must be accepted first; `how_to_run` builds the commands from it. Then
+run `modexai registry` (add `--refresh-sizes` to look up sizes) and open a PR. Listings with at least one
 recipe get merged fastest.
 
 Fine-tuned your own specialist from shadow examples (`modexai export`)? This is where it goes.
