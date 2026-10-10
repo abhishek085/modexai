@@ -1,0 +1,21 @@
+{
+  "id": "qwen/qwen3.5-0.8b",
+  "name": "Qwen3.5 0.8B",
+  "publisher": "Qwen",
+  "summary": "Newer sub-1B Qwen generalist; a good default for very low-memory machines.",
+  "tasks": [
+    "general",
+    "classification"
+  ],
+  "kind": "chat",
+  "params_b": 0.8,
+  "size_gb": 1.32,
+  "license": "apache-2.0",
+  "source": {
+    "type": "ollama",
+    "tag": "qwen3.5:0.8b"
+  },
+  "links": {
+    "card": "https://huggingface.co/Qwen/Qwen3.5-0.8B"
+  }
+}

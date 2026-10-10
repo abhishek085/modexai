@@ -1,0 +1,21 @@
+{
+  "id": "qwen/qwen2.5-coder-1.5b",
+  "name": "Qwen2.5 Coder 1.5B",
+  "publisher": "Qwen",
+  "summary": "Code-tuned small model; a cheap first try for SQL and code-shaped outputs.",
+  "tasks": [
+    "code",
+    "text-to-sql"
+  ],
+  "kind": "chat",
+  "params_b": 1.5,
+  "size_gb": 0.99,
+  "license": "apache-2.0",
+  "source": {
+    "type": "ollama",
+    "tag": "qwen2.5-coder:1.5b"
+  },
+  "links": {
+    "card": "https://huggingface.co/Qwen/Qwen2.5-Coder-1.5B-Instruct"
+  }
+}

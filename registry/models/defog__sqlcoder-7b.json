@@ -1,0 +1,20 @@
+{
+  "id": "defog/sqlcoder-7b",
+  "name": "SQLCoder 7B",
+  "publisher": "Defog",
+  "summary": "Text-to-SQL specialist fine-tuned from Code Llama.",
+  "tasks": [
+    "text-to-sql"
+  ],
+  "kind": "chat",
+  "params_b": 7.0,
+  "size_gb": 4.11,
+  "license": "cc-by-sa-4.0",
+  "source": {
+    "type": "ollama",
+    "tag": "sqlcoder:7b"
+  },
+  "links": {
+    "card": "https://huggingface.co/defog/sqlcoder-7b-2"
+  }
+}

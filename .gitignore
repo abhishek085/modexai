@@ -1,32 +1,31 @@
-# Model files (large binary assets)
-api/models/**/*.gguf
-api/models/**/*.bin
-api/models/**/*.safetensors
-
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
 .venv/
 venv/
-env/
 *.egg-info/
 dist/
 build/
 .pytest_cache/
-.mypy_cache/
 .ruff_cache/
+.mypy_cache/
 
-# Environment
+# Built site
+_site/
+
+# Model files never belong in this repo — recipes, not weights
+*.gguf
+*.safetensors
+*.bin
+
+# Video tooling
+video/node_modules/
+video/out/
+video/.remotion/
+
+# Local
 .env
-
-# Docker
-.docker/
-
-# OS
 .DS_Store
-Thumbs.db
-
-# IDE
 .vscode/
 .idea/
+*.train.jsonl

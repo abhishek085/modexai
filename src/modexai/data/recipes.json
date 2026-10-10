@@ -1,0 +1,4444 @@
+{
+  "schema": "modexai.recipes/1",
+  "updated": "2026-10-09",
+  "recipes": [
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:1.7b scores 100% on tool-calling · Apple M4 Pro · 24 GB",
+      "task": "tool-calling",
+      "model": {
+        "tag": "qwen3:1.7b",
+        "registry_id": "qwen/qwen3-1.7b",
+        "size_gb": 1.36
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.36
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "tool-calling@1",
+        "suite_sha": "9486f0d62ea31f82",
+        "cases": 15,
+        "score": 1.0,
+        "p50_ms": 294.7,
+        "p95_ms": 404.7,
+        "tokens_per_s": 150.0
+      },
+      "author": "abhishek085",
+      "id": "rcp_ff28e7a4245a",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:micro scores 90% on prompt-injection · Apple M4 Pro · 24 GB",
+      "task": "prompt-injection",
+      "model": {
+        "tag": "granite4:micro",
+        "registry_id": "ibm/granite4-micro",
+        "size_gb": 2.1
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.1
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "prompt-injection@1",
+        "suite_sha": "cbc8cdf62e70c3c3",
+        "cases": 20,
+        "score": 0.9,
+        "p50_ms": 503.1,
+        "p95_ms": 665.4,
+        "tokens_per_s": 89.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_fea3f145ff50",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "smollm2:1.7b scores 60% on math-word · Apple M4 Pro · 24 GB",
+      "task": "math",
+      "model": {
+        "tag": "smollm2:1.7b",
+        "registry_id": "huggingface/smollm2-1.7b",
+        "size_gb": 1.82
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.82
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "math-word@1",
+        "suite_sha": "e4abfe5a4d1ee2fb",
+        "cases": 15,
+        "score": 0.6,
+        "p50_ms": 276.2,
+        "p95_ms": 525.9,
+        "tokens_per_s": 118.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_fc25b23ecad6",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "nuextract scores 69% on json-extraction · Apple M4 Pro · 24 GB",
+      "task": "extraction",
+      "model": {
+        "tag": "nuextract",
+        "registry_id": "numind/nuextract",
+        "size_gb": 2.18
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.18
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "json-extraction@1",
+        "suite_sha": "12291b6b7bef0fbd",
+        "cases": 16,
+        "score": 0.6875,
+        "p50_ms": 556.2,
+        "p95_ms": 749.3,
+        "tokens_per_s": 94.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_fa9efecd6875",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:micro scores 85% on ticket-triage · Apple M4 Pro · 24 GB",
+      "task": "classification",
+      "model": {
+        "tag": "granite4:micro",
+        "registry_id": "ibm/granite4-micro",
+        "size_gb": 2.1
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.1
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "ticket-triage@1",
+        "suite_sha": "c13c60a6c727dc7b",
+        "cases": 20,
+        "score": 0.85,
+        "p50_ms": 132.2,
+        "p95_ms": 143.2,
+        "tokens_per_s": 158.1
+      },
+      "author": "abhishek085",
+      "id": "rcp_f5e6609d124b",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:350m scores 60% on text-to-sql · Apple M4 Pro · 24 GB",
+      "task": "text-to-sql",
+      "model": {
+        "tag": "granite4:350m",
+        "registry_id": "ibm/granite4-350m",
+        "size_gb": 0.71
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.71
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "text-to-sql@1",
+        "suite_sha": "d94b7ffab0c08550",
+        "cases": 15,
+        "score": 0.6,
+        "p50_ms": 180.5,
+        "p95_ms": 238.2,
+        "tokens_per_s": 230.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_f58c83339eeb",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3.5:0.8b scores 60% on ticket-triage · Apple M4 Pro · 24 GB",
+      "task": "classification",
+      "model": {
+        "tag": "qwen3.5:0.8b",
+        "registry_id": "qwen/qwen3.5-0.8b",
+        "size_gb": 1.32
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.32
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "ticket-triage@1",
+        "suite_sha": "c13c60a6c727dc7b",
+        "cases": 20,
+        "score": 0.6,
+        "p50_ms": 210.4,
+        "p95_ms": 220.3,
+        "tokens_per_s": 276.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_f495bbbb28bb",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3.5:0.8b scores 80% on prompt-injection · Apple M4 Pro · 24 GB",
+      "task": "prompt-injection",
+      "model": {
+        "tag": "qwen3.5:0.8b",
+        "registry_id": "qwen/qwen3.5-0.8b",
+        "size_gb": 1.32
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.32
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "prompt-injection@1",
+        "suite_sha": "cbc8cdf62e70c3c3",
+        "cases": 20,
+        "score": 0.8,
+        "p50_ms": 256.4,
+        "p95_ms": 830.3,
+        "tokens_per_s": 186.0
+      },
+      "author": "abhishek085",
+      "id": "rcp_f43cfe96930f",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:270m scores 15% on ticket-triage · Apple M4 Pro · 24 GB",
+      "task": "classification",
+      "model": {
+        "tag": "gemma3:270m",
+        "registry_id": "google/gemma3-270m",
+        "size_gb": 0.29
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.29
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "ticket-triage@1",
+        "suite_sha": "c13c60a6c727dc7b",
+        "cases": 20,
+        "score": 0.15,
+        "p50_ms": 141.5,
+        "p95_ms": 144.6,
+        "tokens_per_s": 419.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_f42147c4454b",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:0.6b scores 60% on text-to-sql · Apple M4 Pro · 24 GB",
+      "task": "text-to-sql",
+      "model": {
+        "tag": "qwen3:0.6b",
+        "registry_id": "qwen/qwen3-0.6b",
+        "size_gb": 0.52
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.52
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "text-to-sql@1",
+        "suite_sha": "d94b7ffab0c08550",
+        "cases": 15,
+        "score": 0.6,
+        "p50_ms": 158.3,
+        "p95_ms": 236.3,
+        "tokens_per_s": 306.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_f1ef9fb2e71f",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:4b-instruct scores 100% on text-to-sql · Apple M4 Pro · 24 GB",
+      "task": "text-to-sql",
+      "model": {
+        "tag": "qwen3:4b-instruct",
+        "registry_id": "qwen/qwen3-4b",
+        "size_gb": 2.5
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.5
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "text-to-sql@1",
+        "suite_sha": "d94b7ffab0c08550",
+        "cases": 15,
+        "score": 1.0,
+        "p50_ms": 489.6,
+        "p95_ms": 659.0,
+        "tokens_per_s": 81.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_f05c0ef48d2e",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:350m scores 50% on prompt-injection · Apple M4 Pro · 24 GB",
+      "task": "prompt-injection",
+      "model": {
+        "tag": "granite4:350m",
+        "registry_id": "ibm/granite4-350m",
+        "size_gb": 0.71
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.71
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "prompt-injection@1",
+        "suite_sha": "cbc8cdf62e70c3c3",
+        "cases": 20,
+        "score": 0.5,
+        "p50_ms": 96.9,
+        "p95_ms": 347.7,
+        "tokens_per_s": 274.8
+      },
+      "author": "abhishek085",
+      "id": "rcp_e9593a1b4bbc",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3.5:0.8b scores 88% on fact-check · Apple M4 Pro · 24 GB",
+      "task": "fact-checking",
+      "model": {
+        "tag": "qwen3.5:0.8b",
+        "registry_id": "qwen/qwen3.5-0.8b",
+        "size_gb": 1.32
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.32
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "fact-check@1",
+        "suite_sha": "50011741616aefc6",
+        "cases": 16,
+        "score": 0.875,
+        "p50_ms": 216.5,
+        "p95_ms": 223.0,
+        "tokens_per_s": 279.4
+      },
+      "author": "abhishek085",
+      "id": "rcp_e6c8f783c305",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:350m scores 27% on math-word · Apple M4 Pro · 24 GB",
+      "task": "math",
+      "model": {
+        "tag": "granite4:350m",
+        "registry_id": "ibm/granite4-350m",
+        "size_gb": 0.71
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.71
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "math-word@1",
+        "suite_sha": "e4abfe5a4d1ee2fb",
+        "cases": 15,
+        "score": 0.2667,
+        "p50_ms": 190.9,
+        "p95_ms": 323.1,
+        "tokens_per_s": 225.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_e57d4c8c23da",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "smollm2:1.7b scores 50% on ticket-triage · Apple M4 Pro · 24 GB",
+      "task": "classification",
+      "model": {
+        "tag": "smollm2:1.7b",
+        "registry_id": "huggingface/smollm2-1.7b",
+        "size_gb": 1.82
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.82
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "ticket-triage@1",
+        "suite_sha": "c13c60a6c727dc7b",
+        "cases": 20,
+        "score": 0.5,
+        "p50_ms": 78.1,
+        "p95_ms": 103.8,
+        "tokens_per_s": 160.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_e00be2771507",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "phi4-mini scores 67% on text-to-sql · Apple M4 Pro · 24 GB",
+      "task": "text-to-sql",
+      "model": {
+        "tag": "phi4-mini",
+        "registry_id": "microsoft/phi4-mini",
+        "size_gb": 2.49
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.49
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "text-to-sql@1",
+        "suite_sha": "d94b7ffab0c08550",
+        "cases": 15,
+        "score": 0.6667,
+        "p50_ms": 570.5,
+        "p95_ms": 1029.3,
+        "tokens_per_s": 81.1
+      },
+      "author": "abhishek085",
+      "id": "rcp_dbcf7b66240e",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "phi4-mini scores 86% on content-moderation · Apple M4 Pro · 24 GB",
+      "task": "moderation",
+      "model": {
+        "tag": "phi4-mini",
+        "registry_id": "microsoft/phi4-mini",
+        "size_gb": 2.49
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.49
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "content-moderation@1",
+        "suite_sha": "cef85bdd7fa62914",
+        "cases": 14,
+        "score": 0.8571,
+        "p50_ms": 186.8,
+        "p95_ms": 200.8,
+        "tokens_per_s": 146.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_db6b567364dc",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:350m scores 0% on pii-redaction · Apple M4 Pro · 24 GB",
+      "task": "pii-redaction",
+      "model": {
+        "tag": "granite4:350m",
+        "registry_id": "ibm/granite4-350m",
+        "size_gb": 0.71
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.71
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "pii-redaction@1",
+        "suite_sha": "2cdc3ec16f5223ae",
+        "cases": 12,
+        "score": 0.0,
+        "p50_ms": 200.8,
+        "p95_ms": 254.8,
+        "tokens_per_s": 227.8
+      },
+      "author": "abhishek085",
+      "id": "rcp_db5ab968cf83",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:270m scores 50% on content-moderation · Apple M4 Pro · 24 GB",
+      "task": "moderation",
+      "model": {
+        "tag": "gemma3:270m",
+        "registry_id": "google/gemma3-270m",
+        "size_gb": 0.29
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.29
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "content-moderation@1",
+        "suite_sha": "cef85bdd7fa62914",
+        "cases": 14,
+        "score": 0.5,
+        "p50_ms": 136.9,
+        "p95_ms": 146.3,
+        "tokens_per_s": 542.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_d9d6c7f6b0b8",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:270m scores 0% on tool-calling · Apple M4 Pro · 24 GB",
+      "task": "tool-calling",
+      "model": {
+        "tag": "gemma3:270m",
+        "registry_id": "google/gemma3-270m",
+        "size_gb": 0.29
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.29
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "tool-calling@1",
+        "suite_sha": "9486f0d62ea31f82",
+        "cases": 15,
+        "score": 0.0,
+        "p50_ms": 218.9,
+        "p95_ms": 278.3,
+        "tokens_per_s": 342.0
+      },
+      "author": "abhishek085",
+      "id": "rcp_d8f16844e911",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:micro scores 88% on json-extraction · Apple M4 Pro · 24 GB",
+      "task": "extraction",
+      "model": {
+        "tag": "granite4:micro",
+        "registry_id": "ibm/granite4-micro",
+        "size_gb": 2.1
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.1
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "json-extraction@1",
+        "suite_sha": "12291b6b7bef0fbd",
+        "cases": 16,
+        "score": 0.875,
+        "p50_ms": 501.6,
+        "p95_ms": 550.0,
+        "tokens_per_s": 89.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_d8e0872c3cc0",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:270m scores 27% on math-word · Apple M4 Pro · 24 GB",
+      "task": "math",
+      "model": {
+        "tag": "gemma3:270m",
+        "registry_id": "google/gemma3-270m",
+        "size_gb": 0.29
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.29
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "math-word@1",
+        "suite_sha": "e4abfe5a4d1ee2fb",
+        "cases": 15,
+        "score": 0.2667,
+        "p50_ms": 366.9,
+        "p95_ms": 423.0,
+        "tokens_per_s": 349.0
+      },
+      "author": "abhishek085",
+      "id": "rcp_d41566c1c51a",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3.5:0.8b scores 71% on content-moderation · Apple M4 Pro · 24 GB",
+      "task": "moderation",
+      "model": {
+        "tag": "qwen3.5:0.8b",
+        "registry_id": "qwen/qwen3.5-0.8b",
+        "size_gb": 1.32
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.32
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "content-moderation@1",
+        "suite_sha": "cef85bdd7fa62914",
+        "cases": 14,
+        "score": 0.7143,
+        "p50_ms": 212.3,
+        "p95_ms": 217.1,
+        "tokens_per_s": 278.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_cdc8109df488",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "smollm2:1.7b scores 80% on tool-calling · Apple M4 Pro · 24 GB",
+      "task": "tool-calling",
+      "model": {
+        "tag": "smollm2:1.7b",
+        "registry_id": "huggingface/smollm2-1.7b",
+        "size_gb": 1.82
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.82
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "tool-calling@1",
+        "suite_sha": "9486f0d62ea31f82",
+        "cases": 15,
+        "score": 0.8,
+        "p50_ms": 342.9,
+        "p95_ms": 486.0,
+        "tokens_per_s": 112.0
+      },
+      "author": "abhishek085",
+      "id": "rcp_cd8eb9b73eb6",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:4b-instruct scores 100% on content-moderation · Apple M4 Pro · 24 GB",
+      "task": "moderation",
+      "model": {
+        "tag": "qwen3:4b-instruct",
+        "registry_id": "qwen/qwen3-4b",
+        "size_gb": 2.5
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.5
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "content-moderation@1",
+        "suite_sha": "cef85bdd7fa62914",
+        "cases": 14,
+        "score": 1.0,
+        "p50_ms": 164.8,
+        "p95_ms": 168.0,
+        "tokens_per_s": 149.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_c965346f806d",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:4b-instruct scores 85% on ticket-triage · Apple M4 Pro · 24 GB",
+      "task": "classification",
+      "model": {
+        "tag": "qwen3:4b-instruct",
+        "registry_id": "qwen/qwen3-4b",
+        "size_gb": 2.5
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.5
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "ticket-triage@1",
+        "suite_sha": "c13c60a6c727dc7b",
+        "cases": 20,
+        "score": 0.85,
+        "p50_ms": 172.3,
+        "p95_ms": 180.6,
+        "tokens_per_s": 145.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_c8bd5b32698d",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:4b-instruct scores 100% on tool-calling · Apple M4 Pro · 24 GB",
+      "task": "tool-calling",
+      "model": {
+        "tag": "qwen3:4b-instruct",
+        "registry_id": "qwen/qwen3-4b",
+        "size_gb": 2.5
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.5
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "tool-calling@1",
+        "suite_sha": "9486f0d62ea31f82",
+        "cases": 15,
+        "score": 1.0,
+        "p50_ms": 489.6,
+        "p95_ms": 707.9,
+        "tokens_per_s": 80.1
+      },
+      "author": "abhishek085",
+      "id": "rcp_c6b85144a80c",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:1.7b scores 67% on pii-redaction · Apple M4 Pro · 24 GB",
+      "task": "pii-redaction",
+      "model": {
+        "tag": "qwen3:1.7b",
+        "registry_id": "qwen/qwen3-1.7b",
+        "size_gb": 1.36
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.36
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "pii-redaction@1",
+        "suite_sha": "2cdc3ec16f5223ae",
+        "cases": 12,
+        "score": 0.6667,
+        "p50_ms": 260.2,
+        "p95_ms": 323.5,
+        "tokens_per_s": 155.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_c2e92627cfb4",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:1b scores 60% on text-to-sql · Apple M4 Pro · 24 GB",
+      "task": "text-to-sql",
+      "model": {
+        "tag": "gemma3:1b",
+        "registry_id": "google/gemma3-1b",
+        "size_gb": 0.81
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.81
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "text-to-sql@1",
+        "suite_sha": "d94b7ffab0c08550",
+        "cases": 15,
+        "score": 0.6,
+        "p50_ms": 286.2,
+        "p95_ms": 412.3,
+        "tokens_per_s": 173.8
+      },
+      "author": "abhishek085",
+      "id": "rcp_bb613ec49039",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:0.6b scores 73% on math-word · Apple M4 Pro · 24 GB",
+      "task": "math",
+      "model": {
+        "tag": "qwen3:0.6b",
+        "registry_id": "qwen/qwen3-0.6b",
+        "size_gb": 0.52
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.52
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "math-word@1",
+        "suite_sha": "e4abfe5a4d1ee2fb",
+        "cases": 15,
+        "score": 0.7333,
+        "p50_ms": 314.5,
+        "p95_ms": 416.2,
+        "tokens_per_s": 290.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_bacac3855794",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "smollm2:1.7b scores 69% on json-extraction · Apple M4 Pro · 24 GB",
+      "task": "extraction",
+      "model": {
+        "tag": "smollm2:1.7b",
+        "registry_id": "huggingface/smollm2-1.7b",
+        "size_gb": 1.82
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.82
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "json-extraction@1",
+        "suite_sha": "12291b6b7bef0fbd",
+        "cases": 16,
+        "score": 0.6875,
+        "p50_ms": 421.1,
+        "p95_ms": 503.4,
+        "tokens_per_s": 116.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_b97fef180104",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:270m scores 13% on text-to-sql · Apple M4 Pro · 24 GB",
+      "task": "text-to-sql",
+      "model": {
+        "tag": "gemma3:270m",
+        "registry_id": "google/gemma3-270m",
+        "size_gb": 0.29
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.29
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "text-to-sql@1",
+        "suite_sha": "d94b7ffab0c08550",
+        "cases": 15,
+        "score": 0.1333,
+        "p50_ms": 186.8,
+        "p95_ms": 251.6,
+        "tokens_per_s": 350.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_b5604fc65ff7",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "smollm2:1.7b scores 85% on prompt-injection · Apple M4 Pro · 24 GB",
+      "task": "prompt-injection",
+      "model": {
+        "tag": "smollm2:1.7b",
+        "registry_id": "huggingface/smollm2-1.7b",
+        "size_gb": 1.82
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.82
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "prompt-injection@1",
+        "suite_sha": "cbc8cdf62e70c3c3",
+        "cases": 20,
+        "score": 0.85,
+        "p50_ms": 99.5,
+        "p95_ms": 107.1,
+        "tokens_per_s": 147.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_b32e062f7a5e",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3.5:0.8b scores 47% on tool-calling · Apple M4 Pro · 24 GB",
+      "task": "tool-calling",
+      "model": {
+        "tag": "qwen3.5:0.8b",
+        "registry_id": "qwen/qwen3.5-0.8b",
+        "size_gb": 1.32
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.32
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "tool-calling@1",
+        "suite_sha": "9486f0d62ea31f82",
+        "cases": 15,
+        "score": 0.4667,
+        "p50_ms": 447.8,
+        "p95_ms": 605.3,
+        "tokens_per_s": 154.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_b14d9a9bec1f",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:micro scores 93% on content-moderation · Apple M4 Pro · 24 GB",
+      "task": "moderation",
+      "model": {
+        "tag": "granite4:micro",
+        "registry_id": "ibm/granite4-micro",
+        "size_gb": 2.1
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.1
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "content-moderation@1",
+        "suite_sha": "cef85bdd7fa62914",
+        "cases": 14,
+        "score": 0.9286,
+        "p50_ms": 134.4,
+        "p95_ms": 138.1,
+        "tokens_per_s": 160.4
+      },
+      "author": "abhishek085",
+      "id": "rcp_af0fa3ec12ef",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "llama-guard3:1b scores 93% on content-moderation · Apple M4 Pro · 24 GB",
+      "task": "moderation",
+      "model": {
+        "tag": "llama-guard3:1b",
+        "registry_id": "meta/llama-guard3-1b",
+        "size_gb": 1.6
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.6
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "content-moderation@1",
+        "suite_sha": "cef85bdd7fa62914",
+        "cases": 14,
+        "score": 0.9286,
+        "p50_ms": 155.6,
+        "p95_ms": 181.9,
+        "tokens_per_s": 191.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_a7a28b1e0db4",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:micro scores 93% on tool-calling · Apple M4 Pro · 24 GB",
+      "task": "tool-calling",
+      "model": {
+        "tag": "granite4:micro",
+        "registry_id": "ibm/granite4-micro",
+        "size_gb": 2.1
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.1
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "tool-calling@1",
+        "suite_sha": "9486f0d62ea31f82",
+        "cases": 15,
+        "score": 0.9333,
+        "p50_ms": 420.6,
+        "p95_ms": 537.0,
+        "tokens_per_s": 88.1
+      },
+      "author": "abhishek085",
+      "id": "rcp_9a18445bb1ee",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:1.7b scores 88% on json-extraction · Apple M4 Pro · 24 GB",
+      "task": "extraction",
+      "model": {
+        "tag": "qwen3:1.7b",
+        "registry_id": "qwen/qwen3-1.7b",
+        "size_gb": 1.36
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.36
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "json-extraction@1",
+        "suite_sha": "12291b6b7bef0fbd",
+        "cases": 16,
+        "score": 0.875,
+        "p50_ms": 370.2,
+        "p95_ms": 409.4,
+        "tokens_per_s": 152.4
+      },
+      "author": "abhishek085",
+      "id": "rcp_99e5c27d3589",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:4b scores 0% on ticket-triage · Apple M4 Pro · 24 GB",
+      "task": "classification",
+      "model": {
+        "tag": "qwen3:4b",
+        "size_gb": 2.5
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.5
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "ticket-triage@1",
+        "suite_sha": "c13c60a6c727dc7b",
+        "cases": 20,
+        "score": 0.0,
+        "p50_ms": 447.4,
+        "p95_ms": 452.0,
+        "tokens_per_s": 80.3
+      },
+      "notes": "Pitfall: Ollama's default qwen3:4b tag is the thinking build. It keeps reasoning in the answer even with think=false, so short-answer tasks fail. Use qwen3:4b-instruct (same size) instead.",
+      "author": "abhishek085",
+      "id": "rcp_985d320d6cb4",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:0.6b scores 69% on fact-check · Apple M4 Pro · 24 GB",
+      "task": "fact-checking",
+      "model": {
+        "tag": "qwen3:0.6b",
+        "registry_id": "qwen/qwen3-0.6b",
+        "size_gb": 0.52
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.52
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "fact-check@1",
+        "suite_sha": "50011741616aefc6",
+        "cases": 16,
+        "score": 0.6875,
+        "p50_ms": 109.6,
+        "p95_ms": 122.8,
+        "tokens_per_s": 491.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_966bdf3d931c",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:0.6b scores 71% on content-moderation · Apple M4 Pro · 24 GB",
+      "task": "moderation",
+      "model": {
+        "tag": "qwen3:0.6b",
+        "registry_id": "qwen/qwen3-0.6b",
+        "size_gb": 0.52
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.52
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "content-moderation@1",
+        "suite_sha": "cef85bdd7fa62914",
+        "cases": 14,
+        "score": 0.7143,
+        "p50_ms": 114.4,
+        "p95_ms": 119.4,
+        "tokens_per_s": 489.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_94e7bdd9244c",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "nokast-securerag:0.5b scores 95% on prompt-injection · Apple M4 Pro · 24 GB",
+      "task": "prompt-injection",
+      "model": {
+        "tag": "nokast-securerag:0.5b",
+        "registry_id": "nokast/securerag-0.5b",
+        "size_gb": 0.99
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.99
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "prompt-injection@1",
+        "suite_sha": "cbc8cdf62e70c3c3",
+        "cases": 20,
+        "score": 0.95,
+        "p50_ms": 374.9,
+        "p95_ms": 516.0,
+        "tokens_per_s": 185.0
+      },
+      "author": "abhishek085",
+      "id": "rcp_93e2b2581cc7",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:0.6b scores 70% on prompt-injection · Apple M4 Pro · 24 GB",
+      "task": "prompt-injection",
+      "model": {
+        "tag": "qwen3:0.6b",
+        "registry_id": "qwen/qwen3-0.6b",
+        "size_gb": 0.52
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.52
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "prompt-injection@1",
+        "suite_sha": "cbc8cdf62e70c3c3",
+        "cases": 20,
+        "score": 0.7,
+        "p50_ms": 131.4,
+        "p95_ms": 135.2,
+        "tokens_per_s": 337.1
+      },
+      "author": "abhishek085",
+      "id": "rcp_9347e9e280fe",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:350m scores 69% on json-extraction · Apple M4 Pro · 24 GB",
+      "task": "extraction",
+      "model": {
+        "tag": "granite4:350m",
+        "registry_id": "ibm/granite4-350m",
+        "size_gb": 0.71
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.71
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "json-extraction@1",
+        "suite_sha": "12291b6b7bef0fbd",
+        "cases": 16,
+        "score": 0.6875,
+        "p50_ms": 221.9,
+        "p95_ms": 257.3,
+        "tokens_per_s": 223.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_9270712a257f",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:270m scores 81% on json-extraction · Apple M4 Pro · 24 GB",
+      "task": "extraction",
+      "model": {
+        "tag": "gemma3:270m",
+        "registry_id": "google/gemma3-270m",
+        "size_gb": 0.29
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.29
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "json-extraction@1",
+        "suite_sha": "12291b6b7bef0fbd",
+        "cases": 16,
+        "score": 0.8125,
+        "p50_ms": 262.0,
+        "p95_ms": 281.8,
+        "tokens_per_s": 348.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_923c99fae19d",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:1.7b scores 94% on fact-check · Apple M4 Pro · 24 GB",
+      "task": "fact-checking",
+      "model": {
+        "tag": "qwen3:1.7b",
+        "registry_id": "qwen/qwen3-1.7b",
+        "size_gb": 1.36
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.36
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "fact-check@1",
+        "suite_sha": "50011741616aefc6",
+        "cases": 16,
+        "score": 0.9375,
+        "p50_ms": 142.6,
+        "p95_ms": 148.6,
+        "tokens_per_s": 267.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_8f815b737201",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:4b-instruct scores 100% on math-word · Apple M4 Pro · 24 GB",
+      "task": "math",
+      "model": {
+        "tag": "qwen3:4b-instruct",
+        "registry_id": "qwen/qwen3-4b",
+        "size_gb": 2.5
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.5
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "math-word@1",
+        "suite_sha": "e4abfe5a4d1ee2fb",
+        "cases": 15,
+        "score": 1.0,
+        "p50_ms": 694.6,
+        "p95_ms": 1193.2,
+        "tokens_per_s": 79.0
+      },
+      "author": "abhishek085",
+      "id": "rcp_8e98bd0f8214",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:4b-instruct scores 88% on json-extraction · Apple M4 Pro · 24 GB",
+      "task": "extraction",
+      "model": {
+        "tag": "qwen3:4b-instruct",
+        "registry_id": "qwen/qwen3-4b",
+        "size_gb": 2.5
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.5
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "json-extraction@1",
+        "suite_sha": "12291b6b7bef0fbd",
+        "cases": 16,
+        "score": 0.875,
+        "p50_ms": 648.0,
+        "p95_ms": 705.4,
+        "tokens_per_s": 79.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_8da2350c6a9d",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "phi4-mini scores 94% on fact-check · Apple M4 Pro · 24 GB",
+      "task": "fact-checking",
+      "model": {
+        "tag": "phi4-mini",
+        "registry_id": "microsoft/phi4-mini",
+        "size_gb": 2.49
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.49
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "fact-check@1",
+        "suite_sha": "50011741616aefc6",
+        "cases": 16,
+        "score": 0.9375,
+        "p50_ms": 197.2,
+        "p95_ms": 304.4,
+        "tokens_per_s": 131.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_83f2b6ddfc60",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:270m scores 75% on prompt-injection · Apple M4 Pro · 24 GB",
+      "task": "prompt-injection",
+      "model": {
+        "tag": "gemma3:270m",
+        "registry_id": "google/gemma3-270m",
+        "size_gb": 0.29
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.29
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "prompt-injection@1",
+        "suite_sha": "cbc8cdf62e70c3c3",
+        "cases": 20,
+        "score": 0.75,
+        "p50_ms": 147.0,
+        "p95_ms": 153.0,
+        "tokens_per_s": 414.2
+      },
+      "author": "abhishek085",
+      "id": "rcp_8249a8e95038",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:270m scores 38% on fact-check · Apple M4 Pro · 24 GB",
+      "task": "fact-checking",
+      "model": {
+        "tag": "gemma3:270m",
+        "registry_id": "google/gemma3-270m",
+        "size_gb": 0.29
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.29
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "fact-check@1",
+        "suite_sha": "50011741616aefc6",
+        "cases": 16,
+        "score": 0.375,
+        "p50_ms": 141.2,
+        "p95_ms": 143.4,
+        "tokens_per_s": 463.1
+      },
+      "author": "abhishek085",
+      "id": "rcp_80b36051abbe",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "phi4-mini scores 25% on pii-redaction · Apple M4 Pro · 24 GB",
+      "task": "pii-redaction",
+      "model": {
+        "tag": "phi4-mini",
+        "registry_id": "microsoft/phi4-mini",
+        "size_gb": 2.49
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.49
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "pii-redaction@1",
+        "suite_sha": "2cdc3ec16f5223ae",
+        "cases": 12,
+        "score": 0.25,
+        "p50_ms": 1137.0,
+        "p95_ms": 1867.3,
+        "tokens_per_s": 80.0
+      },
+      "author": "abhishek085",
+      "id": "rcp_7fb35bdeafc3",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:350m scores 64% on content-moderation · Apple M4 Pro · 24 GB",
+      "task": "moderation",
+      "model": {
+        "tag": "granite4:350m",
+        "registry_id": "ibm/granite4-350m",
+        "size_gb": 0.71
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.71
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "content-moderation@1",
+        "suite_sha": "cef85bdd7fa62914",
+        "cases": 14,
+        "score": 0.6429,
+        "p50_ms": 79.8,
+        "p95_ms": 85.9,
+        "tokens_per_s": 387.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_7f42ff03689b",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "phi4-mini scores 100% on math-word · Apple M4 Pro · 24 GB",
+      "task": "math",
+      "model": {
+        "tag": "phi4-mini",
+        "registry_id": "microsoft/phi4-mini",
+        "size_gb": 2.49
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.49
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "math-word@1",
+        "suite_sha": "e4abfe5a4d1ee2fb",
+        "cases": 15,
+        "score": 1.0,
+        "p50_ms": 830.9,
+        "p95_ms": 1290.8,
+        "tokens_per_s": 80.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_7dcfe930e4e9",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:micro scores 50% on pii-redaction · Apple M4 Pro · 24 GB",
+      "task": "pii-redaction",
+      "model": {
+        "tag": "granite4:micro",
+        "registry_id": "ibm/granite4-micro",
+        "size_gb": 2.1
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.1
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "pii-redaction@1",
+        "suite_sha": "2cdc3ec16f5223ae",
+        "cases": 12,
+        "score": 0.5,
+        "p50_ms": 318.6,
+        "p95_ms": 374.9,
+        "tokens_per_s": 92.2
+      },
+      "author": "abhishek085",
+      "id": "rcp_7b759657abff",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:4b-instruct scores 100% on prompt-injection · Apple M4 Pro · 24 GB",
+      "task": "prompt-injection",
+      "model": {
+        "tag": "qwen3:4b-instruct",
+        "registry_id": "qwen/qwen3-4b",
+        "size_gb": 2.5
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.5
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "prompt-injection@1",
+        "suite_sha": "cbc8cdf62e70c3c3",
+        "cases": 20,
+        "score": 1.0,
+        "p50_ms": 225.0,
+        "p95_ms": 804.9,
+        "tokens_per_s": 93.8
+      },
+      "author": "abhishek085",
+      "id": "rcp_79cad5a267b2",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:1b scores 55% on prompt-injection · Apple M4 Pro · 24 GB",
+      "task": "prompt-injection",
+      "model": {
+        "tag": "gemma3:1b",
+        "registry_id": "google/gemma3-1b",
+        "size_gb": 0.81
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.81
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "prompt-injection@1",
+        "suite_sha": "cbc8cdf62e70c3c3",
+        "cases": 20,
+        "score": 0.55,
+        "p50_ms": 209.2,
+        "p95_ms": 416.0,
+        "tokens_per_s": 193.8
+      },
+      "author": "abhishek085",
+      "id": "rcp_7225966ae647",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:270m scores 0% on pii-redaction · Apple M4 Pro · 24 GB",
+      "task": "pii-redaction",
+      "model": {
+        "tag": "gemma3:270m",
+        "registry_id": "google/gemma3-270m",
+        "size_gb": 0.29
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.29
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "pii-redaction@1",
+        "suite_sha": "2cdc3ec16f5223ae",
+        "cases": 12,
+        "score": 0.0,
+        "p50_ms": 209.0,
+        "p95_ms": 226.8,
+        "tokens_per_s": 354.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_6d9f8c7ff9a8",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:0.6b scores 17% on pii-redaction · Apple M4 Pro · 24 GB",
+      "task": "pii-redaction",
+      "model": {
+        "tag": "qwen3:0.6b",
+        "registry_id": "qwen/qwen3-0.6b",
+        "size_gb": 0.52
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.52
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "pii-redaction@1",
+        "suite_sha": "2cdc3ec16f5223ae",
+        "cases": 12,
+        "score": 0.1667,
+        "p50_ms": 191.4,
+        "p95_ms": 201.7,
+        "tokens_per_s": 298.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_6c4f28b11770",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3.5:0.8b scores 27% on text-to-sql · Apple M4 Pro · 24 GB",
+      "task": "text-to-sql",
+      "model": {
+        "tag": "qwen3.5:0.8b",
+        "registry_id": "qwen/qwen3.5-0.8b",
+        "size_gb": 1.32
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.32
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "text-to-sql@1",
+        "suite_sha": "d94b7ffab0c08550",
+        "cases": 15,
+        "score": 0.2667,
+        "p50_ms": 413.0,
+        "p95_ms": 676.3,
+        "tokens_per_s": 150.4
+      },
+      "author": "abhishek085",
+      "id": "rcp_68aabf4e5115",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "phi4-mini scores 80% on ticket-triage · Apple M4 Pro · 24 GB",
+      "task": "classification",
+      "model": {
+        "tag": "phi4-mini",
+        "registry_id": "microsoft/phi4-mini",
+        "size_gb": 2.49
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.49
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "ticket-triage@1",
+        "suite_sha": "c13c60a6c727dc7b",
+        "cases": 20,
+        "score": 0.8,
+        "p50_ms": 191.5,
+        "p95_ms": 195.8,
+        "tokens_per_s": 113.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_63cd13f4da27",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "phi4-mini scores 60% on prompt-injection · Apple M4 Pro · 24 GB",
+      "task": "prompt-injection",
+      "model": {
+        "tag": "phi4-mini",
+        "registry_id": "microsoft/phi4-mini",
+        "size_gb": 2.49
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.49
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "prompt-injection@1",
+        "suite_sha": "cbc8cdf62e70c3c3",
+        "cases": 20,
+        "score": 0.6,
+        "p50_ms": 1044.2,
+        "p95_ms": 1965.1,
+        "tokens_per_s": 76.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_632896e883be",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:1b scores 0% on content-moderation · Apple M4 Pro · 24 GB",
+      "task": "moderation",
+      "model": {
+        "tag": "gemma3:1b",
+        "registry_id": "google/gemma3-1b",
+        "size_gb": 0.81
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.81
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "content-moderation@1",
+        "suite_sha": "cef85bdd7fa62914",
+        "cases": 14,
+        "score": 0.0,
+        "p50_ms": 246.8,
+        "p95_ms": 254.3,
+        "tokens_per_s": 175.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_6121e306bc94",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "functiongemma scores 33% on tool-calling · Apple M4 Pro · 24 GB",
+      "task": "tool-calling",
+      "model": {
+        "tag": "functiongemma",
+        "registry_id": "google/functiongemma-270m",
+        "size_gb": 0.3
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.3
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "tool-calling@1",
+        "suite_sha": "9486f0d62ea31f82",
+        "cases": 15,
+        "score": 0.3333,
+        "p50_ms": 386.5,
+        "p95_ms": 402.9,
+        "tokens_per_s": 344.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_54300ab5700a",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "smollm2:1.7b scores 0% on pii-redaction · Apple M4 Pro · 24 GB",
+      "task": "pii-redaction",
+      "model": {
+        "tag": "smollm2:1.7b",
+        "registry_id": "huggingface/smollm2-1.7b",
+        "size_gb": 1.82
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.82
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "pii-redaction@1",
+        "suite_sha": "2cdc3ec16f5223ae",
+        "cases": 12,
+        "score": 0.0,
+        "p50_ms": 290.3,
+        "p95_ms": 358.8,
+        "tokens_per_s": 117.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_505c91a94483",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:micro scores 100% on text-to-sql · Apple M4 Pro · 24 GB",
+      "task": "text-to-sql",
+      "model": {
+        "tag": "granite4:micro",
+        "registry_id": "ibm/granite4-micro",
+        "size_gb": 2.1
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.1
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "text-to-sql@1",
+        "suite_sha": "d94b7ffab0c08550",
+        "cases": 15,
+        "score": 1.0,
+        "p50_ms": 386.5,
+        "p95_ms": 541.7,
+        "tokens_per_s": 91.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_5042a0bf329f",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:1b scores 75% on fact-check · Apple M4 Pro · 24 GB",
+      "task": "fact-checking",
+      "model": {
+        "tag": "gemma3:1b",
+        "registry_id": "google/gemma3-1b",
+        "size_gb": 0.81
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.81
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "fact-check@1",
+        "suite_sha": "50011741616aefc6",
+        "cases": 16,
+        "score": 0.75,
+        "p50_ms": 170.6,
+        "p95_ms": 177.8,
+        "tokens_per_s": 241.1
+      },
+      "author": "abhishek085",
+      "id": "rcp_4ff74a448cae",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "phi4-mini scores 56% on json-extraction · Apple M4 Pro · 24 GB",
+      "task": "extraction",
+      "model": {
+        "tag": "phi4-mini",
+        "registry_id": "microsoft/phi4-mini",
+        "size_gb": 2.49
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.49
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "json-extraction@1",
+        "suite_sha": "12291b6b7bef0fbd",
+        "cases": 16,
+        "score": 0.5625,
+        "p50_ms": 594.0,
+        "p95_ms": 670.2,
+        "tokens_per_s": 81.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_4cc1811ac53c",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:4b-instruct scores 100% on fact-check · Apple M4 Pro · 24 GB",
+      "task": "fact-checking",
+      "model": {
+        "tag": "qwen3:4b-instruct",
+        "registry_id": "qwen/qwen3-4b",
+        "size_gb": 2.5
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.5
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "fact-check@1",
+        "suite_sha": "50011741616aefc6",
+        "cases": 16,
+        "score": 1.0,
+        "p50_ms": 171.0,
+        "p95_ms": 197.2,
+        "tokens_per_s": 150.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_4c8eb95b597a",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:1b scores 81% on json-extraction · Apple M4 Pro · 24 GB",
+      "task": "extraction",
+      "model": {
+        "tag": "gemma3:1b",
+        "registry_id": "google/gemma3-1b",
+        "size_gb": 0.81
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.81
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "json-extraction@1",
+        "suite_sha": "12291b6b7bef0fbd",
+        "cases": 16,
+        "score": 0.8125,
+        "p50_ms": 418.6,
+        "p95_ms": 451.3,
+        "tokens_per_s": 173.2
+      },
+      "author": "abhishek085",
+      "id": "rcp_4a071e3ae37a",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "phi4-mini scores 87% on tool-calling · Apple M4 Pro · 24 GB",
+      "task": "tool-calling",
+      "model": {
+        "tag": "phi4-mini",
+        "registry_id": "microsoft/phi4-mini",
+        "size_gb": 2.49
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.49
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "tool-calling@1",
+        "suite_sha": "9486f0d62ea31f82",
+        "cases": 15,
+        "score": 0.8667,
+        "p50_ms": 634.9,
+        "p95_ms": 818.0,
+        "tokens_per_s": 78.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_48da1e759b0f",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3.5:0.8b scores 62% on json-extraction · Apple M4 Pro · 24 GB",
+      "task": "extraction",
+      "model": {
+        "tag": "qwen3.5:0.8b",
+        "registry_id": "qwen/qwen3.5-0.8b",
+        "size_gb": 1.32
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.32
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "json-extraction@1",
+        "suite_sha": "12291b6b7bef0fbd",
+        "cases": 16,
+        "score": 0.625,
+        "p50_ms": 472.3,
+        "p95_ms": 528.8,
+        "tokens_per_s": 155.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_47f9a6d577c9",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:1.7b scores 67% on text-to-sql · Apple M4 Pro · 24 GB",
+      "task": "text-to-sql",
+      "model": {
+        "tag": "qwen3:1.7b",
+        "registry_id": "qwen/qwen3-1.7b",
+        "size_gb": 1.36
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.36
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "text-to-sql@1",
+        "suite_sha": "d94b7ffab0c08550",
+        "cases": 15,
+        "score": 0.6667,
+        "p50_ms": 242.3,
+        "p95_ms": 370.5,
+        "tokens_per_s": 159.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_4786fa6752d0",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:1.7b scores 70% on ticket-triage · Apple M4 Pro · 24 GB",
+      "task": "classification",
+      "model": {
+        "tag": "qwen3:1.7b",
+        "registry_id": "qwen/qwen3-1.7b",
+        "size_gb": 1.36
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.36
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "ticket-triage@1",
+        "suite_sha": "c13c60a6c727dc7b",
+        "cases": 20,
+        "score": 0.7,
+        "p50_ms": 128.0,
+        "p95_ms": 135.7,
+        "tokens_per_s": 239.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_46ea4c9cde11",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "smollm2:1.7b scores 57% on content-moderation · Apple M4 Pro · 24 GB",
+      "task": "moderation",
+      "model": {
+        "tag": "smollm2:1.7b",
+        "registry_id": "huggingface/smollm2-1.7b",
+        "size_gb": 1.82
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.82
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "content-moderation@1",
+        "suite_sha": "cef85bdd7fa62914",
+        "cases": 14,
+        "score": 0.5714,
+        "p50_ms": 74.4,
+        "p95_ms": 86.1,
+        "tokens_per_s": 169.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_43d550301012",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:1b scores 80% on ticket-triage · Apple M4 Pro · 24 GB",
+      "task": "classification",
+      "model": {
+        "tag": "gemma3:1b",
+        "registry_id": "google/gemma3-1b",
+        "size_gb": 0.81
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.81
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "ticket-triage@1",
+        "suite_sha": "c13c60a6c727dc7b",
+        "cases": 20,
+        "score": 0.8,
+        "p50_ms": 155.7,
+        "p95_ms": 168.8,
+        "tokens_per_s": 296.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_3d2abd276380",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:0.6b scores 20% on ticket-triage · Apple M4 Pro · 24 GB",
+      "task": "classification",
+      "model": {
+        "tag": "qwen3:0.6b",
+        "registry_id": "qwen/qwen3-0.6b",
+        "size_gb": 0.52
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.52
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "ticket-triage@1",
+        "suite_sha": "c13c60a6c727dc7b",
+        "cases": 20,
+        "score": 0.2,
+        "p50_ms": 107.9,
+        "p95_ms": 114.3,
+        "tokens_per_s": 476.0
+      },
+      "author": "abhishek085",
+      "id": "rcp_3ba6926b7014",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:micro scores 100% on fact-check · Apple M4 Pro · 24 GB",
+      "task": "fact-checking",
+      "model": {
+        "tag": "granite4:micro",
+        "registry_id": "ibm/granite4-micro",
+        "size_gb": 2.1
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.1
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "fact-check@1",
+        "suite_sha": "50011741616aefc6",
+        "cases": 16,
+        "score": 1.0,
+        "p50_ms": 136.4,
+        "p95_ms": 161.6,
+        "tokens_per_s": 159.0
+      },
+      "author": "abhishek085",
+      "id": "rcp_37cf0ae799fd",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:350m scores 73% on tool-calling · Apple M4 Pro · 24 GB",
+      "task": "tool-calling",
+      "model": {
+        "tag": "granite4:350m",
+        "registry_id": "ibm/granite4-350m",
+        "size_gb": 0.71
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.71
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "tool-calling@1",
+        "suite_sha": "9486f0d62ea31f82",
+        "cases": 15,
+        "score": 0.7333,
+        "p50_ms": 191.8,
+        "p95_ms": 248.8,
+        "tokens_per_s": 222.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_35f2b90f17cd",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "smollm2:1.7b scores 67% on text-to-sql · Apple M4 Pro · 24 GB",
+      "task": "text-to-sql",
+      "model": {
+        "tag": "smollm2:1.7b",
+        "registry_id": "huggingface/smollm2-1.7b",
+        "size_gb": 1.82
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.82
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "text-to-sql@1",
+        "suite_sha": "d94b7ffab0c08550",
+        "cases": 15,
+        "score": 0.6667,
+        "p50_ms": 218.0,
+        "p95_ms": 525.4,
+        "tokens_per_s": 118.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_35ec90ba1da8",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:0.6b scores 88% on json-extraction · Apple M4 Pro · 24 GB",
+      "task": "extraction",
+      "model": {
+        "tag": "qwen3:0.6b",
+        "registry_id": "qwen/qwen3-0.6b",
+        "size_gb": 0.52
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.52
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "json-extraction@1",
+        "suite_sha": "12291b6b7bef0fbd",
+        "cases": 16,
+        "score": 0.875,
+        "p50_ms": 240.0,
+        "p95_ms": 265.7,
+        "tokens_per_s": 295.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_30c2c0f1c535",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "smollm2:1.7b scores 56% on fact-check · Apple M4 Pro · 24 GB",
+      "task": "fact-checking",
+      "model": {
+        "tag": "smollm2:1.7b",
+        "registry_id": "huggingface/smollm2-1.7b",
+        "size_gb": 1.82
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.82
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "fact-check@1",
+        "suite_sha": "50011741616aefc6",
+        "cases": 16,
+        "score": 0.5625,
+        "p50_ms": 90.1,
+        "p95_ms": 92.3,
+        "tokens_per_s": 162.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_2ea9fa3819e2",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:1.7b scores 93% on content-moderation · Apple M4 Pro · 24 GB",
+      "task": "moderation",
+      "model": {
+        "tag": "qwen3:1.7b",
+        "registry_id": "qwen/qwen3-1.7b",
+        "size_gb": 1.36
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.36
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "content-moderation@1",
+        "suite_sha": "cef85bdd7fa62914",
+        "cases": 14,
+        "score": 0.9286,
+        "p50_ms": 129.4,
+        "p95_ms": 132.7,
+        "tokens_per_s": 271.4
+      },
+      "author": "abhishek085",
+      "id": "rcp_2be0d973a404",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:0.6b scores 67% on tool-calling · Apple M4 Pro · 24 GB",
+      "task": "tool-calling",
+      "model": {
+        "tag": "qwen3:0.6b",
+        "registry_id": "qwen/qwen3-0.6b",
+        "size_gb": 0.52
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.52
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "tool-calling@1",
+        "suite_sha": "9486f0d62ea31f82",
+        "cases": 15,
+        "score": 0.6667,
+        "p50_ms": 203.5,
+        "p95_ms": 257.1,
+        "tokens_per_s": 283.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_2b939721928d",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:4b-instruct scores 58% on pii-redaction · Apple M4 Pro · 24 GB",
+      "task": "pii-redaction",
+      "model": {
+        "tag": "qwen3:4b-instruct",
+        "registry_id": "qwen/qwen3-4b",
+        "size_gb": 2.5
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.5
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "pii-redaction@1",
+        "suite_sha": "2cdc3ec16f5223ae",
+        "cases": 12,
+        "score": 0.5833,
+        "p50_ms": 360.0,
+        "p95_ms": 477.7,
+        "tokens_per_s": 81.4
+      },
+      "author": "abhishek085",
+      "id": "rcp_2aeb47c02795",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3.5:0.8b scores 50% on pii-redaction · Apple M4 Pro · 24 GB",
+      "task": "pii-redaction",
+      "model": {
+        "tag": "qwen3.5:0.8b",
+        "registry_id": "qwen/qwen3.5-0.8b",
+        "size_gb": 1.32
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.32
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "pii-redaction@1",
+        "suite_sha": "2cdc3ec16f5223ae",
+        "cases": 12,
+        "score": 0.5,
+        "p50_ms": 385.8,
+        "p95_ms": 438.8,
+        "tokens_per_s": 158.9
+      },
+      "author": "abhishek085",
+      "id": "rcp_292e27e5ff53",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:micro scores 80% on math-word · Apple M4 Pro · 24 GB",
+      "task": "math",
+      "model": {
+        "tag": "granite4:micro",
+        "registry_id": "ibm/granite4-micro",
+        "size_gb": 2.1
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 2.1
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "math-word@1",
+        "suite_sha": "e4abfe5a4d1ee2fb",
+        "cases": 15,
+        "score": 0.8,
+        "p50_ms": 456.7,
+        "p95_ms": 882.0,
+        "tokens_per_s": 89.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_24f28376cb7d",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:1.7b scores 100% on math-word · Apple M4 Pro · 24 GB",
+      "task": "math",
+      "model": {
+        "tag": "qwen3:1.7b",
+        "registry_id": "qwen/qwen3-1.7b",
+        "size_gb": 1.36
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.36
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "math-word@1",
+        "suite_sha": "e4abfe5a4d1ee2fb",
+        "cases": 15,
+        "score": 1.0,
+        "p50_ms": 597.0,
+        "p95_ms": 910.8,
+        "tokens_per_s": 152.7
+      },
+      "author": "abhishek085",
+      "id": "rcp_1f6456b42f78",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:1b scores 60% on math-word · Apple M4 Pro · 24 GB",
+      "task": "math",
+      "model": {
+        "tag": "gemma3:1b",
+        "registry_id": "google/gemma3-1b",
+        "size_gb": 0.81
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.81
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "math-word@1",
+        "suite_sha": "e4abfe5a4d1ee2fb",
+        "cases": 15,
+        "score": 0.6,
+        "p50_ms": 408.7,
+        "p95_ms": 1027.6,
+        "tokens_per_s": 174.0
+      },
+      "author": "abhishek085",
+      "id": "rcp_1a45e42ee191",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:1b scores 25% on pii-redaction · Apple M4 Pro · 24 GB",
+      "task": "pii-redaction",
+      "model": {
+        "tag": "gemma3:1b",
+        "registry_id": "google/gemma3-1b",
+        "size_gb": 0.81
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.81
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "pii-redaction@1",
+        "suite_sha": "2cdc3ec16f5223ae",
+        "cases": 12,
+        "score": 0.25,
+        "p50_ms": 317.2,
+        "p95_ms": 384.0,
+        "tokens_per_s": 174.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_1301f180c3e4",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:350m scores 75% on fact-check · Apple M4 Pro · 24 GB",
+      "task": "fact-checking",
+      "model": {
+        "tag": "granite4:350m",
+        "registry_id": "ibm/granite4-350m",
+        "size_gb": 0.71
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.71
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "fact-check@1",
+        "suite_sha": "50011741616aefc6",
+        "cases": 16,
+        "score": 0.75,
+        "p50_ms": 86.1,
+        "p95_ms": 92.0,
+        "tokens_per_s": 385.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_12eec778e2b8",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "gemma3:1b scores 47% on tool-calling · Apple M4 Pro · 24 GB",
+      "task": "tool-calling",
+      "model": {
+        "tag": "gemma3:1b",
+        "registry_id": "google/gemma3-1b",
+        "size_gb": 0.81
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        },
+        "json_mode": true
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.81
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "tool-calling@1",
+        "suite_sha": "9486f0d62ea31f82",
+        "cases": 15,
+        "score": 0.4667,
+        "p50_ms": 349.5,
+        "p95_ms": 421.3,
+        "tokens_per_s": 169.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_121bc9849228",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "granite4:350m scores 50% on ticket-triage · Apple M4 Pro · 24 GB",
+      "task": "classification",
+      "model": {
+        "tag": "granite4:350m",
+        "registry_id": "ibm/granite4-350m",
+        "size_gb": 0.71
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.71
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "ticket-triage@1",
+        "suite_sha": "c13c60a6c727dc7b",
+        "cases": 20,
+        "score": 0.5,
+        "p50_ms": 80.0,
+        "p95_ms": 84.5,
+        "tokens_per_s": 350.6
+      },
+      "author": "abhishek085",
+      "id": "rcp_106a22f502b8",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3.5:0.8b scores 87% on math-word · Apple M4 Pro · 24 GB",
+      "task": "math",
+      "model": {
+        "tag": "qwen3.5:0.8b",
+        "registry_id": "qwen/qwen3.5-0.8b",
+        "size_gb": 1.32
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.32
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "math-word@1",
+        "suite_sha": "e4abfe5a4d1ee2fb",
+        "cases": 15,
+        "score": 0.8667,
+        "p50_ms": 954.2,
+        "p95_ms": 1233.6,
+        "tokens_per_s": 149.3
+      },
+      "author": "abhishek085",
+      "id": "rcp_08e08fbae13b",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen3:1.7b scores 90% on prompt-injection · Apple M4 Pro · 24 GB",
+      "task": "prompt-injection",
+      "model": {
+        "tag": "qwen3:1.7b",
+        "registry_id": "qwen/qwen3-1.7b",
+        "size_gb": 1.36
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 1.36
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "prompt-injection@1",
+        "suite_sha": "cbc8cdf62e70c3c3",
+        "cases": 20,
+        "score": 0.9,
+        "p50_ms": 297.5,
+        "p95_ms": 370.4,
+        "tokens_per_s": 155.5
+      },
+      "author": "abhishek085",
+      "id": "rcp_07d285159203",
+      "reproductions": 0
+    },
+    {
+      "schema": "modexai.recipe/1",
+      "kind": "benchmark",
+      "title": "qwen2.5-coder:1.5b scores 67% on text-to-sql · Apple M4 Pro · 24 GB",
+      "task": "text-to-sql",
+      "model": {
+        "tag": "qwen2.5-coder:1.5b",
+        "registry_id": "qwen/qwen2.5-coder-1.5b",
+        "size_gb": 0.99
+      },
+      "setup": {
+        "parameters": {
+          "temperature": 0,
+          "num_ctx": 4096
+        }
+      },
+      "hardware": {
+        "os": "macOS",
+        "arch": "arm64",
+        "chip": "Apple M4 Pro",
+        "ram_gb": 24,
+        "gpu": "Apple M4 Pro",
+        "vram_gb": 24,
+        "accelerator": "apple-silicon",
+        "label": "Apple M4 Pro · 24 GB",
+        "model_size_gb": 0.99
+      },
+      "runtime": {
+        "engine": "ollama",
+        "version": "0.32.1"
+      },
+      "created": "2026-10-09",
+      "tool": "modexai 1.0.0",
+      "eval": {
+        "suite": "text-to-sql@1",
+        "suite_sha": "d94b7ffab0c08550",
+        "cases": 15,
+        "score": 0.6667,
+        "p50_ms": 273.0,
+        "p95_ms": 324.5,
+        "tokens_per_s": 170.8
+      },
+      "author": "abhishek085",
+      "id": "rcp_031a65178cac",
+      "reproductions": 0
+    }
+  ]
+}

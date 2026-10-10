@@ -1,0 +1,20 @@
+{
+  "id": "google/functiongemma-270m",
+  "name": "FunctionGemma 270M",
+  "publisher": "Google",
+  "summary": "Gemma 3 270M tuned for function calling — built to be a tiny on-device tool router.",
+  "tasks": [
+    "tool-calling"
+  ],
+  "kind": "chat",
+  "params_b": 0.27,
+  "size_gb": 0.3,
+  "license": "gemma",
+  "source": {
+    "type": "ollama",
+    "tag": "functiongemma"
+  },
+  "links": {
+    "card": "https://huggingface.co/google/functiongemma-270m-it"
+  }
+}

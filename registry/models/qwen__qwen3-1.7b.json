@@ -1,0 +1,23 @@
+{
+  "id": "qwen/qwen3-1.7b",
+  "name": "Qwen3 1.7B",
+  "publisher": "Qwen",
+  "summary": "Small generalist that punches above its size on extraction, classification and tool calls.",
+  "tasks": [
+    "general",
+    "classification",
+    "extraction",
+    "tool-calling"
+  ],
+  "kind": "chat",
+  "params_b": 1.7,
+  "size_gb": 1.36,
+  "license": "apache-2.0",
+  "source": {
+    "type": "ollama",
+    "tag": "qwen3:1.7b"
+  },
+  "links": {
+    "card": "https://huggingface.co/Qwen/Qwen3-1.7B"
+  }
+}

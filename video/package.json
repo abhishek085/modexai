@@ -1,0 +1,23 @@
+{
+  "name": "modexai-launch-video",
+  "private": true,
+  "description": "ModexAI product launch explainer — Remotion compositions (9:16 and 16:9).",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts ProductLaunch out/modexai-launch-9x16.mp4",
+    "render:wide": "remotion render src/index.ts ProductLaunchWide out/modexai-launch-16x9.mp4",
+    "still": "remotion still src/index.ts ProductLaunchWide out/poster.png --frame=560"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.534",
+    "@remotion/google-fonts": "^4.0.534",
+    "gsap": "3.15.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.534"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}

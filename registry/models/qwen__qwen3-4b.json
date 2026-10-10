@@ -1,0 +1,24 @@
+{
+  "id": "qwen/qwen3-4b",
+  "name": "Qwen3 4B Instruct (2507)",
+  "publisher": "Qwen",
+  "summary": "The step up when 1–2B models fall short. Use this -instruct tag: plain qwen3:4b is the thinking build and keeps reasoning even with think off.",
+  "tasks": [
+    "general",
+    "extraction",
+    "text-to-sql",
+    "math",
+    "tool-calling"
+  ],
+  "kind": "chat",
+  "params_b": 4.0,
+  "size_gb": 2.5,
+  "license": "apache-2.0",
+  "source": {
+    "type": "ollama",
+    "tag": "qwen3:4b-instruct"
+  },
+  "links": {
+    "card": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507"
+  }
+}

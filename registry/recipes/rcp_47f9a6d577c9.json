@@ -1,0 +1,46 @@
+{
+  "schema": "modexai.recipe/1",
+  "kind": "benchmark",
+  "title": "qwen3.5:0.8b scores 62% on json-extraction \u00b7 Apple M4 Pro \u00b7 24 GB",
+  "task": "extraction",
+  "model": {
+    "tag": "qwen3.5:0.8b",
+    "registry_id": "qwen/qwen3.5-0.8b",
+    "size_gb": 1.32
+  },
+  "setup": {
+    "parameters": {
+      "temperature": 0,
+      "num_ctx": 4096
+    },
+    "json_mode": true
+  },
+  "hardware": {
+    "os": "macOS",
+    "arch": "arm64",
+    "chip": "Apple M4 Pro",
+    "ram_gb": 24,
+    "gpu": "Apple M4 Pro",
+    "vram_gb": 24,
+    "accelerator": "apple-silicon",
+    "label": "Apple M4 Pro \u00b7 24 GB",
+    "model_size_gb": 1.32
+  },
+  "runtime": {
+    "engine": "ollama",
+    "version": "0.32.1"
+  },
+  "created": "2026-10-09",
+  "tool": "modexai 1.0.0",
+  "eval": {
+    "suite": "json-extraction@1",
+    "suite_sha": "12291b6b7bef0fbd",
+    "cases": 16,
+    "score": 0.625,
+    "p50_ms": 472.3,
+    "p95_ms": 528.8,
+    "tokens_per_s": 155.6
+  },
+  "author": "abhishek085",
+  "id": "rcp_47f9a6d577c9"
+}

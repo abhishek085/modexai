@@ -1,0 +1,22 @@
+{
+  "id": "ibm/granite4-micro",
+  "name": "Granite 4.0 Micro",
+  "publisher": "IBM",
+  "summary": "3B Granite 4 model with solid tool calling and enterprise-style instruction following.",
+  "tasks": [
+    "general",
+    "tool-calling",
+    "extraction"
+  ],
+  "kind": "chat",
+  "params_b": 3.0,
+  "size_gb": 2.1,
+  "license": "apache-2.0",
+  "source": {
+    "type": "ollama",
+    "tag": "granite4:micro"
+  },
+  "links": {
+    "card": "https://huggingface.co/ibm-granite/granite-4.0-micro"
+  }
+}

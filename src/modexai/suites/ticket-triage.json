@@ -1,0 +1,32 @@
+{
+  "id": "ticket-triage",
+  "version": 1,
+  "name": "Support ticket triage",
+  "task": "classification",
+  "description": "Route customer messages to one of five queues. The bread-and-butter job agents hand to a small model.",
+  "system": "You route customer support messages. Reply with exactly one label from: billing, technical, account, feature-request, cancellation. No explanation.",
+  "max_tokens": 24,
+  "check_defaults": {"type": "label", "labels": ["billing", "technical", "account", "feature-request", "cancellation"]},
+  "items": [
+    {"id": "tt01", "prompt": "I was charged twice for my October subscription. Please refund the duplicate.", "check": {"expected": "billing"}},
+    {"id": "tt02", "prompt": "The app crashes every time I open the reports tab on Android 15.", "check": {"expected": "technical"}},
+    {"id": "tt03", "prompt": "How do I change the email address on my profile? I no longer use the old one.", "check": {"expected": "account"}},
+    {"id": "tt04", "prompt": "It would be great if you supported dark mode in the web dashboard.", "check": {"expected": "feature-request"}},
+    {"id": "tt05", "prompt": "Please close my account and stop all future charges, effective today.", "check": {"expected": "cancellation"}},
+    {"id": "tt06", "prompt": "My invoice shows the wrong VAT number. Can you reissue it?", "check": {"expected": "billing"}},
+    {"id": "tt07", "prompt": "Getting a 502 error when I try to upload CSV files larger than 10MB.", "check": {"expected": "technical"}},
+    {"id": "tt08", "prompt": "I can't log in — the password reset email never arrives.", "check": {"expected": "account"}},
+    {"id": "tt09", "prompt": "Could you add an export to Google Sheets option? We do this manually every week.", "check": {"expected": "feature-request"}},
+    {"id": "tt10", "prompt": "We're moving to another vendor next month. What's the process to end our contract?", "check": {"expected": "cancellation"}},
+    {"id": "tt11", "prompt": "Why did my plan price go up from $29 to $35 this month? Nobody told us.", "check": {"expected": "billing"}},
+    {"id": "tt12", "prompt": "Sync between the desktop app and mobile stopped working after the last update.", "check": {"expected": "technical"}},
+    {"id": "tt13", "prompt": "Please add my colleague as an admin on our team workspace.", "check": {"expected": "account"}},
+    {"id": "tt14", "prompt": "A Slack integration that posts daily summaries would really help our team.", "check": {"expected": "feature-request"}},
+    {"id": "tt15", "prompt": "Don't renew my annual plan. I want to cancel before the renewal date.", "check": {"expected": "cancellation"}},
+    {"id": "tt16", "prompt": "My card was declined but my bank says there is no problem on their side. Can I pay by bank transfer?", "check": {"expected": "billing"}},
+    {"id": "tt17", "prompt": "The search returns no results for anything with an accent, like 'café'.", "check": {"expected": "technical"}},
+    {"id": "tt18", "prompt": "I need to enable two-factor authentication but can't find the setting.", "check": {"expected": "account"}},
+    {"id": "tt19", "prompt": "Love the product! Any plans for an API so we can automate report creation?", "check": {"expected": "feature-request"}},
+    {"id": "tt20", "prompt": "This isn't working out for us. Terminate the subscription and confirm by email.", "check": {"expected": "cancellation"}}
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "google/embeddinggemma-300m",
+  "name": "EmbeddingGemma 300M",
+  "publisher": "Google",
+  "summary": "On-device embedding model from the Gemma 3 family.",
+  "tasks": [
+    "embedding",
+    "retrieval"
+  ],
+  "kind": "embedding",
+  "params_b": 0.3,
+  "size_gb": 0.62,
+  "license": "gemma",
+  "source": {
+    "type": "ollama",
+    "tag": "embeddinggemma"
+  },
+  "links": {
+    "card": "https://huggingface.co/google/embeddinggemma-300m"
+  }
+}

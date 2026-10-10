@@ -1,0 +1,22 @@
+{
+  "id": "qwen/qwen3-0.6b",
+  "name": "Qwen3 0.6B",
+  "publisher": "Qwen",
+  "summary": "Tiny generalist with a switchable thinking mode. Surprisingly capable at routing and short classification.",
+  "tasks": [
+    "general",
+    "classification",
+    "tool-calling"
+  ],
+  "kind": "chat",
+  "params_b": 0.6,
+  "size_gb": 0.52,
+  "license": "apache-2.0",
+  "source": {
+    "type": "ollama",
+    "tag": "qwen3:0.6b"
+  },
+  "links": {
+    "card": "https://huggingface.co/Qwen/Qwen3-0.6B"
+  }
+}

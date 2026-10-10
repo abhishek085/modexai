@@ -1,0 +1,30 @@
+name: Share a recipe
+description: Post a measured finding — which model, how it was set up, what it scored, on what hardware.
+title: "recipe: "
+labels: [recipe]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The easiest way is `modexai recipes share <id>` (or ask your agent to call `share_recipe`) — it fills this in for you.
+        To do it by hand, paste the output of `modexai recipes show <id>` below. A bot validates it and opens a pull request.
+  - type: textarea
+    id: recipe
+    attributes:
+      label: Recipe JSON
+      description: Exactly as produced by ModexAI. No prompts, outputs or user data should be in here.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else worth knowing? (optional)
+      placeholder: e.g. "needed num_ctx 4096 or it spilled to CPU"
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Privacy check
+      options:
+        - label: This recipe contains no private data, prompts, or secrets.
+          required: true

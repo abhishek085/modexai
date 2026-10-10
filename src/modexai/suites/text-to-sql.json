@@ -1,0 +1,121 @@
+{
+  "id": "text-to-sql",
+  "version": 1,
+  "name": "Text to SQL (execution-graded)",
+  "task": "text-to-sql",
+  "description": "Turn questions into SQLite queries. Graded by running the model's query and the gold query on the same in-memory database and comparing results.",
+  "system": "You write SQLite queries. Reply with only the SQL query, no explanation.",
+  "prompt_prefix": "Schema (SQLite):\ncustomers(id, name, country, signup_date)\nproducts(id, name, category, price)\norders(id, customer_id, order_date, status)   -- status: shipped | pending | cancelled\norder_items(order_id, product_id, quantity)\n\nQuestion: ",
+  "max_tokens": 160,
+  "check_defaults": {
+    "type": "sql_exec",
+    "setup": "CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT, country TEXT, signup_date TEXT);\nCREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, category TEXT, price REAL);\nCREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER, order_date TEXT, status TEXT);\nCREATE TABLE order_items (order_id INTEGER, product_id INTEGER, quantity INTEGER);\nINSERT INTO customers VALUES (1,'Ava Chen','US','2025-01-15'),(2,'Ben Okafor','UK','2025-03-02'),(3,'Carla Ruiz','ES','2025-03-20'),(4,'Dev Patel','US','2025-06-11'),(5,'Emma Novak','DE','2025-08-30'),(6,'Farid Haddad','US','2026-01-05'),(7,'Grace Kim','CA','2026-02-18');\nINSERT INTO products VALUES (1,'Trail Shoe','footwear',120.0),(2,'Rain Jacket','apparel',180.0),(3,'Wool Socks','apparel',18.0),(4,'Headlamp','gear',45.0),(5,'Water Filter','gear',60.0);\nINSERT INTO orders VALUES (101,1,'2026-01-10','shipped'),(102,2,'2026-01-12','shipped'),(103,1,'2026-02-03','cancelled'),(104,3,'2026-02-14','shipped'),(105,4,'2026-03-01','pending'),(106,5,'2026-03-09','shipped'),(107,1,'2026-03-22','shipped'),(108,6,'2026-04-02','pending');\nINSERT INTO order_items VALUES (101,1,1),(101,3,2),(102,2,1),(103,4,1),(104,1,2),(104,5,1),(105,3,4),(106,2,1),(106,4,2),(107,5,1),(107,3,3),(108,1,1);"
+  },
+  "items": [
+    {
+      "id": "ts01",
+      "prompt": "How many customers are from the US?",
+      "check": {
+        "gold": "SELECT COUNT(*) FROM customers WHERE country='US'"
+      }
+    },
+    {
+      "id": "ts02",
+      "prompt": "List the names of products in the 'gear' category.",
+      "check": {
+        "gold": "SELECT name FROM products WHERE category='gear'"
+      }
+    },
+    {
+      "id": "ts03",
+      "prompt": "What is the most expensive product's name?",
+      "check": {
+        "gold": "SELECT name FROM products ORDER BY price DESC LIMIT 1"
+      }
+    },
+    {
+      "id": "ts04",
+      "prompt": "How many orders have status 'pending'?",
+      "check": {
+        "gold": "SELECT COUNT(*) FROM orders WHERE status='pending'"
+      }
+    },
+    {
+      "id": "ts05",
+      "prompt": "List the names of customers who signed up in 2025.",
+      "check": {
+        "gold": "SELECT name FROM customers WHERE signup_date LIKE '2025%'"
+      }
+    },
+    {
+      "id": "ts06",
+      "prompt": "What is the average product price?",
+      "check": {
+        "gold": "SELECT AVG(price) FROM products"
+      }
+    },
+    {
+      "id": "ts07",
+      "prompt": "How many orders did Ava Chen place?",
+      "check": {
+        "gold": "SELECT COUNT(*) FROM orders o JOIN customers c ON c.id=o.customer_id WHERE c.name='Ava Chen'"
+      }
+    },
+    {
+      "id": "ts08",
+      "prompt": "Show each country and its number of customers.",
+      "check": {
+        "gold": "SELECT country, COUNT(*) FROM customers GROUP BY country"
+      }
+    },
+    {
+      "id": "ts09",
+      "prompt": "What is the total quantity of 'Wool Socks' ever ordered (all orders)?",
+      "check": {
+        "gold": "SELECT SUM(oi.quantity) FROM order_items oi JOIN products p ON p.id=oi.product_id WHERE p.name='Wool Socks'"
+      }
+    },
+    {
+      "id": "ts10",
+      "prompt": "List the names of customers who have at least one shipped order.",
+      "check": {
+        "gold": "SELECT DISTINCT c.name FROM customers c JOIN orders o ON o.customer_id=c.id WHERE o.status='shipped'"
+      }
+    },
+    {
+      "id": "ts11",
+      "prompt": "What is the total revenue (price times quantity) of shipped orders?",
+      "check": {
+        "gold": "SELECT SUM(p.price*oi.quantity) FROM order_items oi JOIN products p ON p.id=oi.product_id JOIN orders o ON o.id=oi.order_id WHERE o.status='shipped'"
+      }
+    },
+    {
+      "id": "ts12",
+      "prompt": "Which customers have never placed an order? Return their names.",
+      "check": {
+        "gold": "SELECT name FROM customers WHERE id NOT IN (SELECT customer_id FROM orders)"
+      }
+    },
+    {
+      "id": "ts13",
+      "prompt": "For each product category, what is the total quantity sold across all orders?",
+      "check": {
+        "gold": "SELECT p.category, SUM(oi.quantity) FROM order_items oi JOIN products p ON p.id=oi.product_id GROUP BY p.category"
+      }
+    },
+    {
+      "id": "ts14",
+      "prompt": "Which customer name has placed the most orders?",
+      "check": {
+        "gold": "SELECT c.name FROM customers c JOIN orders o ON o.customer_id=c.id GROUP BY c.id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    },
+    {
+      "id": "ts15",
+      "prompt": "How many orders were placed in March 2026?",
+      "check": {
+        "gold": "SELECT COUNT(*) FROM orders WHERE order_date LIKE '2026-03%'"
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "modexai.recipe/1",
+  "kind": "benchmark",
+  "title": "gemma3:270m scores 38% on fact-check \u00b7 Apple M4 Pro \u00b7 24 GB",
+  "task": "fact-checking",
+  "model": {
+    "tag": "gemma3:270m",
+    "registry_id": "google/gemma3-270m",
+    "size_gb": 0.29
+  },
+  "setup": {
+    "parameters": {
+      "temperature": 0,
+      "num_ctx": 4096
+    }
+  },
+  "hardware": {
+    "os": "macOS",
+    "arch": "arm64",
+    "chip": "Apple M4 Pro",
+    "ram_gb": 24,
+    "gpu": "Apple M4 Pro",
+    "vram_gb": 24,
+    "accelerator": "apple-silicon",
+    "label": "Apple M4 Pro \u00b7 24 GB",
+    "model_size_gb": 0.29
+  },
+  "runtime": {
+    "engine": "ollama",
+    "version": "0.32.1"
+  },
+  "created": "2026-10-09",
+  "tool": "modexai 1.0.0",
+  "eval": {
+    "suite": "fact-check@1",
+    "suite_sha": "50011741616aefc6",
+    "cases": 16,
+    "score": 0.375,
+    "p50_ms": 141.2,
+    "p95_ms": 143.4,
+    "tokens_per_s": 463.1
+  },
+  "author": "abhishek085",
+  "id": "rcp_80b36051abbe"
+}

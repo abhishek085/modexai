@@ -1,0 +1,20 @@
+{
+  "id": "ibm/granite4-350m",
+  "name": "Granite 4.0 350M",
+  "publisher": "IBM",
+  "summary": "IBM's smallest Granite 4 model, aimed at edge devices and simple instruction following.",
+  "tasks": [
+    "general"
+  ],
+  "kind": "chat",
+  "params_b": 0.35,
+  "size_gb": 0.71,
+  "license": "apache-2.0",
+  "source": {
+    "type": "ollama",
+    "tag": "granite4:350m"
+  },
+  "links": {
+    "card": "https://huggingface.co/ibm-granite/granite-4.0-350m"
+  }
+}

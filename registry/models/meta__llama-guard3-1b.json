@@ -1,0 +1,21 @@
+{
+  "id": "meta/llama-guard3-1b",
+  "name": "Llama Guard 3 1B",
+  "publisher": "Meta",
+  "summary": "Safety classifier for prompts and responses (safe / unsafe with hazard categories).",
+  "tasks": [
+    "moderation",
+    "guardrail"
+  ],
+  "kind": "chat",
+  "params_b": 1.0,
+  "size_gb": 1.6,
+  "license": "llama3.2",
+  "source": {
+    "type": "ollama",
+    "tag": "llama-guard3:1b"
+  },
+  "links": {
+    "card": "https://huggingface.co/meta-llama/Llama-Guard-3-1B"
+  }
+}

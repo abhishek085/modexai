@@ -1,0 +1,20 @@
+{
+  "id": "google/medgemma-4b",
+  "name": "MedGemma 4B",
+  "publisher": "Google",
+  "summary": "Gemma 3 variant trained for medical text and image comprehension. Research use; check the license terms.",
+  "tasks": [
+    "medical"
+  ],
+  "kind": "chat",
+  "params_b": 4.0,
+  "size_gb": 3.34,
+  "license": "health-ai-developer-foundations",
+  "source": {
+    "type": "ollama",
+    "tag": "medgemma:4b"
+  },
+  "links": {
+    "card": "https://huggingface.co/google/medgemma-4b-it"
+  }
+}
