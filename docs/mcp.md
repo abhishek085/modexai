@@ -1,8 +1,11 @@
 # Use ModexAI from your agent (MCP)
 
 ModexAI is an [MCP](https://modelcontextprotocol.io) server. Any MCP client can use it: Claude Code, Claude
-Desktop, Cursor, VS Code, Codex, Goose, Zed. It needs [Ollama](https://ollama.com) running locally and
-[uv](https://docs.astral.sh/uv/) (for `uvx`).
+Desktop, Cursor, VS Code, Codex, Hermes, OpenClaw, Goose, Zed. It needs [uv](https://docs.astral.sh/uv/)
+(for `uvx`) and a local runtime: [Ollama](https://ollama.com) by default.
+
+Setup for every client, plus the brief that tells your agent what to do with these tools:
+**[docs/agents.md](agents.md)** (or run `modexai prompt`).
 
 ## Install
 
@@ -46,7 +49,7 @@ args = ["--from", "git+https://github.com/abhishek085/modexai", "modexai", "mcp"
 | `benchmark_models` | Run models on a suite or **your own samples**; score, latency, failures, verdict | local |
 | `recommend_model` | Candidates from recipes + registry → test → smallest model that's good enough | local |
 | `install_model` | Pull / import a model into Ollama | downloads weights |
-| `ask_local_model` / `ask_local_model_batch` | Delegate prompts to a local model | local |
+| `ask_local_model` / `ask_local_model_batch` | Delegate prompts to a local model; pass `labels` for a closed decision (returns a confidence on decision models) | local |
 | `record_example` | Shadow mode: save (input, your answer) for a task | local file |
 | `hire_model` | Test models against your recorded answers; hire the smallest that agrees | local |
 | `list_tasks` | Shadowed tasks and current hires | local |
@@ -54,6 +57,19 @@ args = ["--from", "git+https://github.com/abhishek085/modexai", "modexai", "mcp"
 | `try_recipe` | Reproduce a community recipe here | local |
 | `share_recipe` | Preview → (user approves) → submit a recipe as a GitHub issue | GitHub, only with `confirm=true` |
 | `savings_report` | Calls and tokens kept local, estimated cloud cost avoided | local |
+
+The server also offers one MCP **prompt**, `small_models_in_my_loop` — the brief from
+[agents.md](agents.md). Claude Code shows it as `/mcp__modexai__small_models_in_my_loop`.
+
+## Runtimes
+
+Set these in the MCP server's environment (e.g. `claude mcp add modexai -e MODEXAI_BACKEND=osj -- …`):
+
+| Variable | Values |
+|---|---|
+| `MODEXAI_BACKEND` | `ollama` (default), `openai` (llama.cpp, LM Studio, vLLM, MLX-LM), `osj` ([decision models](decision-models.md)) |
+| `MODEXAI_BASE_URL` | Server URL for `openai` / `osj` (defaults `http://127.0.0.1:8080/v1` / `http://127.0.0.1:8400/v1`) |
+| `OLLAMA_HOST` | Ollama address |
 
 ## Turning on shadow mode
 

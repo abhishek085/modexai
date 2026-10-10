@@ -1,0 +1,26 @@
+{
+  "id": "nokast/spark-s1-4b-v6",
+  "name": "spark-s1 4B v6",
+  "publisher": "Nokast",
+  "summary": "System One decision model: returns a probability per option in one forward pass, no text. Gates tool calls (allow/ask/deny), routes, flags injections. bf16, needs a GPU.",
+  "tasks": [
+    "decision",
+    "tool-gate",
+    "routing",
+    "prompt-injection"
+  ],
+  "kind": "decision",
+  "params_b": 4.0,
+  "size_gb": 8.41,
+  "license": "apache-2.0",
+  "source": {
+    "type": "hf-decision",
+    "repo": "abhishek085/spark-s1-4b-v6"
+  },
+  "links": {
+    "card": "https://huggingface.co/abhishek085/spark-s1-4b-v6",
+    "code": "https://github.com/abhishek085/open-spark-jev"
+  },
+  "base_model": "Qwen/Qwen3.5-4B",
+  "featured": true
+}

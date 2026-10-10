@@ -76,7 +76,7 @@ def build(check: bool = False, refresh_sizes: bool = False, console=None) -> int
             size = None
             if src["type"] == "ollama":
                 size = _ollama_size_gb(src["tag"])
-            elif src["type"] == "hf-safetensors":
+            elif src["type"] in ("hf-safetensors", "hf-decision"):
                 size = _hf_size_gb(src["repo"], ".safetensors")
             if size:
                 d["size_gb"] = size

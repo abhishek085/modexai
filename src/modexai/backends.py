@@ -2,6 +2,8 @@
 
 - ``ollama``: the Ollama HTTP API (default).
 - ``openai``: any OpenAI-compatible local server — llama.cpp ``llama-server``, LM Studio, vLLM, MLX-LM.
+- ``osj``: a local open-spark-jev gateway (``osj serve``) running a System One decision model. It answers
+  closed questions — pick one of N labels — with probabilities, not generated text.
 - ``simulated``: deterministic fake answers, used by ``modexai demo`` and the test-suite. Never used
   unless you ask for it, and every result it produces is labelled ``simulated``.
 """
@@ -26,6 +28,7 @@ class Generation:
     prompt_tokens: int = 0
     completion_tokens: int = 0
     tokens_per_s: float | None = None
+    confidence: float | None = None  # decision models only: probability mass on the chosen label
 
 
 class BackendError(RuntimeError):
@@ -172,6 +175,61 @@ class OpenAICompatBackend:
         )
 
 
+class OsjBackend:
+    """A System One decision model behind an open-spark-jev gateway (``osj serve``, POST /v1/decide).
+
+    Decision models never write text: given a state and a closed question they return a probability per
+    option. Each call becomes one ``choice`` question — the user message is the state, the system prompt
+    is the question, and the options are the labels from the item's check (or ``labels`` passed to
+    ``ask``). The chosen label comes back as the text, so the normal graders score it.
+    """
+
+    name = "osj"
+
+    def __init__(self, base_url: str = "http://127.0.0.1:8400/v1", timeout: float = 120.0):
+        self.base_url = base_url.rstrip("/")
+        self.client = httpx.Client(timeout=timeout)
+
+    def installed(self) -> set[str]:
+        try:
+            r = self.client.get(f"{self.base_url}/models", timeout=5)
+            r.raise_for_status()
+            return {m["id"] for m in r.json().get("data", [])}
+        except httpx.HTTPError as e:
+            raise BackendError(f"open-spark-jev gateway not reachable at {self.base_url} "
+                               f"(start it with `osj serve --pull <model>`): {e}") from e
+
+    def generate(self, model, messages, *, max_tokens=256, json_mode=False, item=None) -> Generation:
+        labels = ((item or {}).get("check") or {}).get("labels")
+        if not labels or len(labels) < 2:
+            raise BackendError("decision models answer closed questions only: give two or more labels "
+                               "(a label suite, or labels= when asking)")
+        system = next((m["content"] for m in messages if m["role"] == "system"), "")
+        state = next((m["content"] for m in reversed(messages) if m["role"] == "user"), "")
+        body = {
+            "state": {"content": state},
+            "questions": [{"type": "choice", "prompt": system or "Which option fits?", "options": list(labels)}],
+            "model": model,
+        }
+        t0 = time.perf_counter()
+        try:
+            r = self.client.post(f"{self.base_url}/decide", json=body)
+            r.raise_for_status()
+            ans = r.json()["answers"][0]
+        except httpx.HTTPError as e:
+            raise BackendError(f"decision request failed for {model}: {e}") from e
+        except (KeyError, IndexError, ValueError) as e:
+            raise BackendError(f"unexpected reply from the open-spark-jev gateway: {e}") from e
+        latency = (time.perf_counter() - t0) * 1000
+        return Generation(
+            text=ans["selected"],
+            latency_ms=latency,
+            prompt_tokens=_approx_tokens(state + system),
+            completion_tokens=1,
+            confidence=ans.get("confidence"),
+        )
+
+
 class SimulatedBackend:
     """Deterministic stand-in for a real model. A model's 'skill' sets how often it answers correctly.
 
@@ -231,11 +289,18 @@ def _simulated_answer(check: dict | None, correct: bool) -> str:
     return "OK"
 
 
-def get_backend(name: str = "ollama", **kw) -> Backend:
+BACKENDS = ("ollama", "openai", "osj", "simulated")
+
+
+def get_backend(name: str | None = None, **kw) -> Backend:
+    name = name or config.backend_name()
+    base_url = kw.get("base_url") or config.backend_url()
     if name == "ollama":
         return OllamaBackend(host=kw.get("host"))
     if name == "openai":
-        return OpenAICompatBackend(base_url=kw.get("base_url") or "http://127.0.0.1:8080/v1")
+        return OpenAICompatBackend(base_url=base_url or "http://127.0.0.1:8080/v1")
+    if name == "osj":
+        return OsjBackend(base_url=base_url or "http://127.0.0.1:8400/v1")
     if name == "simulated":
         return SimulatedBackend(kw.get("skills"), kw.get("speed"))
-    raise ValueError(f"unknown backend {name!r} (ollama | openai | simulated)")
+    raise ValueError(f"unknown backend {name!r} ({' | '.join(BACKENDS)})")

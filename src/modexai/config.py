@@ -38,6 +38,16 @@ def ollama_host() -> str:
     return f"{scheme}://{rest}"
 
 
+def backend_name() -> str:
+    """Default inference backend (MODEXAI_BACKEND: ollama | openai | osj). The MCP server uses it too."""
+    return os.environ.get("MODEXAI_BACKEND", "").strip() or "ollama"
+
+
+def backend_url() -> str | None:
+    """Server URL for the openai and osj backends (MODEXAI_BASE_URL); each has its own default."""
+    return os.environ.get("MODEXAI_BASE_URL", "").strip() or None
+
+
 def baseline_price() -> tuple[float, float]:
     """Cloud baseline used for "what this would have cost" estimates, in USD per 1M tokens (input, output).
 

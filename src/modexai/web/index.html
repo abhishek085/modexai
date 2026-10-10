@@ -390,7 +390,7 @@ function renderModels(filter = "") {
   $("#model-rows").innerHTML = ms.map(m => {
     const best = Object.entries(m.benchmarks || {}).sort((a, b) => b[1].score - a[1].score)[0];
     return `<tr>
-      <td><span class="id">${esc(m.name)}</span>${m.featured ? ' <span class="feat">Nokast</span>' : ""}<div class="tag">${esc(m.ollama_tag)}</div></td>
+      <td><span class="id">${esc(m.name)}</span>${m.featured ? ' <span class="feat">Nokast</span>' : ""}${m.kind === "decision" ? ' <span class="pill">System One</span>' : ""}<div class="tag">${m.kind === "decision" ? `osj serve --pull ${esc(m.ollama_tag)}` : esc(m.ollama_tag)}</div></td>
       <td class="hide-md">${m.tasks.map(t => `<span class="pill">${esc(t)}</span>`).join("")}</td>
       <td class="s">${m.size_gb ? m.size_gb + " GB" : "–"}</td>
       <td class="s">${best ? `<strong>${pct(best[1].score)}</strong> <span class="tag">${esc(best[0])}</span>` : '<span class="tag">not yet</span>'}</td>

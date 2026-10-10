@@ -14,6 +14,7 @@ case has a checkable answer, and every check is reproducible.
 | `math-word` | math | 15 | final number |
 | `pii-redaction` | pii-redaction | 12 | nothing personal leaks, useful words survive |
 | `content-moderation` | moderation | 14 | safe / unsafe (with edgy-but-safe distractors) |
+| `tool-call-gate` | tool-gate | 24 | allow / ask / deny for tool calls an agent wants to run, incl. injected instructions |
 
 Every suite is tested in CI: a perfect simulated model must score 100% and a broken one 0%, which proves
 the gold answers and the graders agree.
