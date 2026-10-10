@@ -1,0 +1,34 @@
+name: Exchange site
+
+on:
+  push:
+    branches: [main]
+    paths: ["src/modexai/web/**", "src/modexai/data/**", "src/modexai/suites/**", "scripts/build_site.py", "llms.txt"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv venv && uv pip install -e .
+      - run: uv run --no-sync python scripts/build_site.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

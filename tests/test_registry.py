@@ -30,7 +30,7 @@ def test_private_listings_are_merged(isolated_home):
     d.mkdir(parents=True)
     (d / "mine.json").write_text(json.dumps({
         "id": "acme/claims-1b", "name": "Claims 1B", "publisher": "Acme", "summary": "Internal claims triage.",
-        "license": "proprietary", "tasks": ["claims"], "source": {"type": "ollama", "tag": "acme-claims:1b"}}))
+        "license": "proprietary", "tasks": ["claims"], "source": {"type": "ollama", "tag": "acme-claims:1b"}}), encoding="utf-8")
     reg = load_registry()
     assert reg.get("acme/claims-1b").raw["_private"] is True
 

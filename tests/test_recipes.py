@@ -69,7 +69,7 @@ def test_reproductions_are_linked():
 
 def test_bundled_index_recipes_are_valid():
     import json
-    raw = json.loads(recipes.BUNDLED_INDEX.read_text())["recipes"]
+    raw = json.loads(recipes.BUNDLED_INDEX.read_text(encoding="utf-8"))["recipes"]
     assert raw, "bundled index should not be empty"
     for r in raw:
         assert recipes.validate(r) == [], r["id"]

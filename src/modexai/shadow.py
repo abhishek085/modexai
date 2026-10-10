@@ -53,14 +53,14 @@ def record(task: str, prompt: str, output: str, system: str | None = None, refer
     if len(existing) >= MAX_EXAMPLES:
         return {"task": task, "recorded": False, "reason": f"limit of {MAX_EXAMPLES} reached", "examples": len(existing)}
     row = {"hash": h, "prompt": prompt, "expected": output, "ts": int(time.time())}
-    with path.open("a") as fh:
+    with path.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(row) + "\n")
     meta = task_meta(task)
     if system and not meta.get("system"):
         meta["system"] = system
     if reference:
         meta["reference"] = reference
-    _meta_path(task).write_text(json.dumps(meta, indent=2))
+    _meta_path(task).write_text(json.dumps(meta, indent=2), encoding="utf-8")
     return {"task": task, "recorded": True, "examples": len(existing) + 1}
 
 
@@ -68,12 +68,12 @@ def examples(task: str) -> list[dict[str, Any]]:
     path = _task_path(task)
     if not path.exists():
         return []
-    return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
 def task_meta(task: str) -> dict[str, Any]:
     p = _meta_path(task)
-    return json.loads(p.read_text()) if p.exists() else {}
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
 
 
 def list_tasks() -> list[dict[str, Any]]:
@@ -81,7 +81,7 @@ def list_tasks() -> list[dict[str, Any]]:
     hires = load_hires()
     for p in sorted(_tasks_dir().glob("*.jsonl")):
         task = p.stem
-        n = sum(1 for line in p.read_text().splitlines() if line.strip())
+        n = sum(1 for line in p.read_text(encoding="utf-8").splitlines() if line.strip())
         out.append({"task": task, "examples": n, "hired": hires.get(task, {}).get("model")})
     return out
 
@@ -119,11 +119,11 @@ def _hires_path() -> Path:
 
 def load_hires() -> dict[str, Any]:
     p = _hires_path()
-    return json.loads(p.read_text()) if p.exists() else {}
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
 
 
 def _save_hires(h: dict[str, Any]) -> None:
-    _hires_path().write_text(json.dumps(h, indent=2))
+    _hires_path().write_text(json.dumps(h, indent=2), encoding="utf-8")
 
 
 def hire(
@@ -179,7 +179,7 @@ def export(task: str, out: Path | None = None, fmt: str = "messages") -> Path:
         raise ValueError(f"no examples recorded for task {task!r}")
     system = task_meta(task).get("system")
     out = out or Path.cwd() / f"{task}.train.jsonl"
-    with out.open("w") as fh:
+    with out.open("w", encoding="utf-8") as fh:
         for e in ex:
             expected = e["expected"] if isinstance(e["expected"], str) else json.dumps(e["expected"])
             if fmt == "prompt-completion":

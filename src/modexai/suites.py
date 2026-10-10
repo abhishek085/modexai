@@ -82,7 +82,7 @@ def _from_doc(doc: dict[str, Any], builtin: bool) -> Suite:
 
 
 def list_suites() -> list[Suite]:
-    return [_from_doc(json.loads(p.read_text()), True) for p in sorted(config.SUITES_DIR.glob("*.json"))]
+    return [_from_doc(json.loads(p.read_text(encoding="utf-8")), True) for p in sorted(config.SUITES_DIR.glob("*.json"))]
 
 
 def get_suite(ref: str) -> Suite:
@@ -90,10 +90,10 @@ def get_suite(ref: str) -> Suite:
     sid = ref.split("@", 1)[0]
     path = config.SUITES_DIR / f"{sid}.json"
     if path.exists():
-        return _from_doc(json.loads(path.read_text()), True)
+        return _from_doc(json.loads(path.read_text(encoding="utf-8")), True)
     p = Path(ref).expanduser()
     if p.exists():
-        return _from_doc(json.loads(p.read_text()), False)
+        return _from_doc(json.loads(p.read_text(encoding="utf-8")), False)
     known = ", ".join(s.id for s in list_suites())
     raise KeyError(f"unknown suite {ref!r}. Built-in suites: {known}")
 
@@ -145,7 +145,7 @@ def suite_from_samples(
 def load_samples_file(path: str | Path) -> list[dict[str, Any]]:
     """Read samples from .jsonl (one object per line) or .json (a list)."""
     p = Path(path).expanduser()
-    text = p.read_text()
+    text = p.read_text(encoding="utf-8")
     if p.suffix == ".jsonl":
         return [json.loads(line) for line in text.splitlines() if line.strip()]
     data = json.loads(text)

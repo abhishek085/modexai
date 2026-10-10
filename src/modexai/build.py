@@ -68,7 +68,7 @@ def build(check: bool = False, refresh_sizes: bool = False, console=None) -> int
 
     listings: list[dict[str, Any]] = []
     for p in sorted(LISTINGS.glob("*.json")):
-        d = json.loads(p.read_text())
+        d = json.loads(p.read_text(encoding="utf-8"))
         errs = validate_listing(d)
         problems += [f"{p.name}: {e}" for e in errs]
         if refresh_sizes and not errs:
@@ -80,7 +80,7 @@ def build(check: bool = False, refresh_sizes: bool = False, console=None) -> int
                 size = _hf_size_gb(src["repo"], ".safetensors")
             if size:
                 d["size_gb"] = size
-                p.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
+                p.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         listings.append(d)
     ids = [d.get("id") for d in listings]
     dupes = {i for i in ids if ids.count(i) > 1}
@@ -88,7 +88,7 @@ def build(check: bool = False, refresh_sizes: bool = False, console=None) -> int
 
     recipes: list[dict[str, Any]] = []
     for p in sorted(RECIPES.glob("*.json")):
-        d = json.loads(p.read_text())
+        d = json.loads(p.read_text(encoding="utf-8"))
         errs = rec.validate(d)
         if p.stem != d.get("id"):
             errs.append(f"file name must be {d.get('id')}.json")
@@ -129,7 +129,7 @@ def build(check: bool = False, refresh_sizes: bool = False, console=None) -> int
         OUT / "registry.json": json.dumps(reg_doc, indent=2, ensure_ascii=False) + "\n",
         OUT / "recipes.json": json.dumps(rec_doc, indent=2, ensure_ascii=False) + "\n",
     }
-    stale = [p for p, text in new.items() if not p.exists() or p.read_text() != text]
+    stale = [p for p, text in new.items() if not p.exists() or p.read_text(encoding="utf-8") != text]
     if check:
         if stale:
             for p in stale:
@@ -139,6 +139,6 @@ def build(check: bool = False, refresh_sizes: bool = False, console=None) -> int
         return 0
     OUT.mkdir(exist_ok=True)
     for p, text in new.items():
-        p.write_text(text)
+        p.write_text(text, encoding="utf-8")
     say(f"built {len(models_out)} models, {len(recipes_out)} recipes → {OUT.relative_to(ROOT)}")
     return 0

@@ -40,7 +40,7 @@ def test_hire_needs_enough_examples():
 def test_export_is_chat_jsonl(tmp_path):
     _shadow(5)
     out = shadow.export("triage", tmp_path / "train.jsonl")
-    rows = [json.loads(line) for line in out.read_text().splitlines()]
+    rows = [json.loads(line) for line in out.read_text(encoding="utf-8").splitlines()]
     assert len(rows) == 5
     assert [m["role"] for m in rows[0]["messages"]] == ["system", "user", "assistant"]
 
