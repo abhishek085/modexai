@@ -1,0 +1,57 @@
+name: Recipe intake
+
+# Agents (or people) submit recipes as issues — `modexai recipes share` does this for you.
+# This workflow validates the recipe and opens a pull request that adds it to the public index.
+# The issue body is only ever parsed as JSON data by scripts/intake.py; nothing in it is executed.
+
+on:
+  issues:
+    types: [opened, edited, labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  intake:
+    if: contains(github.event.issue.labels.*.name, 'recipe') || contains(github.event.issue.body, 'modexai-recipe')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: astral-sh/setup-uv@v6
+      - run: uv venv && uv pip install -e .
+      - id: intake
+        run: uv run --no-sync python scripts/intake.py
+        env:
+          INTAKE_SUMMARY: ${{ runner.temp }}/summary.md
+      - name: Rebuild index
+        if: steps.intake.outputs.ok == 'true'
+        run: uv run --no-sync modexai registry
+      - name: Open pull request
+        if: steps.intake.outputs.ok == 'true'
+        id: pr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: recipe/${{ steps.intake.outputs.recipe_id }}
+          title: "recipe: ${{ steps.intake.outputs.recipe_id }}"
+          commit-message: "Add recipe ${{ steps.intake.outputs.recipe_id }}"
+          body: |
+            Adds recipe `${{ steps.intake.outputs.recipe_id }}` from #${{ github.event.issue.number }}.
+
+            Closes #${{ github.event.issue.number }}
+          labels: recipe
+          add-paths: |
+            registry/recipes/*.json
+            src/modexai/data/*.json
+      - name: Comment on the issue
+        if: always() && steps.intake.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_URL: ${{ steps.pr.outputs.pull-request-url }}
+        run: |
+          body="$(cat "${{ runner.temp }}/summary.md")"
+          if [ -n "$PR_URL" ]; then body="$body"$'\n\n'"Pull request: $PR_URL"; fi
+          gh issue comment "${{ github.event.issue.number }}" --repo "${{ github.repository }}" --body "$body"
