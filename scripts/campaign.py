@@ -62,7 +62,7 @@ def main() -> int:
         if problems:
             print(f"  invalid recipe: {problems}", file=sys.stderr)
             continue
-        (out / f"{r['id']}.json").write_text(json.dumps(r, indent=2) + "\n")
+        (out / f"{r['id']}.json").write_text(json.dumps(r, indent=2) + "\n", encoding="utf-8")
         print(f"[{i}/{len(plan)}] {m.ollama_tag:<24} {s.id:<20} {res.score:>5.0%}  p50 {res.p50_ms} ms  "
               f"({time.time() - t0:.0f}s)", flush=True)
     return 0

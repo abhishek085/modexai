@@ -28,7 +28,7 @@ def main() -> None:
             "hire": {k: v for k, v in hire.items() if k != "hw"},
             "suite": "ticket-triage", "hardware": hire["hw"], "bar": BAR}
     out = ROOT / "video/src/data.json"
-    out.write_text(json.dumps(data, indent=2) + "\n")
+    out.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(data, indent=2))
 
 

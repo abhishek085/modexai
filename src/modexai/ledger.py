@@ -22,7 +22,7 @@ def log(model: str, prompt_tokens: int, completion_tokens: int, latency_ms: floa
         return
     row = {"ts": int(time.time()), "model": model, "task": task, "in": prompt_tokens, "out": completion_tokens,
            "ms": round(latency_ms)}
-    with _path().open("a") as fh:
+    with _path().open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(row) + "\n")
 
 
@@ -35,7 +35,7 @@ def summary(days: int | None = None) -> dict[str, Any]:
     first = None
     p = _path()
     if p.exists():
-        for line in p.read_text().splitlines():
+        for line in p.read_text(encoding="utf-8").splitlines():
             try:
                 r = json.loads(line)
             except json.JSONDecodeError:

@@ -425,7 +425,7 @@ def cmd_recipes(args) -> int:
         console.print(f"[green]✓[/] {out['note']}\n{out['url']}")
         return 0
     if sub == "validate":
-        raw = sys.stdin.read() if args.file == "-" else Path(args.file).read_text()
+        raw = sys.stdin.read() if args.file == "-" else Path(args.file).read_text(encoding="utf-8")
         d = json.loads(raw)
         problems = recipes.validate(d)
         if problems:
@@ -435,7 +435,7 @@ def cmd_recipes(args) -> int:
         console.print(f"[green]✓[/] valid recipe {d.get('id')}")
         return 0
     if sub == "id":
-        d = json.loads(Path(args.file).read_text())
+        d = json.loads(Path(args.file).read_text(encoding="utf-8"))
         print(recipes.recipe_id(d))
         return 0
     return 2
@@ -444,7 +444,7 @@ def cmd_recipes(args) -> int:
 def cmd_savings(args) -> int:
     s = ledger.summary(args.days)
     if args.badge:
-        with open(args.badge, "w") as fh:
+        with open(args.badge, "w", encoding="utf-8") as fh:
             fh.write(ledger.badge_svg(s))
         console.print(f"[green]✓[/] badge written to {args.badge}")
     if args.json:

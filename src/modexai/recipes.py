@@ -219,7 +219,7 @@ def local_dir() -> Path:
 
 def save_local(d: dict[str, Any]) -> Path:
     path = local_dir() / f"{d['id']}.json"
-    path.write_text(json.dumps(d, indent=2))
+    path.write_text(json.dumps(d, indent=2), encoding="utf-8")
     return path
 
 
@@ -227,7 +227,7 @@ def load_local() -> list[dict[str, Any]]:
     out = []
     for p in sorted(local_dir().glob("rcp_*.json")):
         try:
-            out.append(json.loads(p.read_text()))
+            out.append(json.loads(p.read_text(encoding="utf-8")))
         except json.JSONDecodeError:
             continue
     return out
@@ -245,11 +245,11 @@ def load_index(source: str | None = None) -> list[dict[str, Any]]:
             r.raise_for_status()
             doc = r.json()
         else:
-            doc = json.loads(Path(source).read_text())
+            doc = json.loads(Path(source).read_text(encoding="utf-8"))
     elif _cached_index().exists():
-        doc = json.loads(_cached_index().read_text())
+        doc = json.loads(_cached_index().read_text(encoding="utf-8"))
     elif BUNDLED_INDEX.exists():
-        doc = json.loads(BUNDLED_INDEX.read_text())
+        doc = json.loads(BUNDLED_INDEX.read_text(encoding="utf-8"))
     else:
         doc = {"recipes": []}
     return [r for r in doc.get("recipes", []) if not validate(r)]
@@ -259,7 +259,7 @@ def update_index(url: str = REMOTE_INDEX_URL) -> int:
     r = httpx.get(url, timeout=20, follow_redirects=True)
     r.raise_for_status()
     doc = r.json()
-    _cached_index().write_text(json.dumps(doc))
+    _cached_index().write_text(json.dumps(doc), encoding="utf-8")
     return len(doc.get("recipes", []))
 
 

@@ -193,7 +193,7 @@ def _read_source(src: str) -> dict[str, Any]:
         r = httpx.get(src, timeout=20, follow_redirects=True)
         r.raise_for_status()
         return r.json()
-    return json.loads(Path(src).expanduser().read_text())
+    return json.loads(Path(src).expanduser().read_text(encoding="utf-8"))
 
 
 def load_registry(source: str | None = None, include_private: bool = True) -> Registry:
@@ -207,9 +207,9 @@ def load_registry(source: str | None = None, include_private: bool = True) -> Re
     if src:
         doc = _read_source(src)
     elif _cached_registry_path().exists():
-        doc = json.loads(_cached_registry_path().read_text())
+        doc = json.loads(_cached_registry_path().read_text(encoding="utf-8"))
     else:
-        doc = json.loads(config.BUNDLED_REGISTRY.read_text())
+        doc = json.loads(config.BUNDLED_REGISTRY.read_text(encoding="utf-8"))
 
     models = [Model(raw=m, benchmarks=m.get("benchmarks", {})) for m in doc.get("models", [])]
 
@@ -219,7 +219,7 @@ def load_registry(source: str | None = None, include_private: bool = True) -> Re
             known = {m.id for m in models}
             for p in sorted(pdir.glob("*.json")):
                 try:
-                    raw = json.loads(p.read_text())
+                    raw = json.loads(p.read_text(encoding="utf-8"))
                 except json.JSONDecodeError:
                     continue
                 if validate_listing(raw):
@@ -239,7 +239,7 @@ def update_registry(url: str = config.REMOTE_REGISTRY_URL) -> tuple[Path, int]:
     if "models" not in doc:
         raise ValueError("Not a ModexAI registry document")
     path = _cached_registry_path()
-    path.write_text(json.dumps(doc, indent=2))
+    path.write_text(json.dumps(doc, indent=2), encoding="utf-8")
     return path, len(doc["models"])
 
 

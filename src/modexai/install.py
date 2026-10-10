@@ -121,12 +121,12 @@ def _install_safetensors(model: Model, say: Progress) -> None:
             _download(f"https://huggingface.co/{repo}/resolve/{rev}/{name}", dest, say, name)
     cfg_path = cache / "config.json"
     if cfg_path.exists():
-        cfg = json.loads(cfg_path.read_text())
+        cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
         fixes = patch_hf_config(cfg)
         if fixes:
-            cfg_path.write_text(json.dumps(cfg, indent=2))
+            cfg_path.write_text(json.dumps(cfg, indent=2), encoding="utf-8")
             say(f"patched config.json ({', '.join(fixes)})", None)
-    (cache / "Modelfile").write_text(modelfile_text(model, "."))
+    (cache / "Modelfile").write_text(modelfile_text(model, "."), encoding="utf-8")
     say("creating Ollama model", None)
     proc = subprocess.run(
         ["ollama", "create", model.ollama_tag, "-f", "Modelfile"],

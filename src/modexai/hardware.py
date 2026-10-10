@@ -46,11 +46,11 @@ def detect() -> dict[str, Any]:
             info["vram_gb"] = info["ram_gb"]  # unified memory
     elif system == "Linux":
         try:
-            with open("/proc/cpuinfo") as f:
+            with open("/proc/cpuinfo", encoding="utf-8") as f:
                 m = re.search(r"model name\s*:\s*(.+)", f.read())
                 if m:
                     info["chip"] = m.group(1).strip()
-            with open("/proc/meminfo") as f:
+            with open("/proc/meminfo", encoding="utf-8") as f:
                 m = re.search(r"MemTotal:\s*(\d+)", f.read())
                 if m:
                     info["ram_gb"] = round(int(m.group(1)) / 2**20)
