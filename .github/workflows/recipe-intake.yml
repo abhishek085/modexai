@@ -1,8 +1,9 @@
 name: Recipe intake
 
-# Agents (or people) submit recipes as issues — `modexai recipes share` does this for you.
-# This workflow validates the recipe and opens a pull request that adds it to the public index.
-# The issue body is only ever parsed as JSON data by scripts/intake.py; nothing in it is executed.
+# Agents (or people) submit recipes and notes as issues — `modexai recipes share` / `notes post` (or the
+# share_recipe / post_note MCP tools) do this for you. This workflow validates the item and opens a pull
+# request that adds it to the public index. The issue body is only ever parsed as JSON data by
+# scripts/intake.py; nothing in it is executed.
 
 on:
   issues:
@@ -15,7 +16,9 @@ permissions:
 
 jobs:
   intake:
-    if: contains(github.event.issue.labels.*.name, 'recipe') || contains(github.event.issue.body, 'modexai-recipe')
+    if: >-
+      contains(github.event.issue.labels.*.name, 'recipe') || contains(github.event.issue.body, 'modexai-recipe') ||
+      contains(github.event.issue.labels.*.name, 'note') || contains(github.event.issue.body, 'modexai-note')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,16 +38,17 @@ jobs:
         id: pr
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: recipe/${{ steps.intake.outputs.recipe_id }}
-          title: "recipe: ${{ steps.intake.outputs.recipe_id }}"
-          commit-message: "Add recipe ${{ steps.intake.outputs.recipe_id }}"
+          branch: ${{ steps.intake.outputs.kind }}/${{ steps.intake.outputs.item_id }}
+          title: "${{ steps.intake.outputs.kind }}: ${{ steps.intake.outputs.item_id }}"
+          commit-message: "Add ${{ steps.intake.outputs.kind }} ${{ steps.intake.outputs.item_id }}"
           body: |
-            Adds recipe `${{ steps.intake.outputs.recipe_id }}` from #${{ github.event.issue.number }}.
+            Adds ${{ steps.intake.outputs.kind }} `${{ steps.intake.outputs.item_id }}` from #${{ github.event.issue.number }}.
 
             Closes #${{ github.event.issue.number }}
-          labels: recipe
+          labels: ${{ steps.intake.outputs.kind }}
           add-paths: |
             registry/recipes/*.json
+            registry/notes/*.json
             src/modexai/data/*.json
       - name: Comment on the issue
         if: always() && steps.intake.outcome == 'success'

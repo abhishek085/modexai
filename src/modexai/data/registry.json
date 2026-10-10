@@ -22,6 +22,7 @@
       "links": {
         "card": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
       },
+      "ollama_tag": "deepseek-r1:1.5b",
       "benchmarks": {}
     },
     {
@@ -43,6 +44,7 @@
       "links": {
         "card": "https://huggingface.co/defog/sqlcoder-7b-2"
       },
+      "ollama_tag": "sqlcoder:7b",
       "benchmarks": {}
     },
     {
@@ -65,6 +67,7 @@
       "links": {
         "card": "https://huggingface.co/google/embeddinggemma-300m"
       },
+      "ollama_tag": "embeddinggemma",
       "benchmarks": {}
     },
     {
@@ -86,6 +89,7 @@
       "links": {
         "card": "https://huggingface.co/google/functiongemma-270m-it"
       },
+      "ollama_tag": "functiongemma",
       "benchmarks": {
         "tool-calling": {
           "score": 0.3333,
@@ -118,6 +122,7 @@
       "links": {
         "card": "https://huggingface.co/google/gemma-3-1b-it"
       },
+      "ollama_tag": "gemma3:1b",
       "benchmarks": {
         "content-moderation": {
           "score": 0.0,
@@ -221,6 +226,7 @@
       "links": {
         "card": "https://huggingface.co/google/gemma-3-270m"
       },
+      "ollama_tag": "gemma3:270m",
       "benchmarks": {
         "content-moderation": {
           "score": 0.5,
@@ -324,6 +330,7 @@
       "links": {
         "card": "https://huggingface.co/google/medgemma-4b-it"
       },
+      "ollama_tag": "medgemma:4b",
       "benchmarks": {}
     },
     {
@@ -346,6 +353,7 @@
       "links": {
         "card": "https://huggingface.co/google/shieldgemma-2b"
       },
+      "ollama_tag": "shieldgemma:2b",
       "benchmarks": {}
     },
     {
@@ -367,6 +375,7 @@
       "links": {
         "card": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct"
       },
+      "ollama_tag": "smollm2:1.7b",
       "benchmarks": {
         "content-moderation": {
           "score": 0.5714,
@@ -472,6 +481,7 @@
       "links": {
         "card": "https://huggingface.co/ibm-granite/granite-guardian-3.0-2b"
       },
+      "ollama_tag": "granite3-guardian:2b",
       "benchmarks": {}
     },
     {
@@ -493,6 +503,7 @@
       "links": {
         "card": "https://huggingface.co/ibm-granite/granite-4.0-350m"
       },
+      "ollama_tag": "granite4:350m",
       "benchmarks": {
         "content-moderation": {
           "score": 0.6429,
@@ -598,6 +609,7 @@
       "links": {
         "card": "https://huggingface.co/ibm-granite/granite-4.0-micro"
       },
+      "ollama_tag": "granite4:micro",
       "benchmarks": {
         "content-moderation": {
           "score": 0.9286,
@@ -701,6 +713,7 @@
       "links": {
         "card": "https://huggingface.co/jinaai/reader-lm-1.5b"
       },
+      "ollama_tag": "reader-lm:1.5b",
       "benchmarks": {}
     },
     {
@@ -723,6 +736,7 @@
       "links": {
         "card": "https://huggingface.co/meta-llama/Llama-Guard-3-1B"
       },
+      "ollama_tag": "llama-guard3:1b",
       "benchmarks": {
         "content-moderation": {
           "score": 0.9286,
@@ -757,6 +771,7 @@
       "links": {
         "card": "https://huggingface.co/microsoft/Phi-4-mini-instruct"
       },
+      "ollama_tag": "phi4-mini",
       "benchmarks": {
         "content-moderation": {
           "score": 0.8571,
@@ -860,6 +875,7 @@
       "links": {
         "card": "https://huggingface.co/motherduckdb/DuckDB-NSQL-7B-v0.1"
       },
+      "ollama_tag": "duckdb-nsql:7b",
       "benchmarks": {}
     },
     {
@@ -889,6 +905,7 @@
       },
       "base_model": "Qwen/Qwen3.5-0.8B-Base",
       "featured": true,
+      "ollama_tag": "jev-control-core",
       "benchmarks": {}
     },
     {
@@ -927,6 +944,7 @@
           ]
         }
       },
+      "ollama_tag": "nokast-securerag:0.5b",
       "benchmarks": {
         "prompt-injection": {
           "score": 0.95,
@@ -964,6 +982,7 @@
       },
       "base_model": "Qwen/Qwen3.5-4B",
       "featured": true,
+      "ollama_tag": "spark-s1-4b-v6-nvfp4",
       "benchmarks": {}
     },
     {
@@ -991,6 +1010,7 @@
       },
       "base_model": "Qwen/Qwen3.5-4B",
       "featured": true,
+      "ollama_tag": "spark-s1-4b-v6",
       "benchmarks": {}
     },
     {
@@ -1018,6 +1038,7 @@
       },
       "base_model": "Qwen/Qwen3.5-4B",
       "featured": true,
+      "ollama_tag": "spark-s1-4b-v8-nvfp4",
       "benchmarks": {}
     },
     {
@@ -1040,6 +1061,7 @@
       "links": {
         "card": "https://huggingface.co/nomic-ai/nomic-embed-text-v1.5"
       },
+      "ollama_tag": "nomic-embed-text",
       "benchmarks": {}
     },
     {
@@ -1061,6 +1083,7 @@
       "links": {
         "card": "https://huggingface.co/numind/NuExtract"
       },
+      "ollama_tag": "nuextract",
       "benchmarks": {
         "json-extraction": {
           "score": 0.6875,
@@ -1093,6 +1116,7 @@
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen2.5-Coder-1.5B-Instruct"
       },
+      "ollama_tag": "qwen2.5-coder:1.5b",
       "benchmarks": {
         "text-to-sql": {
           "score": 0.6667,
@@ -1126,6 +1150,7 @@
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen3-0.6B"
       },
+      "ollama_tag": "qwen3:0.6b",
       "benchmarks": {
         "content-moderation": {
           "score": 0.7143,
@@ -1232,6 +1257,7 @@
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen3-1.7B"
       },
+      "ollama_tag": "qwen3:1.7b",
       "benchmarks": {
         "content-moderation": {
           "score": 0.9286,
@@ -1339,6 +1365,7 @@
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507"
       },
+      "ollama_tag": "qwen3:4b-instruct",
       "benchmarks": {
         "content-moderation": {
           "score": 1.0,
@@ -1443,6 +1470,7 @@
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B"
       },
+      "ollama_tag": "qwen3-embedding:0.6b",
       "benchmarks": {}
     },
     {
@@ -1465,6 +1493,7 @@
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen3.5-0.8B"
       },
+      "ollama_tag": "qwen3.5:0.8b",
       "benchmarks": {
         "content-moderation": {
           "score": 0.7143,

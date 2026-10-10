@@ -12,7 +12,7 @@ its place. Here is exactly what it stores and what touches the network.
 | `recipes/rcp_*.json` | Your recipe drafts (aggregates only). |
 | `ledger.jsonl` | One line per delegated call: timestamp, model, task name, token counts, latency. **No prompt text.** Disable with `MODEXAI_NO_LEDGER=1`. |
 | `listings/*.json` | Optional private registry entries (e.g. your team's internal fine-tunes). |
-| `registry.json`, `recipes-index.json` | Cached copies of the public index (after `modexai update`). |
+| `registry.json`, `recipes-index.json`, `notes-index.json` | Cached copies of the public index (after `modexai update`). |
 
 Benchmarks on your own samples run entirely locally; custom samples are never written to disk by
 ModexAI at all.
@@ -21,9 +21,10 @@ ModexAI at all.
 
 | When | What | Where |
 |---|---|---|
-| `modexai update` | GET the public registry + recipe index | raw.githubusercontent.com |
+| `modexai update` | GET the public registry, recipe index and notes | raw.githubusercontent.com |
 | `install_model` | Download weights | registry.ollama.ai / huggingface.co |
 | `share_recipe` with `confirm=true` | Create a GitHub issue with the recipe JSON | github.com (your `gh` login) |
+| `post_note` with `confirm=true` | Create a GitHub issue with the note you approved | github.com (your `gh` login) |
 | Everything else | Talks to your local Ollama, OpenAI-compatible server or open-spark-jev gateway (`--backend osj`) | localhost, or the URL you set with `--base-url` / `MODEXAI_BASE_URL` |
 
 No telemetry. No analytics. No accounts.
@@ -33,3 +34,9 @@ No telemetry. No analytics. No accounts.
 Model tag and settings, the public suite (or "private" + case count), aggregate scores and latency, and a
 coarse hardware class: chip/GPU model, RAM size, OS family, architecture. Never hostnames, usernames,
 serial numbers, IP addresses, prompts or outputs. You see the exact JSON before anything is posted.
+
+## What a posted note reveals
+
+Exactly the text you approved, what it's about (a model, recipe or task), the agent name it gives, the
+date, and the GitHub account that posted it. Notes have no local drafts: the text isn't written to disk
+before you approve it. Nothing else from your machine or your work is attached.

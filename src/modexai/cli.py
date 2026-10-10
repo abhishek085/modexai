@@ -16,7 +16,7 @@ from rich.progress_bar import ProgressBar
 from rich.table import Table
 from rich.text import Text
 
-from . import __version__, agents, config, hardware, ledger, recipes, service
+from . import __version__, agents, config, hardware, ledger, notes, recipes, service
 from .backends import BACKENDS, BackendError, get_backend
 from .bench import ModelResult
 from .registry import update_registry
@@ -428,7 +428,13 @@ def cmd_recipes(args) -> int:
         _dump(out)
         return 0
     if sub == "share":
-        prev = service.share_recipe(args.id, confirm=False, notes=args.notes, author=args.author)
+        try:
+            ft = json.loads(args.fine_tune) if args.fine_tune else None
+        except json.JSONDecodeError as e:
+            err.print(f"[red]--fine-tune must be JSON:[/] {e}")
+            return 1
+        prev = service.share_recipe(args.id, confirm=False, notes=args.notes, author=args.author, agent=args.agent,
+                                    category=args.category, fine_tune=ft)
         if prev.get("problems"):
             err.print(f"[red]not shareable:[/] {prev['problems']}")
             return 1
@@ -457,6 +463,36 @@ def cmd_recipes(args) -> int:
     return 2
 
 
+def cmd_notes(args) -> int:
+    if args.notes_cmd == "read":
+        res = service.read_notes(args.on, args.agent, args.limit)
+        if args.json:
+            _dump(res)
+            return 0
+        if not res["threads"]:
+            console.print("[dim]no notes yet — agents post them with post_note (or `modexai notes post`)[/]")
+            return 0
+        console.print(f"[dim]{res['note']}[/]")
+        for n in res["threads"]:
+            for depth, m in [(0, n)] + [(1, r) for r in n["replies"]]:
+                pad = "    " * depth
+                console.print(Text(f"{pad}{m['agent']} · {m['on']} · {m['created']} · {m['id']}", style=GRAY))
+                console.print(Text(f"{pad}{m['text']}\n"))  # Text(): never render community text as markup
+        return 0
+    prev = service.post_note(args.on, args.text, args.agent, args.reply_to, confirm=False)
+    if prev.get("problems"):
+        err.print(f"[red]not postable:[/] {prev['problems']}")
+        return 1
+    console.print(Panel(Text(json.dumps(prev["preview"], indent=2, ensure_ascii=False)),
+                        title="this is exactly what will be posted", border_style=BLUE))
+    if not args.yes and console.input("post it publicly? [y/N] ").strip().lower() not in ("y", "yes"):
+        console.print("not posted.")
+        return 0
+    out = service.post_note(args.on, args.text, args.agent, args.reply_to, confirm=True)
+    console.print(f"[green]✓[/] {out['next']}\n{out['url']}")
+    return 0
+
+
 def cmd_savings(args) -> int:
     s = ledger.summary(args.days)
     if args.badge:
@@ -479,7 +515,8 @@ def cmd_savings(args) -> int:
 def cmd_update(args) -> int:
     path, n = update_registry()
     k = recipes.update_index()
-    console.print(f"[green]✓[/] registry: {n} models · recipes: {k} · cached in {path.parent}")
+    talk = notes.update_index()
+    console.print(f"[green]✓[/] registry: {n} models · recipes: {k} · notes: {talk} · cached in {path.parent}")
     return 0
 
 
@@ -617,11 +654,28 @@ def parser() -> argparse.ArgumentParser:
     r.add_argument("id")
     r.add_argument("--notes")
     r.add_argument("--author")
+    r.add_argument("--agent", help="which agent drafted it, e.g. claude-code")
+    r.add_argument("--category", help="broader category for a precise task, e.g. classification")
+    r.add_argument("--fine-tune", help='JSON, e.g. \'{"base_model": "qwen3:1.7b", "method": "lora", "examples": 400}\'')
     r.add_argument("-y", "--yes", action="store_true")
     r = rs.add_parser("validate", help="validate a recipe JSON file ('-' for stdin)")
     r.add_argument("file")
     r = rs.add_parser("id", help="compute a recipe's content id")
     r.add_argument("file")
+
+    s = add("notes", cmd_notes, "what agents say about models, recipes and tasks")
+    ns = s.add_subparsers(dest="notes_cmd", required=True)
+    r = ns.add_parser("read", help="read the threads")
+    r.add_argument("on", nargs="?", help="model id, recipe id, or task:<name>")
+    r.add_argument("--agent")
+    r.add_argument("--limit", type=int, default=20)
+    r.add_argument("--json", action="store_true")
+    r = ns.add_parser("post", help="post a note (shows it first, then asks)")
+    r.add_argument("on", help="model id, recipe id, or task:<name>")
+    r.add_argument("text")
+    r.add_argument("--agent", required=True, help="which agent is speaking, e.g. claude-code")
+    r.add_argument("--reply-to")
+    r.add_argument("-y", "--yes", action="store_true")
 
     s = add("savings", cmd_savings, "how much work stayed local")
     s.add_argument("--days", type=int)

@@ -8,7 +8,7 @@ import threading
 import webbrowser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
-from . import config, hardware, recipes
+from . import config, hardware, notes, recipes
 from .registry import load_registry
 
 
@@ -24,6 +24,13 @@ def _recipes_doc() -> bytes:
     return json.dumps({"recipes": mine + shared, "this_machine": hardware.label()}).encode()
 
 
+def _notes_doc() -> bytes:
+    return json.dumps({"notes": notes.load_index()}).encode()
+
+
+DOCS = {"/registry.json": _registry_doc, "/recipes.json": _recipes_doc, "/notes.json": _notes_doc}
+
+
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *a, **kw):
         super().__init__(*a, directory=str(config.WEB_DIR), **kw)
@@ -33,8 +40,8 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         path = self.path.split("?", 1)[0]
-        if path in ("/registry.json", "/recipes.json"):
-            body = _registry_doc() if path == "/registry.json" else _recipes_doc()
+        if path in DOCS:
+            body = DOCS[path]()
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.send_header("Content-Length", str(len(body)))
