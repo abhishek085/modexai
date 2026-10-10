@@ -1,0 +1,29 @@
+{
+  "id": "json-extraction",
+  "version": 1,
+  "name": "Structured extraction to JSON",
+  "task": "extraction",
+  "description": "Pull typed fields out of messy text (invoices, emails, receipts) as JSON. Graded field-by-field.",
+  "system": "Extract the requested fields from the text. Respond with a single JSON object using exactly the keys requested. Use numbers for amounts, null when a field is absent. No prose.",
+  "max_tokens": 160,
+  "json_mode": true,
+  "check_defaults": {"type": "json_fields"},
+  "items": [
+    {"id": "je01", "prompt": "Keys: vendor, invoice_number, total, currency\n\nText: INVOICE #INV-2291 from Northwind Traders. Amount due: 1,250.00 EUR by 30 Nov.", "check": {"expected": {"vendor": "Northwind Traders", "invoice_number": "INV-2291", "total": 1250.0, "currency": "EUR"}}},
+    {"id": "je02", "prompt": "Keys: name, email, company\n\nText: Hi, this is Priya Natarajan from Lumen Labs — reach me at priya.n@lumenlabs.io about the pilot.", "check": {"expected": {"name": "Priya Natarajan", "email": "priya.n@lumenlabs.io", "company": "Lumen Labs"}}},
+    {"id": "je03", "prompt": "Keys: city, check_in, nights\n\nText: Booking confirmed: 3 nights at Hotel Lisboa Mar, Lisbon. Check-in 2026-11-14.", "check": {"expected": {"city": "Lisbon", "check_in": "2026-11-14", "nights": 3}}},
+    {"id": "je04", "prompt": "Keys: merchant, total, tip\n\nText: Blue Bottle Coffee — Latte 5.50, Croissant 4.25. Subtotal 9.75. Tip 2.00. Total 11.75", "check": {"expected": {"merchant": "Blue Bottle Coffee", "total": 11.75, "tip": 2.0}}},
+    {"id": "je05", "prompt": "Keys: order_id, status, carrier\n\nText: Your order 88-7731-AX has shipped via DHL Express and is now in transit.", "check": {"expected": {"order_id": "88-7731-AX", "status": "shipped", "carrier": "DHL Express"}}},
+    {"id": "je06", "prompt": "Keys: name, phone, email\n\nText: Call Marco Rossi on +39 055 123 4567 for the venue keys.", "check": {"expected": {"name": "Marco Rossi", "phone": "+39 055 123 4567", "email": null}}},
+    {"id": "je07", "prompt": "Keys: job_title, company, salary_min, salary_max\n\nText: Acme Robotics is hiring a Senior Firmware Engineer. Range: $150,000–$185,000 plus equity.", "check": {"expected": {"job_title": "Senior Firmware Engineer", "company": "Acme Robotics", "salary_min": 150000, "salary_max": 185000}}},
+    {"id": "je08", "prompt": "Keys: drug, dose_mg, frequency_per_day\n\nText: Rx: Amoxicillin 500 mg, take one capsule three times daily for 7 days.", "check": {"expected": {"drug": "Amoxicillin", "dose_mg": 500, "frequency_per_day": 3}}},
+    {"id": "je09", "prompt": "Keys: meeting_date, meeting_time, location\n\nText: Let's meet Thursday 2026-10-22 at 14:30 in the Oak conference room.", "check": {"expected": {"meeting_date": "2026-10-22", "meeting_time": "14:30", "location": "Oak conference room"}}},
+    {"id": "je10", "prompt": "Keys: tenant, monthly_rent, deposit, lease_months\n\nText: Lease for Jordan Lee: rent $2,100/month, security deposit $4,200, term 12 months starting Jan 1.", "check": {"expected": {"tenant": "Jordan Lee", "monthly_rent": 2100, "deposit": 4200, "lease_months": 12}}},
+    {"id": "je11", "prompt": "Keys: flight, from, to, seat\n\nText: Boarding pass — UA 1452, SFO → ORD, seat 23C, group 4.", "check": {"expected": {"flight": "UA 1452", "from": "SFO", "to": "ORD", "seat": "23C"}}},
+    {"id": "je12", "prompt": "Keys: product, quantity, unit_price\n\nText: PO line 3: 40 x USB-C docking station @ 89.90 each.", "check": {"expected": {"product": "USB-C docking station", "quantity": 40, "unit_price": 89.9}}},
+    {"id": "je13", "prompt": "Keys: error_code, service, region\n\nText: [ALERT] payments-api returned ERR_TIMEOUT_504 repeatedly in eu-west-1 since 03:12 UTC.", "check": {"expected": {"error_code": "ERR_TIMEOUT_504", "service": "payments-api", "region": "eu-west-1"}}},
+    {"id": "je14", "prompt": "Keys: account_holder, iban_last4, amount\n\nText: Transfer of 640.00 to Elena Petrova, IBAN ending 9921, scheduled for Friday.", "check": {"expected": {"account_holder": "Elena Petrova", "iban_last4": "9921", "amount": 640.0}}},
+    {"id": "je15", "prompt": "Keys: title, author, year\n\nText: In 'The Pragmatic Programmer' (1999), Andrew Hunt and David Thomas argue for... (first author only)", "check": {"expected": {"title": "The Pragmatic Programmer", "author": "Andrew Hunt", "year": 1999}}},
+    {"id": "je16", "prompt": "Keys: temperature_c, condition, city\n\nText: Forecast for Austin: sunny, high of 31°C, light wind from the south.", "check": {"expected": {"temperature_c": 31, "condition": "sunny", "city": "Austin"}}}
+  ]
+}

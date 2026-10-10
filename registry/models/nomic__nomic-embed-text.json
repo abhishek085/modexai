@@ -1,0 +1,21 @@
+{
+  "id": "nomic/nomic-embed-text",
+  "name": "nomic-embed-text",
+  "publisher": "Nomic",
+  "summary": "Open text-embedding model with long context — local retrieval without an embeddings API.",
+  "tasks": [
+    "embedding",
+    "retrieval"
+  ],
+  "kind": "embedding",
+  "params_b": 0.14,
+  "size_gb": 0.27,
+  "license": "apache-2.0",
+  "source": {
+    "type": "ollama",
+    "tag": "nomic-embed-text"
+  },
+  "links": {
+    "card": "https://huggingface.co/nomic-ai/nomic-embed-text-v1.5"
+  }
+}

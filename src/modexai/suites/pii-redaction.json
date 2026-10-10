@@ -1,0 +1,24 @@
+{
+  "id": "pii-redaction",
+  "version": 1,
+  "name": "PII redaction before the cloud",
+  "task": "pii-redaction",
+  "description": "Mask names, emails, phone numbers, addresses and IDs while keeping the rest of the text useful — the job a local model should do before anything is sent to a cloud API.",
+  "system": "Rewrite the text with personal data replaced by placeholders: [NAME], [EMAIL], [PHONE], [ADDRESS], [ID]. Keep every other word unchanged. Output only the rewritten text.",
+  "max_tokens": 200,
+  "check_defaults": {"type": "contains"},
+  "items": [
+    {"id": "pr01", "prompt": "Hi, I'm Sarah Connor, email sarah.connor@skynet.example, and my order hasn't arrived.", "check": {"none": ["Sarah", "Connor", "sarah.connor@skynet.example"], "all": ["order", "[EMAIL]"]}},
+    {"id": "pr02", "prompt": "Call me on 415-555-0132 about the refund for the blue jacket.", "check": {"none": ["415-555-0132"], "all": ["refund", "jacket", "[PHONE]"]}},
+    {"id": "pr03", "prompt": "Ship it to 742 Evergreen Terrace, Springfield. Thanks, Homer.", "check": {"none": ["742 Evergreen", "Homer"], "all": ["Ship"]}},
+    {"id": "pr04", "prompt": "Patient John Okoye (MRN 00482913) reports chest pain since Tuesday.", "check": {"none": ["Okoye", "00482913"], "all": ["chest pain", "Tuesday"]}},
+    {"id": "pr05", "prompt": "My SSN is 123-45-6789 and the tax form is missing box 12.", "check": {"none": ["123-45-6789"], "all": ["tax form", "box 12"]}},
+    {"id": "pr06", "prompt": "Forward the contract to mike.ross@pearson-hardman.example and cc Rachel Zane.", "check": {"none": ["mike.ross@pearson-hardman.example", "Rachel", "Zane"], "all": ["contract"]}},
+    {"id": "pr07", "prompt": "Wire the deposit from account DE89 3704 0044 0532 0130 00 before Friday.", "check": {"none": ["DE89 3704 0044 0532 0130 00", "0532 0130"], "all": ["deposit", "Friday"]}},
+    {"id": "pr08", "prompt": "Driver Lena Fischer, license B072RRE2I55, was involved in a minor collision on Main St.", "check": {"none": ["Lena", "Fischer", "B072RRE2I55"], "all": ["collision"]}},
+    {"id": "pr09", "prompt": "Text +44 7700 900123 when the technician arrives at 221B Baker Street.", "check": {"none": ["7700 900123", "221B Baker"], "all": ["technician"]}},
+    {"id": "pr10", "prompt": "Employee Raj Malhotra (ID E-55821) requested parental leave from 1 March.", "check": {"none": ["Raj", "Malhotra", "E-55821"], "all": ["parental leave", "March"]}},
+    {"id": "pr11", "prompt": "Reset the password for user anna.k@contoso.example — she is locked out after the update.", "check": {"none": ["anna.k@contoso.example"], "all": ["password", "locked out"]}},
+    {"id": "pr12", "prompt": "Dr. Emily Watts confirmed the MRI for Carlos Mendez on 2026-11-02.", "check": {"none": ["Emily Watts", "Mendez"], "all": ["MRI", "2026-11-02"]}}
+  ]
+}

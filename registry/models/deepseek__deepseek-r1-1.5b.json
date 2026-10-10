@@ -1,0 +1,21 @@
+{
+  "id": "deepseek/deepseek-r1-1.5b",
+  "name": "DeepSeek-R1 Distill 1.5B",
+  "publisher": "DeepSeek",
+  "summary": "Reasoning distilled into Qwen 1.5B. Thinks out loud; better at math than at short-answer tasks.",
+  "tasks": [
+    "math",
+    "reasoning"
+  ],
+  "kind": "chat",
+  "params_b": 1.5,
+  "size_gb": 1.12,
+  "license": "mit",
+  "source": {
+    "type": "ollama",
+    "tag": "deepseek-r1:1.5b"
+  },
+  "links": {
+    "card": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
+  }
+}

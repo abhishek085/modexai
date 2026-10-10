@@ -1,0 +1,37 @@
+{
+  "race": [
+    {
+      "tag": "qwen3:0.6b",
+      "score": 0.2,
+      "p50": 107.9,
+      "size": 0.52
+    },
+    {
+      "tag": "granite4:350m",
+      "score": 0.5,
+      "p50": 80.0,
+      "size": 0.71
+    },
+    {
+      "tag": "gemma3:1b",
+      "score": 0.8,
+      "p50": 155.7,
+      "size": 0.81
+    },
+    {
+      "tag": "qwen3:4b-instruct",
+      "score": 0.85,
+      "p50": 172.3,
+      "size": 2.5
+    }
+  ],
+  "hire": {
+    "tag": "gemma3:1b",
+    "score": 0.8,
+    "p50": 155.7,
+    "size": 0.81
+  },
+  "suite": "ticket-triage",
+  "hardware": "Apple M4 Pro \u00b7 24 GB",
+  "bar": 0.8
+}

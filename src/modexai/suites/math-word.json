@@ -1,0 +1,27 @@
+{
+  "id": "math-word",
+  "version": 1,
+  "name": "Everyday math word problems",
+  "task": "math",
+  "description": "Short multi-step arithmetic — invoices, discounts, unit rates. Graded on the final number.",
+  "system": "Solve the problem. Show at most two short lines of work, then end with 'Answer: <number>'.",
+  "max_tokens": 160,
+  "check_defaults": {"type": "number"},
+  "items": [
+    {"id": "mw01", "prompt": "A shirt costs $40 and is discounted 25%. What is the sale price in dollars?", "check": {"expected": 30}},
+    {"id": "mw02", "prompt": "A team of 6 shares a $1,350 bonus equally. How much does each person get?", "check": {"expected": 225}},
+    {"id": "mw03", "prompt": "A car travels 180 km in 2.5 hours. What is its average speed in km/h?", "check": {"expected": 72}},
+    {"id": "mw04", "prompt": "You buy 3 notebooks at $4.50 and 2 pens at $1.25. What is the total in dollars?", "check": {"expected": 16}},
+    {"id": "mw05", "prompt": "A server handles 1,200 requests per minute. How many requests is that per second?", "check": {"expected": 20}},
+    {"id": "mw06", "prompt": "An invoice of $800 has 8% sales tax added. What is the total in dollars?", "check": {"expected": 864}},
+    {"id": "mw07", "prompt": "A recipe for 4 people uses 300 g of rice. How many grams are needed for 10 people?", "check": {"expected": 750}},
+    {"id": "mw08", "prompt": "Maya is 3 times as old as her son. Together they are 48. How old is Maya?", "check": {"expected": 36}},
+    {"id": "mw09", "prompt": "A model processes 45 tokens per second. How many seconds does it need for 900 tokens?", "check": {"expected": 20}},
+    {"id": "mw10", "prompt": "A subscription is $12 per month or $120 per year. How many dollars do you save per year by paying annually?", "check": {"expected": 24}},
+    {"id": "mw11", "prompt": "A tank holds 500 litres and is 35% full. How many litres are in it?", "check": {"expected": 175}},
+    {"id": "mw12", "prompt": "Stock rose from $50 to $65. What is the percentage increase?", "check": {"expected": 30}},
+    {"id": "mw13", "prompt": "A train leaves at 09:40 and arrives at 13:05. How many minutes is the trip?", "check": {"expected": 205}},
+    {"id": "mw14", "prompt": "There are 7 boxes with 24 apples each. 18 apples are bad. How many good apples are there?", "check": {"expected": 150}},
+    {"id": "mw15", "prompt": "Cloud API calls cost $3 per million input tokens. What do 40 million input tokens cost in dollars?", "check": {"expected": 120}}
+  ]
+}

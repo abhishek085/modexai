@@ -1,0 +1,23 @@
+{
+  "id": "microsoft/phi4-mini",
+  "name": "Phi-4 mini",
+  "publisher": "Microsoft",
+  "summary": "3.8B model strong at reasoning, math and function calling for its size.",
+  "tasks": [
+    "general",
+    "math",
+    "tool-calling",
+    "extraction"
+  ],
+  "kind": "chat",
+  "params_b": 3.8,
+  "size_gb": 2.49,
+  "license": "mit",
+  "source": {
+    "type": "ollama",
+    "tag": "phi4-mini"
+  },
+  "links": {
+    "card": "https://huggingface.co/microsoft/Phi-4-mini-instruct"
+  }
+}

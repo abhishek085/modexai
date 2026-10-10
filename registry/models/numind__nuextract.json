@@ -1,0 +1,20 @@
+{
+  "id": "numind/nuextract",
+  "name": "NuExtract",
+  "publisher": "NuMind",
+  "summary": "Phi-3-mini fine-tuned for structured extraction from a JSON template.",
+  "tasks": [
+    "extraction"
+  ],
+  "kind": "chat",
+  "params_b": 3.8,
+  "size_gb": 2.18,
+  "license": "mit",
+  "source": {
+    "type": "ollama",
+    "tag": "nuextract"
+  },
+  "links": {
+    "card": "https://huggingface.co/numind/NuExtract"
+  }
+}

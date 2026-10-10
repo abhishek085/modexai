@@ -1,0 +1,1443 @@
+{
+  "schema": "modexai.registry/1",
+  "updated": "2026-10-09",
+  "models": [
+    {
+      "id": "deepseek/deepseek-r1-1.5b",
+      "name": "DeepSeek-R1 Distill 1.5B",
+      "publisher": "DeepSeek",
+      "summary": "Reasoning distilled into Qwen 1.5B. Thinks out loud; better at math than at short-answer tasks.",
+      "tasks": [
+        "math",
+        "reasoning"
+      ],
+      "kind": "chat",
+      "params_b": 1.5,
+      "size_gb": 1.12,
+      "license": "mit",
+      "source": {
+        "type": "ollama",
+        "tag": "deepseek-r1:1.5b"
+      },
+      "links": {
+        "card": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
+      },
+      "benchmarks": {}
+    },
+    {
+      "id": "defog/sqlcoder-7b",
+      "name": "SQLCoder 7B",
+      "publisher": "Defog",
+      "summary": "Text-to-SQL specialist fine-tuned from Code Llama.",
+      "tasks": [
+        "text-to-sql"
+      ],
+      "kind": "chat",
+      "params_b": 7.0,
+      "size_gb": 4.11,
+      "license": "cc-by-sa-4.0",
+      "source": {
+        "type": "ollama",
+        "tag": "sqlcoder:7b"
+      },
+      "links": {
+        "card": "https://huggingface.co/defog/sqlcoder-7b-2"
+      },
+      "benchmarks": {}
+    },
+    {
+      "id": "google/embeddinggemma-300m",
+      "name": "EmbeddingGemma 300M",
+      "publisher": "Google",
+      "summary": "On-device embedding model from the Gemma 3 family.",
+      "tasks": [
+        "embedding",
+        "retrieval"
+      ],
+      "kind": "embedding",
+      "params_b": 0.3,
+      "size_gb": 0.62,
+      "license": "gemma",
+      "source": {
+        "type": "ollama",
+        "tag": "embeddinggemma"
+      },
+      "links": {
+        "card": "https://huggingface.co/google/embeddinggemma-300m"
+      },
+      "benchmarks": {}
+    },
+    {
+      "id": "google/functiongemma-270m",
+      "name": "FunctionGemma 270M",
+      "publisher": "Google",
+      "summary": "Gemma 3 270M tuned for function calling — built to be a tiny on-device tool router.",
+      "tasks": [
+        "tool-calling"
+      ],
+      "kind": "chat",
+      "params_b": 0.27,
+      "size_gb": 0.3,
+      "license": "gemma",
+      "source": {
+        "type": "ollama",
+        "tag": "functiongemma"
+      },
+      "links": {
+        "card": "https://huggingface.co/google/functiongemma-270m-it"
+      },
+      "benchmarks": {
+        "tool-calling": {
+          "score": 0.3333,
+          "cases": 15,
+          "p50_ms": 386.5,
+          "tokens_per_s": 344.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_54300ab5700a"
+        }
+      }
+    },
+    {
+      "id": "google/gemma3-1b",
+      "name": "Gemma 3 1B",
+      "publisher": "Google",
+      "summary": "Compact Gemma generalist with good multilingual coverage.",
+      "tasks": [
+        "general",
+        "classification"
+      ],
+      "kind": "chat",
+      "params_b": 1.0,
+      "size_gb": 0.81,
+      "license": "gemma",
+      "source": {
+        "type": "ollama",
+        "tag": "gemma3:1b"
+      },
+      "links": {
+        "card": "https://huggingface.co/google/gemma-3-1b-it"
+      },
+      "benchmarks": {
+        "content-moderation": {
+          "score": 0.0,
+          "cases": 14,
+          "p50_ms": 246.8,
+          "tokens_per_s": 175.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_6121e306bc94"
+        },
+        "fact-check": {
+          "score": 0.75,
+          "cases": 16,
+          "p50_ms": 170.6,
+          "tokens_per_s": 241.1,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_4ff74a448cae"
+        },
+        "json-extraction": {
+          "score": 0.8125,
+          "cases": 16,
+          "p50_ms": 418.6,
+          "tokens_per_s": 173.2,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_4a071e3ae37a"
+        },
+        "math-word": {
+          "score": 0.6,
+          "cases": 15,
+          "p50_ms": 408.7,
+          "tokens_per_s": 174.0,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_1a45e42ee191"
+        },
+        "pii-redaction": {
+          "score": 0.25,
+          "cases": 12,
+          "p50_ms": 317.2,
+          "tokens_per_s": 174.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_1301f180c3e4"
+        },
+        "prompt-injection": {
+          "score": 0.55,
+          "cases": 20,
+          "p50_ms": 209.2,
+          "tokens_per_s": 193.8,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_7225966ae647"
+        },
+        "text-to-sql": {
+          "score": 0.6,
+          "cases": 15,
+          "p50_ms": 286.2,
+          "tokens_per_s": 173.8,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_bb613ec49039"
+        },
+        "ticket-triage": {
+          "score": 0.8,
+          "cases": 20,
+          "p50_ms": 155.7,
+          "tokens_per_s": 296.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_3d2abd276380"
+        },
+        "tool-calling": {
+          "score": 0.4667,
+          "cases": 15,
+          "p50_ms": 349.5,
+          "tokens_per_s": 169.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_121bc9849228"
+        }
+      }
+    },
+    {
+      "id": "google/gemma3-270m",
+      "name": "Gemma 3 270M",
+      "publisher": "Google",
+      "summary": "Ultra-small model meant to be fine-tuned for one narrow task. Weak out of the box; great base for a specialist.",
+      "tasks": [
+        "general"
+      ],
+      "kind": "chat",
+      "params_b": 0.27,
+      "size_gb": 0.29,
+      "license": "gemma",
+      "source": {
+        "type": "ollama",
+        "tag": "gemma3:270m"
+      },
+      "links": {
+        "card": "https://huggingface.co/google/gemma-3-270m"
+      },
+      "benchmarks": {
+        "content-moderation": {
+          "score": 0.5,
+          "cases": 14,
+          "p50_ms": 136.9,
+          "tokens_per_s": 542.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_d9d6c7f6b0b8"
+        },
+        "fact-check": {
+          "score": 0.375,
+          "cases": 16,
+          "p50_ms": 141.2,
+          "tokens_per_s": 463.1,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_80b36051abbe"
+        },
+        "json-extraction": {
+          "score": 0.8125,
+          "cases": 16,
+          "p50_ms": 262.0,
+          "tokens_per_s": 348.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_923c99fae19d"
+        },
+        "math-word": {
+          "score": 0.2667,
+          "cases": 15,
+          "p50_ms": 366.9,
+          "tokens_per_s": 349.0,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_d41566c1c51a"
+        },
+        "pii-redaction": {
+          "score": 0.0,
+          "cases": 12,
+          "p50_ms": 209.0,
+          "tokens_per_s": 354.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_6d9f8c7ff9a8"
+        },
+        "prompt-injection": {
+          "score": 0.75,
+          "cases": 20,
+          "p50_ms": 147.0,
+          "tokens_per_s": 414.2,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_8249a8e95038"
+        },
+        "text-to-sql": {
+          "score": 0.1333,
+          "cases": 15,
+          "p50_ms": 186.8,
+          "tokens_per_s": 350.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_b5604fc65ff7"
+        },
+        "ticket-triage": {
+          "score": 0.15,
+          "cases": 20,
+          "p50_ms": 141.5,
+          "tokens_per_s": 419.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_f42147c4454b"
+        },
+        "tool-calling": {
+          "score": 0.0,
+          "cases": 15,
+          "p50_ms": 218.9,
+          "tokens_per_s": 342.0,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_d8f16844e911"
+        }
+      }
+    },
+    {
+      "id": "google/medgemma-4b",
+      "name": "MedGemma 4B",
+      "publisher": "Google",
+      "summary": "Gemma 3 variant trained for medical text and image comprehension. Research use; check the license terms.",
+      "tasks": [
+        "medical"
+      ],
+      "kind": "chat",
+      "params_b": 4.0,
+      "size_gb": 3.34,
+      "license": "health-ai-developer-foundations",
+      "source": {
+        "type": "ollama",
+        "tag": "medgemma:4b"
+      },
+      "links": {
+        "card": "https://huggingface.co/google/medgemma-4b-it"
+      },
+      "benchmarks": {}
+    },
+    {
+      "id": "google/shieldgemma-2b",
+      "name": "ShieldGemma 2B",
+      "publisher": "Google",
+      "summary": "Gemma-based safety classifier for policy violations in prompts and responses.",
+      "tasks": [
+        "moderation",
+        "guardrail"
+      ],
+      "kind": "chat",
+      "params_b": 2.0,
+      "size_gb": 1.71,
+      "license": "gemma",
+      "source": {
+        "type": "ollama",
+        "tag": "shieldgemma:2b"
+      },
+      "links": {
+        "card": "https://huggingface.co/google/shieldgemma-2b"
+      },
+      "benchmarks": {}
+    },
+    {
+      "id": "huggingface/smollm2-1.7b",
+      "name": "SmolLM2 1.7B",
+      "publisher": "Hugging Face",
+      "summary": "Fully open small model (data and training recipe published).",
+      "tasks": [
+        "general"
+      ],
+      "kind": "chat",
+      "params_b": 1.7,
+      "size_gb": 1.82,
+      "license": "apache-2.0",
+      "source": {
+        "type": "ollama",
+        "tag": "smollm2:1.7b"
+      },
+      "links": {
+        "card": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct"
+      },
+      "benchmarks": {
+        "content-moderation": {
+          "score": 0.5714,
+          "cases": 14,
+          "p50_ms": 74.4,
+          "tokens_per_s": 169.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_43d550301012"
+        },
+        "fact-check": {
+          "score": 0.5625,
+          "cases": 16,
+          "p50_ms": 90.1,
+          "tokens_per_s": 162.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_2ea9fa3819e2"
+        },
+        "json-extraction": {
+          "score": 0.6875,
+          "cases": 16,
+          "p50_ms": 421.1,
+          "tokens_per_s": 116.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_b97fef180104"
+        },
+        "math-word": {
+          "score": 0.6,
+          "cases": 15,
+          "p50_ms": 276.2,
+          "tokens_per_s": 118.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_fc25b23ecad6"
+        },
+        "pii-redaction": {
+          "score": 0.0,
+          "cases": 12,
+          "p50_ms": 290.3,
+          "tokens_per_s": 117.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_505c91a94483"
+        },
+        "prompt-injection": {
+          "score": 0.85,
+          "cases": 20,
+          "p50_ms": 99.5,
+          "tokens_per_s": 147.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_b32e062f7a5e"
+        },
+        "text-to-sql": {
+          "score": 0.6667,
+          "cases": 15,
+          "p50_ms": 218.0,
+          "tokens_per_s": 118.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_35ec90ba1da8"
+        },
+        "ticket-triage": {
+          "score": 0.5,
+          "cases": 20,
+          "p50_ms": 78.1,
+          "tokens_per_s": 160.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_e00be2771507"
+        },
+        "tool-calling": {
+          "score": 0.8,
+          "cases": 15,
+          "p50_ms": 342.9,
+          "tokens_per_s": 112.0,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_cd8eb9b73eb6"
+        }
+      }
+    },
+    {
+      "id": "ibm/granite3-guardian-2b",
+      "name": "Granite Guardian 3 2B",
+      "publisher": "IBM",
+      "summary": "Risk detector for harmful content and RAG failures such as ungrounded answers.",
+      "tasks": [
+        "moderation",
+        "guardrail",
+        "fact-checking"
+      ],
+      "kind": "chat",
+      "params_b": 2.0,
+      "size_gb": 2.69,
+      "license": "apache-2.0",
+      "source": {
+        "type": "ollama",
+        "tag": "granite3-guardian:2b"
+      },
+      "links": {
+        "card": "https://huggingface.co/ibm-granite/granite-guardian-3.0-2b"
+      },
+      "benchmarks": {}
+    },
+    {
+      "id": "ibm/granite4-350m",
+      "name": "Granite 4.0 350M",
+      "publisher": "IBM",
+      "summary": "IBM's smallest Granite 4 model, aimed at edge devices and simple instruction following.",
+      "tasks": [
+        "general"
+      ],
+      "kind": "chat",
+      "params_b": 0.35,
+      "size_gb": 0.71,
+      "license": "apache-2.0",
+      "source": {
+        "type": "ollama",
+        "tag": "granite4:350m"
+      },
+      "links": {
+        "card": "https://huggingface.co/ibm-granite/granite-4.0-350m"
+      },
+      "benchmarks": {
+        "content-moderation": {
+          "score": 0.6429,
+          "cases": 14,
+          "p50_ms": 79.8,
+          "tokens_per_s": 387.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_7f42ff03689b"
+        },
+        "fact-check": {
+          "score": 0.75,
+          "cases": 16,
+          "p50_ms": 86.1,
+          "tokens_per_s": 385.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_12eec778e2b8"
+        },
+        "json-extraction": {
+          "score": 0.6875,
+          "cases": 16,
+          "p50_ms": 221.9,
+          "tokens_per_s": 223.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_9270712a257f"
+        },
+        "math-word": {
+          "score": 0.2667,
+          "cases": 15,
+          "p50_ms": 190.9,
+          "tokens_per_s": 225.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_e57d4c8c23da"
+        },
+        "pii-redaction": {
+          "score": 0.0,
+          "cases": 12,
+          "p50_ms": 200.8,
+          "tokens_per_s": 227.8,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_db5ab968cf83"
+        },
+        "prompt-injection": {
+          "score": 0.5,
+          "cases": 20,
+          "p50_ms": 96.9,
+          "tokens_per_s": 274.8,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_e9593a1b4bbc"
+        },
+        "text-to-sql": {
+          "score": 0.6,
+          "cases": 15,
+          "p50_ms": 180.5,
+          "tokens_per_s": 230.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_f58c83339eeb"
+        },
+        "ticket-triage": {
+          "score": 0.5,
+          "cases": 20,
+          "p50_ms": 80.0,
+          "tokens_per_s": 350.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_106a22f502b8"
+        },
+        "tool-calling": {
+          "score": 0.7333,
+          "cases": 15,
+          "p50_ms": 191.8,
+          "tokens_per_s": 222.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_35f2b90f17cd"
+        }
+      }
+    },
+    {
+      "id": "ibm/granite4-micro",
+      "name": "Granite 4.0 Micro",
+      "publisher": "IBM",
+      "summary": "3B Granite 4 model with solid tool calling and enterprise-style instruction following.",
+      "tasks": [
+        "general",
+        "tool-calling",
+        "extraction"
+      ],
+      "kind": "chat",
+      "params_b": 3.0,
+      "size_gb": 2.1,
+      "license": "apache-2.0",
+      "source": {
+        "type": "ollama",
+        "tag": "granite4:micro"
+      },
+      "links": {
+        "card": "https://huggingface.co/ibm-granite/granite-4.0-micro"
+      },
+      "benchmarks": {
+        "content-moderation": {
+          "score": 0.9286,
+          "cases": 14,
+          "p50_ms": 134.4,
+          "tokens_per_s": 160.4,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_af0fa3ec12ef"
+        },
+        "fact-check": {
+          "score": 1.0,
+          "cases": 16,
+          "p50_ms": 136.4,
+          "tokens_per_s": 159.0,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_37cf0ae799fd"
+        },
+        "json-extraction": {
+          "score": 0.875,
+          "cases": 16,
+          "p50_ms": 501.6,
+          "tokens_per_s": 89.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_d8e0872c3cc0"
+        },
+        "math-word": {
+          "score": 0.8,
+          "cases": 15,
+          "p50_ms": 456.7,
+          "tokens_per_s": 89.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_24f28376cb7d"
+        },
+        "pii-redaction": {
+          "score": 0.5,
+          "cases": 12,
+          "p50_ms": 318.6,
+          "tokens_per_s": 92.2,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_7b759657abff"
+        },
+        "prompt-injection": {
+          "score": 0.9,
+          "cases": 20,
+          "p50_ms": 503.1,
+          "tokens_per_s": 89.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_fea3f145ff50"
+        },
+        "text-to-sql": {
+          "score": 1.0,
+          "cases": 15,
+          "p50_ms": 386.5,
+          "tokens_per_s": 91.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_5042a0bf329f"
+        },
+        "ticket-triage": {
+          "score": 0.85,
+          "cases": 20,
+          "p50_ms": 132.2,
+          "tokens_per_s": 158.1,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_f5e6609d124b"
+        },
+        "tool-calling": {
+          "score": 0.9333,
+          "cases": 15,
+          "p50_ms": 420.6,
+          "tokens_per_s": 88.1,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_9a18445bb1ee"
+        }
+      }
+    },
+    {
+      "id": "jina/reader-lm-1.5b",
+      "name": "ReaderLM 1.5B",
+      "publisher": "Jina AI",
+      "summary": "Converts raw HTML into clean Markdown — a local pre-processor for web content.",
+      "tasks": [
+        "html-to-markdown"
+      ],
+      "kind": "chat",
+      "params_b": 1.5,
+      "size_gb": 0.93,
+      "license": "cc-by-nc-4.0",
+      "source": {
+        "type": "ollama",
+        "tag": "reader-lm:1.5b"
+      },
+      "links": {
+        "card": "https://huggingface.co/jinaai/reader-lm-1.5b"
+      },
+      "benchmarks": {}
+    },
+    {
+      "id": "meta/llama-guard3-1b",
+      "name": "Llama Guard 3 1B",
+      "publisher": "Meta",
+      "summary": "Safety classifier for prompts and responses (safe / unsafe with hazard categories).",
+      "tasks": [
+        "moderation",
+        "guardrail"
+      ],
+      "kind": "chat",
+      "params_b": 1.0,
+      "size_gb": 1.6,
+      "license": "llama3.2",
+      "source": {
+        "type": "ollama",
+        "tag": "llama-guard3:1b"
+      },
+      "links": {
+        "card": "https://huggingface.co/meta-llama/Llama-Guard-3-1B"
+      },
+      "benchmarks": {
+        "content-moderation": {
+          "score": 0.9286,
+          "cases": 14,
+          "p50_ms": 155.6,
+          "tokens_per_s": 191.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_a7a28b1e0db4"
+        }
+      }
+    },
+    {
+      "id": "microsoft/phi4-mini",
+      "name": "Phi-4 mini",
+      "publisher": "Microsoft",
+      "summary": "3.8B model strong at reasoning, math and function calling for its size.",
+      "tasks": [
+        "general",
+        "math",
+        "tool-calling",
+        "extraction"
+      ],
+      "kind": "chat",
+      "params_b": 3.8,
+      "size_gb": 2.49,
+      "license": "mit",
+      "source": {
+        "type": "ollama",
+        "tag": "phi4-mini"
+      },
+      "links": {
+        "card": "https://huggingface.co/microsoft/Phi-4-mini-instruct"
+      },
+      "benchmarks": {
+        "content-moderation": {
+          "score": 0.8571,
+          "cases": 14,
+          "p50_ms": 186.8,
+          "tokens_per_s": 146.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_db6b567364dc"
+        },
+        "fact-check": {
+          "score": 0.9375,
+          "cases": 16,
+          "p50_ms": 197.2,
+          "tokens_per_s": 131.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_83f2b6ddfc60"
+        },
+        "json-extraction": {
+          "score": 0.5625,
+          "cases": 16,
+          "p50_ms": 594.0,
+          "tokens_per_s": 81.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_4cc1811ac53c"
+        },
+        "math-word": {
+          "score": 1.0,
+          "cases": 15,
+          "p50_ms": 830.9,
+          "tokens_per_s": 80.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_7dcfe930e4e9"
+        },
+        "pii-redaction": {
+          "score": 0.25,
+          "cases": 12,
+          "p50_ms": 1137.0,
+          "tokens_per_s": 80.0,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_7fb35bdeafc3"
+        },
+        "prompt-injection": {
+          "score": 0.6,
+          "cases": 20,
+          "p50_ms": 1044.2,
+          "tokens_per_s": 76.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_632896e883be"
+        },
+        "text-to-sql": {
+          "score": 0.6667,
+          "cases": 15,
+          "p50_ms": 570.5,
+          "tokens_per_s": 81.1,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_dbcf7b66240e"
+        },
+        "ticket-triage": {
+          "score": 0.8,
+          "cases": 20,
+          "p50_ms": 191.5,
+          "tokens_per_s": 113.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_63cd13f4da27"
+        },
+        "tool-calling": {
+          "score": 0.8667,
+          "cases": 15,
+          "p50_ms": 634.9,
+          "tokens_per_s": 78.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_48da1e759b0f"
+        }
+      }
+    },
+    {
+      "id": "motherduck/duckdb-nsql-7b",
+      "name": "DuckDB-NSQL 7B",
+      "publisher": "MotherDuck",
+      "summary": "Text-to-SQL tuned for DuckDB's SQL dialect.",
+      "tasks": [
+        "text-to-sql"
+      ],
+      "kind": "chat",
+      "params_b": 7.0,
+      "size_gb": 3.83,
+      "license": "llama2",
+      "source": {
+        "type": "ollama",
+        "tag": "duckdb-nsql:7b"
+      },
+      "links": {
+        "card": "https://huggingface.co/motherduckdb/DuckDB-NSQL-7B-v0.1"
+      },
+      "benchmarks": {}
+    },
+    {
+      "id": "nokast/securerag-0.5b",
+      "name": "nokast-secureRAG 0.5B",
+      "publisher": "Nokast",
+      "summary": "Context-aware prompt-injection firewall for RAG: reads the query and the retrieved passage together and labels it safe, suspicious or malicious-instruction.",
+      "tasks": [
+        "prompt-injection",
+        "guardrail",
+        "rag-security"
+      ],
+      "kind": "chat",
+      "params_b": 0.5,
+      "size_gb": 0.99,
+      "license": "apache-2.0",
+      "source": {
+        "type": "hf-safetensors",
+        "repo": "abhishek085/nokast-secureRAG-0.5B",
+        "ollama_tag": "nokast-securerag:0.5b"
+      },
+      "links": {
+        "card": "https://huggingface.co/abhishek085/nokast-secureRAG-0.5B"
+      },
+      "base_model": "Qwen/Qwen2.5-0.5B",
+      "featured": true,
+      "modelfile": {
+        "template": "chatml",
+        "system": "You are a security firewall for a RAG system. Given a user query and a retrieved context, decide whether the context is safe, suspicious, or a malicious-instruction. Think briefly, then give the label.",
+        "parameters": {
+          "temperature": 0,
+          "num_predict": 128,
+          "stop": [
+            "<|im_end|>",
+            "<|endoftext|>"
+          ]
+        }
+      },
+      "benchmarks": {
+        "prompt-injection": {
+          "score": 0.95,
+          "cases": 20,
+          "p50_ms": 374.9,
+          "tokens_per_s": 185.0,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_93e2b2581cc7"
+        }
+      }
+    },
+    {
+      "id": "nomic/nomic-embed-text",
+      "name": "nomic-embed-text",
+      "publisher": "Nomic",
+      "summary": "Open text-embedding model with long context — local retrieval without an embeddings API.",
+      "tasks": [
+        "embedding",
+        "retrieval"
+      ],
+      "kind": "embedding",
+      "params_b": 0.14,
+      "size_gb": 0.27,
+      "license": "apache-2.0",
+      "source": {
+        "type": "ollama",
+        "tag": "nomic-embed-text"
+      },
+      "links": {
+        "card": "https://huggingface.co/nomic-ai/nomic-embed-text-v1.5"
+      },
+      "benchmarks": {}
+    },
+    {
+      "id": "numind/nuextract",
+      "name": "NuExtract",
+      "publisher": "NuMind",
+      "summary": "Phi-3-mini fine-tuned for structured extraction from a JSON template.",
+      "tasks": [
+        "extraction"
+      ],
+      "kind": "chat",
+      "params_b": 3.8,
+      "size_gb": 2.18,
+      "license": "mit",
+      "source": {
+        "type": "ollama",
+        "tag": "nuextract"
+      },
+      "links": {
+        "card": "https://huggingface.co/numind/NuExtract"
+      },
+      "benchmarks": {
+        "json-extraction": {
+          "score": 0.6875,
+          "cases": 16,
+          "p50_ms": 556.2,
+          "tokens_per_s": 94.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_fa9efecd6875"
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen2.5-coder-1.5b",
+      "name": "Qwen2.5 Coder 1.5B",
+      "publisher": "Qwen",
+      "summary": "Code-tuned small model; a cheap first try for SQL and code-shaped outputs.",
+      "tasks": [
+        "code",
+        "text-to-sql"
+      ],
+      "kind": "chat",
+      "params_b": 1.5,
+      "size_gb": 0.99,
+      "license": "apache-2.0",
+      "source": {
+        "type": "ollama",
+        "tag": "qwen2.5-coder:1.5b"
+      },
+      "links": {
+        "card": "https://huggingface.co/Qwen/Qwen2.5-Coder-1.5B-Instruct"
+      },
+      "benchmarks": {
+        "text-to-sql": {
+          "score": 0.6667,
+          "cases": 15,
+          "p50_ms": 273.0,
+          "tokens_per_s": 170.8,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_031a65178cac"
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3-0.6b",
+      "name": "Qwen3 0.6B",
+      "publisher": "Qwen",
+      "summary": "Tiny generalist with a switchable thinking mode. Surprisingly capable at routing and short classification.",
+      "tasks": [
+        "general",
+        "classification",
+        "tool-calling"
+      ],
+      "kind": "chat",
+      "params_b": 0.6,
+      "size_gb": 0.52,
+      "license": "apache-2.0",
+      "source": {
+        "type": "ollama",
+        "tag": "qwen3:0.6b"
+      },
+      "links": {
+        "card": "https://huggingface.co/Qwen/Qwen3-0.6B"
+      },
+      "benchmarks": {
+        "content-moderation": {
+          "score": 0.7143,
+          "cases": 14,
+          "p50_ms": 114.4,
+          "tokens_per_s": 489.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_94e7bdd9244c"
+        },
+        "fact-check": {
+          "score": 0.6875,
+          "cases": 16,
+          "p50_ms": 109.6,
+          "tokens_per_s": 491.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_966bdf3d931c"
+        },
+        "json-extraction": {
+          "score": 0.875,
+          "cases": 16,
+          "p50_ms": 240.0,
+          "tokens_per_s": 295.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_30c2c0f1c535"
+        },
+        "math-word": {
+          "score": 0.7333,
+          "cases": 15,
+          "p50_ms": 314.5,
+          "tokens_per_s": 290.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_bacac3855794"
+        },
+        "pii-redaction": {
+          "score": 0.1667,
+          "cases": 12,
+          "p50_ms": 191.4,
+          "tokens_per_s": 298.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_6c4f28b11770"
+        },
+        "prompt-injection": {
+          "score": 0.7,
+          "cases": 20,
+          "p50_ms": 131.4,
+          "tokens_per_s": 337.1,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_9347e9e280fe"
+        },
+        "text-to-sql": {
+          "score": 0.6,
+          "cases": 15,
+          "p50_ms": 158.3,
+          "tokens_per_s": 306.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_f1ef9fb2e71f"
+        },
+        "ticket-triage": {
+          "score": 0.2,
+          "cases": 20,
+          "p50_ms": 107.9,
+          "tokens_per_s": 476.0,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_3ba6926b7014"
+        },
+        "tool-calling": {
+          "score": 0.6667,
+          "cases": 15,
+          "p50_ms": 203.5,
+          "tokens_per_s": 283.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_2b939721928d"
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3-1.7b",
+      "name": "Qwen3 1.7B",
+      "publisher": "Qwen",
+      "summary": "Small generalist that punches above its size on extraction, classification and tool calls.",
+      "tasks": [
+        "general",
+        "classification",
+        "extraction",
+        "tool-calling"
+      ],
+      "kind": "chat",
+      "params_b": 1.7,
+      "size_gb": 1.36,
+      "license": "apache-2.0",
+      "source": {
+        "type": "ollama",
+        "tag": "qwen3:1.7b"
+      },
+      "links": {
+        "card": "https://huggingface.co/Qwen/Qwen3-1.7B"
+      },
+      "benchmarks": {
+        "content-moderation": {
+          "score": 0.9286,
+          "cases": 14,
+          "p50_ms": 129.4,
+          "tokens_per_s": 271.4,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_2be0d973a404"
+        },
+        "fact-check": {
+          "score": 0.9375,
+          "cases": 16,
+          "p50_ms": 142.6,
+          "tokens_per_s": 267.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_8f815b737201"
+        },
+        "json-extraction": {
+          "score": 0.875,
+          "cases": 16,
+          "p50_ms": 370.2,
+          "tokens_per_s": 152.4,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_99e5c27d3589"
+        },
+        "math-word": {
+          "score": 1.0,
+          "cases": 15,
+          "p50_ms": 597.0,
+          "tokens_per_s": 152.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_1f6456b42f78"
+        },
+        "pii-redaction": {
+          "score": 0.6667,
+          "cases": 12,
+          "p50_ms": 260.2,
+          "tokens_per_s": 155.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_c2e92627cfb4"
+        },
+        "prompt-injection": {
+          "score": 0.9,
+          "cases": 20,
+          "p50_ms": 297.5,
+          "tokens_per_s": 155.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_07d285159203"
+        },
+        "text-to-sql": {
+          "score": 0.6667,
+          "cases": 15,
+          "p50_ms": 242.3,
+          "tokens_per_s": 159.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_4786fa6752d0"
+        },
+        "ticket-triage": {
+          "score": 0.7,
+          "cases": 20,
+          "p50_ms": 128.0,
+          "tokens_per_s": 239.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_46ea4c9cde11"
+        },
+        "tool-calling": {
+          "score": 1.0,
+          "cases": 15,
+          "p50_ms": 294.7,
+          "tokens_per_s": 150.0,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_ff28e7a4245a"
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3-4b",
+      "name": "Qwen3 4B Instruct (2507)",
+      "publisher": "Qwen",
+      "summary": "The step up when 1–2B models fall short. Use this -instruct tag: plain qwen3:4b is the thinking build and keeps reasoning even with think off.",
+      "tasks": [
+        "general",
+        "extraction",
+        "text-to-sql",
+        "math",
+        "tool-calling"
+      ],
+      "kind": "chat",
+      "params_b": 4.0,
+      "size_gb": 2.5,
+      "license": "apache-2.0",
+      "source": {
+        "type": "ollama",
+        "tag": "qwen3:4b-instruct"
+      },
+      "links": {
+        "card": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507"
+      },
+      "benchmarks": {
+        "content-moderation": {
+          "score": 1.0,
+          "cases": 14,
+          "p50_ms": 164.8,
+          "tokens_per_s": 149.5,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_c965346f806d"
+        },
+        "fact-check": {
+          "score": 1.0,
+          "cases": 16,
+          "p50_ms": 171.0,
+          "tokens_per_s": 150.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_4c8eb95b597a"
+        },
+        "json-extraction": {
+          "score": 0.875,
+          "cases": 16,
+          "p50_ms": 648.0,
+          "tokens_per_s": 79.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_8da2350c6a9d"
+        },
+        "math-word": {
+          "score": 1.0,
+          "cases": 15,
+          "p50_ms": 694.6,
+          "tokens_per_s": 79.0,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_8e98bd0f8214"
+        },
+        "pii-redaction": {
+          "score": 0.5833,
+          "cases": 12,
+          "p50_ms": 360.0,
+          "tokens_per_s": 81.4,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_2aeb47c02795"
+        },
+        "prompt-injection": {
+          "score": 1.0,
+          "cases": 20,
+          "p50_ms": 225.0,
+          "tokens_per_s": 93.8,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_79cad5a267b2"
+        },
+        "text-to-sql": {
+          "score": 1.0,
+          "cases": 15,
+          "p50_ms": 489.6,
+          "tokens_per_s": 81.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_f05c0ef48d2e"
+        },
+        "ticket-triage": {
+          "score": 0.85,
+          "cases": 20,
+          "p50_ms": 172.3,
+          "tokens_per_s": 145.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_c8bd5b32698d"
+        },
+        "tool-calling": {
+          "score": 1.0,
+          "cases": 15,
+          "p50_ms": 489.6,
+          "tokens_per_s": 80.1,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_c6b85144a80c"
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3-embedding-0.6b",
+      "name": "Qwen3 Embedding 0.6B",
+      "publisher": "Qwen",
+      "summary": "Multilingual embedding model; strong retrieval quality for its size.",
+      "tasks": [
+        "embedding",
+        "retrieval"
+      ],
+      "kind": "embedding",
+      "params_b": 0.6,
+      "size_gb": 0.64,
+      "license": "apache-2.0",
+      "source": {
+        "type": "ollama",
+        "tag": "qwen3-embedding:0.6b"
+      },
+      "links": {
+        "card": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B"
+      },
+      "benchmarks": {}
+    },
+    {
+      "id": "qwen/qwen3.5-0.8b",
+      "name": "Qwen3.5 0.8B",
+      "publisher": "Qwen",
+      "summary": "Newer sub-1B Qwen generalist; a good default for very low-memory machines.",
+      "tasks": [
+        "general",
+        "classification"
+      ],
+      "kind": "chat",
+      "params_b": 0.8,
+      "size_gb": 1.32,
+      "license": "apache-2.0",
+      "source": {
+        "type": "ollama",
+        "tag": "qwen3.5:0.8b"
+      },
+      "links": {
+        "card": "https://huggingface.co/Qwen/Qwen3.5-0.8B"
+      },
+      "benchmarks": {
+        "content-moderation": {
+          "score": 0.7143,
+          "cases": 14,
+          "p50_ms": 212.3,
+          "tokens_per_s": 278.7,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_cdc8109df488"
+        },
+        "fact-check": {
+          "score": 0.875,
+          "cases": 16,
+          "p50_ms": 216.5,
+          "tokens_per_s": 279.4,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_e6c8f783c305"
+        },
+        "json-extraction": {
+          "score": 0.625,
+          "cases": 16,
+          "p50_ms": 472.3,
+          "tokens_per_s": 155.6,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_47f9a6d577c9"
+        },
+        "math-word": {
+          "score": 0.8667,
+          "cases": 15,
+          "p50_ms": 954.2,
+          "tokens_per_s": 149.3,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_08e08fbae13b"
+        },
+        "pii-redaction": {
+          "score": 0.5,
+          "cases": 12,
+          "p50_ms": 385.8,
+          "tokens_per_s": 158.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_292e27e5ff53"
+        },
+        "prompt-injection": {
+          "score": 0.8,
+          "cases": 20,
+          "p50_ms": 256.4,
+          "tokens_per_s": 186.0,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_f43cfe96930f"
+        },
+        "text-to-sql": {
+          "score": 0.2667,
+          "cases": 15,
+          "p50_ms": 413.0,
+          "tokens_per_s": 150.4,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_68aabf4e5115"
+        },
+        "ticket-triage": {
+          "score": 0.6,
+          "cases": 20,
+          "p50_ms": 210.4,
+          "tokens_per_s": 276.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_f495bbbb28bb"
+        },
+        "tool-calling": {
+          "score": 0.4667,
+          "cases": 15,
+          "p50_ms": 447.8,
+          "tokens_per_s": 154.9,
+          "hardware": "Apple M4 Pro · 24 GB",
+          "runs": 1,
+          "recipe": "rcp_b14d9a9bec1f"
+        }
+      }
+    }
+  ]
+}

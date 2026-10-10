@@ -1,0 +1,20 @@
+{
+  "id": "jina/reader-lm-1.5b",
+  "name": "ReaderLM 1.5B",
+  "publisher": "Jina AI",
+  "summary": "Converts raw HTML into clean Markdown — a local pre-processor for web content.",
+  "tasks": [
+    "html-to-markdown"
+  ],
+  "kind": "chat",
+  "params_b": 1.5,
+  "size_gb": 0.93,
+  "license": "cc-by-nc-4.0",
+  "source": {
+    "type": "ollama",
+    "tag": "reader-lm:1.5b"
+  },
+  "links": {
+    "card": "https://huggingface.co/jinaai/reader-lm-1.5b"
+  }
+}

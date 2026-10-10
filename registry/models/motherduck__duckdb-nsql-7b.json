@@ -1,0 +1,20 @@
+{
+  "id": "motherduck/duckdb-nsql-7b",
+  "name": "DuckDB-NSQL 7B",
+  "publisher": "MotherDuck",
+  "summary": "Text-to-SQL tuned for DuckDB's SQL dialect.",
+  "tasks": [
+    "text-to-sql"
+  ],
+  "kind": "chat",
+  "params_b": 7.0,
+  "size_gb": 3.83,
+  "license": "llama2",
+  "source": {
+    "type": "ollama",
+    "tag": "duckdb-nsql:7b"
+  },
+  "links": {
+    "card": "https://huggingface.co/motherduckdb/DuckDB-NSQL-7B-v0.1"
+  }
+}

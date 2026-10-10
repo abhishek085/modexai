@@ -1,0 +1,28 @@
+{
+  "id": "tool-calling",
+  "version": 1,
+  "name": "Tool calling (pick the tool, fill the arguments)",
+  "task": "tool-calling",
+  "description": "Choose the right function and produce correct arguments as JSON. The core skill for small agent sub-models and routers.",
+  "system": "You can call these tools:\n- get_weather(city: string, unit: \"celsius\" | \"fahrenheit\")\n- create_event(title: string, date: \"YYYY-MM-DD\", time: \"HH:MM\" 24h)\n- send_email(to: string, subject: string)\n- search_files(query: string, file_type: \"pdf\" | \"docx\" | \"xlsx\" | \"any\")\n- convert_currency(amount: number, from_currency: ISO code, to_currency: ISO code)\n- set_timer(minutes: integer)\n\nToday is 2026-10-09 (Friday). Reply with only a JSON object: {\"name\": <tool>, \"arguments\": {...}}.",
+  "max_tokens": 120,
+  "json_mode": true,
+  "check_defaults": {"type": "tool_call"},
+  "items": [
+    {"id": "tc01", "prompt": "What's the weather in Tokyo in celsius?", "check": {"expected": {"name": "get_weather", "arguments": {"city": "Tokyo", "unit": "celsius"}}}},
+    {"id": "tc02", "prompt": "Set a timer for 25 minutes.", "check": {"expected": {"name": "set_timer", "arguments": {"minutes": 25}}}},
+    {"id": "tc03", "prompt": "Convert 250 US dollars to euros.", "check": {"expected": {"name": "convert_currency", "arguments": {"amount": 250, "from_currency": "USD", "to_currency": "EUR"}}}},
+    {"id": "tc04", "prompt": "Email sam@example.com with the subject 'Quarterly numbers'.", "check": {"expected": {"name": "send_email", "arguments": {"to": "sam@example.com", "subject": "Quarterly numbers"}}}},
+    {"id": "tc05", "prompt": "Find the PDF about the vendor contract.", "check": {"expected": {"name": "search_files", "arguments": {"file_type": "pdf"}}}},
+    {"id": "tc06", "prompt": "Put 'Dentist' on my calendar for 2026-10-15 at 3:30pm.", "check": {"expected": {"name": "create_event", "arguments": {"title": "Dentist", "date": "2026-10-15", "time": "15:30"}}}},
+    {"id": "tc07", "prompt": "Is it hot in Phoenix right now? Use fahrenheit.", "check": {"expected": {"name": "get_weather", "arguments": {"city": "Phoenix", "unit": "fahrenheit"}}}},
+    {"id": "tc08", "prompt": "How much is 1200 Japanese yen in British pounds?", "check": {"expected": {"name": "convert_currency", "arguments": {"amount": 1200, "from_currency": "JPY", "to_currency": "GBP"}}}},
+    {"id": "tc09", "prompt": "Remind me in an hour and a half — set a timer.", "check": {"expected": {"name": "set_timer", "arguments": {"minutes": 90}}}},
+    {"id": "tc10", "prompt": "Look for any spreadsheet with the 2025 budget.", "check": {"expected": {"name": "search_files", "arguments": {"file_type": "xlsx"}}}},
+    {"id": "tc11", "prompt": "Schedule 'Team retro' tomorrow at 10am.", "check": {"expected": {"name": "create_event", "arguments": {"title": "Team retro", "date": "2026-10-10", "time": "10:00"}}}},
+    {"id": "tc12", "prompt": "Send an email to legal@acme.io, subject: NDA review.", "check": {"expected": {"name": "send_email", "arguments": {"to": "legal@acme.io", "subject": "NDA review"}}}},
+    {"id": "tc13", "prompt": "Weather for Berlin please, metric units.", "check": {"expected": {"name": "get_weather", "arguments": {"city": "Berlin", "unit": "celsius"}}}},
+    {"id": "tc14", "prompt": "I need 75 euros in Swiss francs — how much is that?", "check": {"expected": {"name": "convert_currency", "arguments": {"amount": 75, "from_currency": "EUR", "to_currency": "CHF"}}}},
+    {"id": "tc15", "prompt": "Find the Word document with the onboarding checklist.", "check": {"expected": {"name": "search_files", "arguments": {"file_type": "docx"}}}}
+  ]
+}

@@ -1,0 +1,3 @@
+[mcp_servers.modexai]
+command = "uvx"
+args = ["--from", "git+https://github.com/abhishek085/modexai", "modexai", "mcp"]

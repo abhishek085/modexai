@@ -1,0 +1,20 @@
+{
+  "id": "google/gemma3-270m",
+  "name": "Gemma 3 270M",
+  "publisher": "Google",
+  "summary": "Ultra-small model meant to be fine-tuned for one narrow task. Weak out of the box; great base for a specialist.",
+  "tasks": [
+    "general"
+  ],
+  "kind": "chat",
+  "params_b": 0.27,
+  "size_gb": 0.29,
+  "license": "gemma",
+  "source": {
+    "type": "ollama",
+    "tag": "gemma3:270m"
+  },
+  "links": {
+    "card": "https://huggingface.co/google/gemma-3-270m"
+  }
+}

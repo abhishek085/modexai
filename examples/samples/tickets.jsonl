@@ -1,0 +1,10 @@
+{"prompt": "The checkout page times out when I apply a coupon code.", "expected": "technical"}
+{"prompt": "Can I get an invoice with our company's tax ID on it?", "expected": "billing"}
+{"prompt": "Please remove my old phone number from my profile.", "expected": "account"}
+{"prompt": "Would love a keyboard shortcut to archive messages.", "expected": "feature-request"}
+{"prompt": "We won't be renewing next quarter. How do we wind down?", "expected": "cancellation"}
+{"prompt": "You charged my card after I downgraded to the free plan.", "expected": "billing"}
+{"prompt": "Notifications stopped arriving on iOS since yesterday.", "expected": "technical"}
+{"prompt": "How do I transfer ownership of the workspace to my cofounder?", "expected": "account"}
+{"prompt": "Please support SSO with Okta — it's a blocker for our security team.", "expected": "feature-request"}
+{"prompt": "Cancel immediately and delete our data.", "expected": "cancellation"}

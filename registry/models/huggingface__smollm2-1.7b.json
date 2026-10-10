@@ -1,0 +1,20 @@
+{
+  "id": "huggingface/smollm2-1.7b",
+  "name": "SmolLM2 1.7B",
+  "publisher": "Hugging Face",
+  "summary": "Fully open small model (data and training recipe published).",
+  "tasks": [
+    "general"
+  ],
+  "kind": "chat",
+  "params_b": 1.7,
+  "size_gb": 1.82,
+  "license": "apache-2.0",
+  "source": {
+    "type": "ollama",
+    "tag": "smollm2:1.7b"
+  },
+  "links": {
+    "card": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct"
+  }
+}

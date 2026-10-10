@@ -1,0 +1,45 @@
+{
+  "schema": "modexai.recipe/1",
+  "kind": "benchmark",
+  "title": "smollm2:1.7b scores 85% on prompt-injection \u00b7 Apple M4 Pro \u00b7 24 GB",
+  "task": "prompt-injection",
+  "model": {
+    "tag": "smollm2:1.7b",
+    "registry_id": "huggingface/smollm2-1.7b",
+    "size_gb": 1.82
+  },
+  "setup": {
+    "parameters": {
+      "temperature": 0,
+      "num_ctx": 4096
+    }
+  },
+  "hardware": {
+    "os": "macOS",
+    "arch": "arm64",
+    "chip": "Apple M4 Pro",
+    "ram_gb": 24,
+    "gpu": "Apple M4 Pro",
+    "vram_gb": 24,
+    "accelerator": "apple-silicon",
+    "label": "Apple M4 Pro \u00b7 24 GB",
+    "model_size_gb": 1.82
+  },
+  "runtime": {
+    "engine": "ollama",
+    "version": "0.32.1"
+  },
+  "created": "2026-10-09",
+  "tool": "modexai 1.0.0",
+  "eval": {
+    "suite": "prompt-injection@1",
+    "suite_sha": "cbc8cdf62e70c3c3",
+    "cases": 20,
+    "score": 0.85,
+    "p50_ms": 99.5,
+    "p95_ms": 107.1,
+    "tokens_per_s": 147.7
+  },
+  "author": "abhishek085",
+  "id": "rcp_b32e062f7a5e"
+}

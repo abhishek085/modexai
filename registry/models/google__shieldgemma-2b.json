@@ -1,0 +1,21 @@
+{
+  "id": "google/shieldgemma-2b",
+  "name": "ShieldGemma 2B",
+  "publisher": "Google",
+  "summary": "Gemma-based safety classifier for policy violations in prompts and responses.",
+  "tasks": [
+    "moderation",
+    "guardrail"
+  ],
+  "kind": "chat",
+  "params_b": 2.0,
+  "size_gb": 1.71,
+  "license": "gemma",
+  "source": {
+    "type": "ollama",
+    "tag": "shieldgemma:2b"
+  },
+  "links": {
+    "card": "https://huggingface.co/google/shieldgemma-2b"
+  }
+}

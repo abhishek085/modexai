@@ -1,0 +1,45 @@
+{
+  "schema": "modexai.recipe/1",
+  "kind": "benchmark",
+  "title": "granite4:350m scores 50% on ticket-triage \u00b7 Apple M4 Pro \u00b7 24 GB",
+  "task": "classification",
+  "model": {
+    "tag": "granite4:350m",
+    "registry_id": "ibm/granite4-350m",
+    "size_gb": 0.71
+  },
+  "setup": {
+    "parameters": {
+      "temperature": 0,
+      "num_ctx": 4096
+    }
+  },
+  "hardware": {
+    "os": "macOS",
+    "arch": "arm64",
+    "chip": "Apple M4 Pro",
+    "ram_gb": 24,
+    "gpu": "Apple M4 Pro",
+    "vram_gb": 24,
+    "accelerator": "apple-silicon",
+    "label": "Apple M4 Pro \u00b7 24 GB",
+    "model_size_gb": 0.71
+  },
+  "runtime": {
+    "engine": "ollama",
+    "version": "0.32.1"
+  },
+  "created": "2026-10-09",
+  "tool": "modexai 1.0.0",
+  "eval": {
+    "suite": "ticket-triage@1",
+    "suite_sha": "c13c60a6c727dc7b",
+    "cases": 20,
+    "score": 0.5,
+    "p50_ms": 80.0,
+    "p95_ms": 84.5,
+    "tokens_per_s": 350.6
+  },
+  "author": "abhishek085",
+  "id": "rcp_106a22f502b8"
+}

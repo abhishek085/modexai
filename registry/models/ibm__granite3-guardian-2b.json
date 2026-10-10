@@ -1,0 +1,22 @@
+{
+  "id": "ibm/granite3-guardian-2b",
+  "name": "Granite Guardian 3 2B",
+  "publisher": "IBM",
+  "summary": "Risk detector for harmful content and RAG failures such as ungrounded answers.",
+  "tasks": [
+    "moderation",
+    "guardrail",
+    "fact-checking"
+  ],
+  "kind": "chat",
+  "params_b": 2.0,
+  "size_gb": 2.69,
+  "license": "apache-2.0",
+  "source": {
+    "type": "ollama",
+    "tag": "granite3-guardian:2b"
+  },
+  "links": {
+    "card": "https://huggingface.co/ibm-granite/granite-guardian-3.0-2b"
+  }
+}

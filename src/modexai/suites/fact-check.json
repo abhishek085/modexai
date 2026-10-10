@@ -1,0 +1,28 @@
+{
+  "id": "fact-check",
+  "version": 1,
+  "name": "Grounded fact-checking",
+  "task": "fact-checking",
+  "description": "Is a claim supported by the document? The check you run on RAG answers before trusting them.",
+  "system": "Decide whether the claim is fully supported by the document. Answer with exactly one word: supported or unsupported.",
+  "max_tokens": 16,
+  "check_defaults": {"type": "label", "labels": ["supported", "unsupported"]},
+  "items": [
+    {"id": "fc01", "prompt": "Document: The Eiffel Tower was completed in 1889 for the World's Fair in Paris.\nClaim: The Eiffel Tower was finished in 1889.", "check": {"expected": "supported"}},
+    {"id": "fc02", "prompt": "Document: The Eiffel Tower was completed in 1889 for the World's Fair in Paris.\nClaim: The Eiffel Tower was built for the 1900 Olympics.", "check": {"expected": "unsupported"}},
+    {"id": "fc03", "prompt": "Document: Our premium plan costs $49 per month and includes 10 seats.\nClaim: The premium plan includes 10 seats.", "check": {"expected": "supported"}},
+    {"id": "fc04", "prompt": "Document: Our premium plan costs $49 per month and includes 10 seats.\nClaim: The premium plan includes unlimited seats.", "check": {"expected": "unsupported"}},
+    {"id": "fc05", "prompt": "Document: The patient was prescribed 20 mg of atorvastatin once daily.\nClaim: The patient takes atorvastatin twice a day.", "check": {"expected": "unsupported"}},
+    {"id": "fc06", "prompt": "Document: Revenue rose from $2.1M in Q2 to $2.6M in Q3.\nClaim: Revenue increased between Q2 and Q3.", "check": {"expected": "supported"}},
+    {"id": "fc07", "prompt": "Document: Revenue rose from $2.1M in Q2 to $2.6M in Q3.\nClaim: Revenue more than doubled between Q2 and Q3.", "check": {"expected": "unsupported"}},
+    {"id": "fc08", "prompt": "Document: The library is open Monday to Friday, 9am to 6pm. It is closed on weekends.\nClaim: The library is open on Saturdays.", "check": {"expected": "unsupported"}},
+    {"id": "fc09", "prompt": "Document: Mercury is the closest planet to the Sun and has no moons.\nClaim: Mercury has no natural satellites.", "check": {"expected": "supported"}},
+    {"id": "fc10", "prompt": "Document: The contract may be terminated by either party with 30 days' written notice.\nClaim: Only the vendor can terminate the contract.", "check": {"expected": "unsupported"}},
+    {"id": "fc11", "prompt": "Document: The firmware update fixes the Bluetooth pairing bug and improves battery life by about 8%.\nClaim: The update improves battery life.", "check": {"expected": "supported"}},
+    {"id": "fc12", "prompt": "Document: The firmware update fixes the Bluetooth pairing bug and improves battery life by about 8%.\nClaim: The update adds Wi-Fi 7 support.", "check": {"expected": "unsupported"}},
+    {"id": "fc13", "prompt": "Document: Maria joined the company in 2019 as an analyst and became head of data in 2024.\nClaim: Maria has led the data team since 2019.", "check": {"expected": "unsupported"}},
+    {"id": "fc14", "prompt": "Document: The bridge is 1.2 km long and carries four lanes of traffic.\nClaim: The bridge is longer than one kilometre.", "check": {"expected": "supported"}},
+    {"id": "fc15", "prompt": "Document: Shipping is free for orders over $50 within the continental US.\nClaim: All orders ship free worldwide.", "check": {"expected": "unsupported"}},
+    {"id": "fc16", "prompt": "Document: The study enrolled 412 adults aged 18 to 65 across three hospitals.\nClaim: The study included participants from three hospitals.", "check": {"expected": "supported"}}
+  ]
+}

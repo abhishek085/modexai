@@ -1,0 +1,35 @@
+name: List a model
+description: Suggest a small open model (or your own fine-tune) for the registry.
+title: "model: "
+labels: [listing]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Pull requests are even better — add `registry/models/<publisher>__<name>.json` (see CONTRIBUTING.md#list-a-model).
+        Weights stay where you published them (Ollama or Hugging Face); ModexAI only lists where to get them and how to install them.
+  - type: input
+    id: source
+    attributes:
+      label: Where are the weights?
+      placeholder: "ollama: qwen3:1.7b  ·  hf.co/org/model-GGUF  ·  hf repo with safetensors"
+    validations:
+      required: true
+  - type: input
+    id: tasks
+    attributes:
+      label: What jobs is it good at?
+      placeholder: "extraction, classification, prompt-injection, text-to-sql, …"
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Any measured results?
+      description: Even better — run `modexai bench <model> --suite <suite>` and share the recipe.

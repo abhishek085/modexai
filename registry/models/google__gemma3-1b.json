@@ -1,0 +1,21 @@
+{
+  "id": "google/gemma3-1b",
+  "name": "Gemma 3 1B",
+  "publisher": "Google",
+  "summary": "Compact Gemma generalist with good multilingual coverage.",
+  "tasks": [
+    "general",
+    "classification"
+  ],
+  "kind": "chat",
+  "params_b": 1.0,
+  "size_gb": 0.81,
+  "license": "gemma",
+  "source": {
+    "type": "ollama",
+    "tag": "gemma3:1b"
+  },
+  "links": {
+    "card": "https://huggingface.co/google/gemma-3-1b-it"
+  }
+}
