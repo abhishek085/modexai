@@ -18,8 +18,8 @@ import httpx
 
 from . import config
 
-SOURCE_TYPES = ("ollama", "hf-gguf", "hf-safetensors")
-KINDS = ("chat", "embedding")
+SOURCE_TYPES = ("ollama", "hf-gguf", "hf-safetensors", "hf-decision")
+KINDS = ("chat", "embedding", "decision")
 _ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]*/[a-z0-9][a-z0-9._-]*$")
 _TASK_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
 
@@ -82,6 +82,8 @@ class Model:
             return f"hf.co/{src['repo']}" + (f":{quant}" if quant else "")
         if t == "hf-safetensors":
             return src["ollama_tag"]
+        if t == "hf-decision":
+            return src["repo"].rsplit("/", 1)[-1]  # the release name `osj serve --pull` uses
         return self.id
 
     def best_score(self, suite: str | None = None) -> float | None:
@@ -133,7 +135,7 @@ class Registry:
         query: str = "",
         task: str | None = None,
         max_size_gb: float | None = None,
-        kind: str | None = "chat",
+        kind: str | tuple[str, ...] | None = "chat",
         include_general: bool = True,
         installed: set[str] | None = None,
         installed_only: bool = False,
@@ -142,7 +144,7 @@ class Registry:
         words = [w for w in re.split(r"[^a-z0-9.]+", query.lower()) if w]
         ranked: list[tuple[tuple, Model]] = []
         for m in self.models:
-            if kind and m.kind != kind:
+            if kind and m.kind not in ((kind,) if isinstance(kind, str) else kind):
                 continue
             if max_size_gb is not None and m.size_gb and m.size_gb > max_size_gb:
                 continue
@@ -303,6 +305,10 @@ def validate_listing(d: Any) -> list[str]:
                 errs.append("hf-safetensors sources need 'repo'")
             if not isinstance(src.get("ollama_tag"), str):
                 errs.append("hf-safetensors sources need 'ollama_tag' (the local name to create)")
+        elif t == "hf-decision" and not isinstance(src.get("repo"), str):
+            errs.append("hf-decision sources need 'repo' (e.g. 'org/spark-s1-4b-v6')")
+        if (t == "hf-decision") != (kind == "decision"):
+            errs.append("decision models use source.type 'hf-decision' and kind 'decision', together")
 
     mf = d.get("modelfile")
     if mf is not None:

@@ -37,7 +37,9 @@ Add `registry/models/<publisher>__<name>.json`:
 ```
 
 Source types: `ollama` (`tag`), `hf-gguf` (`repo`, optional `quant`), `hf-safetensors` (`repo`,
-`ollama_tag`, plus an optional `modelfile` with `template` / `system` / `parameters`). Then run
+`ollama_tag`, plus an optional `modelfile` with `template` / `system` / `parameters`), `hf-decision`
+(`repo`; with `"kind": "decision"`, for System One models served by open-spark-jev — see
+[docs/decision-models.md](docs/decision-models.md)). Then run
 `modexai registry` (add `--refresh-sizes` to look up sizes) and open a PR. Listings with at least one
 recipe get merged fastest.
 

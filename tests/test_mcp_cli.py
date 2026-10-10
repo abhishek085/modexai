@@ -1,9 +1,16 @@
 import asyncio
 import json
+from pathlib import Path
 
 from modexai import mcp_server, service
+from modexai.agents import BRIEF, CLIENTS, UVX
 from modexai.backends import SimulatedBackend
 from modexai.cli import main
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10
+    tomllib = None
 
 EXPECTED_TOOLS = {
     "system_info", "search_models", "list_benchmark_suites", "benchmark_models", "recommend_model", "install_model",
@@ -46,3 +53,26 @@ def test_cli_commands(capsys):
 def test_cli_demo_runs_offline(capsys):
     assert main(["demo", "--fast"]) == 0
     assert "verdict" in capsys.readouterr().out
+
+
+def test_agent_brief_is_a_prompt_a_command_and_a_doc(capsys):
+    prompts = asyncio.run(mcp_server.mcp.list_prompts())
+    assert [p.name for p in prompts] == ["small_models_in_my_loop"]
+    got = asyncio.run(mcp_server.mcp.get_prompt("small_models_in_my_loop"))
+    assert got.messages[0].content.text == BRIEF
+
+    assert main(["prompt", "--client", "codex"]) == 0
+    out = capsys.readouterr().out
+    assert BRIEF in out and "[mcp_servers.modexai]" in out
+
+    want = {"command": "uvx", "args": UVX}
+    assert json.loads(CLIENTS["cursor"]["setup"])["mcpServers"]["modexai"] == want
+    assert json.loads(CLIENTS["vscode"]["setup"])["servers"]["modexai"] == want
+    if tomllib:
+        assert tomllib.loads(CLIENTS["codex"]["setup"])["mcp_servers"]["modexai"] == want
+
+    root = Path(__file__).resolve().parents[1]
+    for doc in ("docs/agents.md", "examples/agent-instructions.md"):
+        assert BRIEF in (root / doc).read_text(encoding="utf-8"), f"{doc} is out of date with agents.BRIEF"
+    agents_doc = (root / "docs/agents.md").read_text(encoding="utf-8")
+    assert all(c["setup"] in agents_doc for c in CLIENTS.values())

@@ -24,7 +24,7 @@ ModexAI at all.
 | `modexai update` | GET the public registry + recipe index | raw.githubusercontent.com |
 | `install_model` | Download weights | registry.ollama.ai / huggingface.co |
 | `share_recipe` with `confirm=true` | Create a GitHub issue with the recipe JSON | github.com (your `gh` login) |
-| Everything else | Talks to your local Ollama (or OpenAI-compatible server) | localhost |
+| Everything else | Talks to your local Ollama, OpenAI-compatible server or open-spark-jev gateway (`--backend osj`) | localhost, or the URL you set with `--base-url` / `MODEXAI_BASE_URL` |
 
 No telemetry. No analytics. No accounts.
 

@@ -1,0 +1,26 @@
+{
+  "id": "nokast/spark-s1-4b-v8-nvfp4",
+  "name": "spark-s1 4B v8 (NVFP4)",
+  "publisher": "Nokast",
+  "summary": "Adds agent-harness decisions to v6: next-tool choice, tool-call gating, command risk, injected instructions in tool output. Softer calibration. NVFP4, Blackwell GPU.",
+  "tasks": [
+    "decision",
+    "tool-gate",
+    "tool-choice",
+    "prompt-injection"
+  ],
+  "kind": "decision",
+  "params_b": 4.0,
+  "size_gb": 5.16,
+  "license": "apache-2.0",
+  "source": {
+    "type": "hf-decision",
+    "repo": "abhishek085/spark-s1-4b-v8-nvfp4"
+  },
+  "links": {
+    "card": "https://huggingface.co/abhishek085/spark-s1-4b-v8-nvfp4",
+    "code": "https://github.com/abhishek085/open-spark-jev"
+  },
+  "base_model": "Qwen/Qwen3.5-4B",
+  "featured": true
+}

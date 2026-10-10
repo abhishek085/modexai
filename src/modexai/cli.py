@@ -16,8 +16,8 @@ from rich.progress_bar import ProgressBar
 from rich.table import Table
 from rich.text import Text
 
-from . import __version__, config, hardware, ledger, recipes, service
-from .backends import BackendError, get_backend
+from . import __version__, agents, config, hardware, ledger, recipes, service
+from .backends import BACKENDS, BackendError, get_backend
 from .bench import ModelResult
 from .registry import update_registry
 
@@ -203,6 +203,20 @@ def cmd_suites(args) -> int:
     return 0
 
 
+def cmd_prompt(args) -> int:
+    res = service.agent_setup(args.client)
+    if args.json:
+        _dump(res)
+        return 0
+    out = [res["brief"]]
+    if not args.brief_only:
+        for c in res["clients"].values():
+            out.append(f"--- {c['name']} · where: {c['where']}\n\n{c['setup']}\n\nThen paste the brief above into "
+                       f"{c['brief_to']}.\n")
+    sys.stdout.write("\n".join(out))  # plain text: the snippets contain [brackets] rich would eat
+    return 0
+
+
 def _run_with_board(models: list[str], title: str, total: int, fn) -> Any:
     board = RaceBoard(models, title, total)
     with Live(board, console=console, refresh_per_second=8, transient=False):
@@ -286,8 +300,9 @@ def cmd_run(args) -> int:
     ctx = _ctx(args)
     prompt = " ".join(args.prompt) if args.prompt else sys.stdin.read()
     try:
+        labels = [x.strip() for x in args.labels.split(",") if x.strip()] if args.labels else None
         out = service.ask(ctx, prompt, model=args.model, system=args.system, max_tokens=args.max_tokens,
-                          json_mode=args.json_mode)
+                          json_mode=args.json_mode, labels=labels)
     except (BackendError, ValueError) as e:
         err.print(f"[red]{e}[/]")
         return 1
@@ -295,7 +310,8 @@ def cmd_run(args) -> int:
         _dump(out)
     else:
         console.print(out["output"])
-        err.print(f"[dim]{out['model']} · {out['latency_ms']} ms · {out['tokens']['out']} tokens · on this machine[/]")
+        conf = f" · confidence {out['confidence']:.2f}" if "confidence" in out else ""
+        err.print(f"[dim]{out['model']} · {out['latency_ms']} ms · {out['tokens']['out']} tokens{conf} · on this machine[/]")
     return 0
 
 
@@ -497,8 +513,10 @@ def cmd_registry(args) -> int:
 def parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="modexai", description="The local model exchange for AI agents. A Nokast tool.")
     p.add_argument("--version", action="version", version=f"modexai {__version__}")
-    p.add_argument("--backend", default="ollama", choices=["ollama", "openai", "simulated"])
-    p.add_argument("--base-url", help="OpenAI-compatible server URL for --backend openai (llama.cpp, LM Studio, vLLM)")
+    p.add_argument("--backend", default=None, choices=BACKENDS,
+                   help="inference backend (default: $MODEXAI_BACKEND or ollama); osj = System One decision models")
+    p.add_argument("--base-url", help="server URL for --backend openai (llama.cpp, LM Studio, vLLM) or osj "
+                                      "(open-spark-jev gateway, default http://127.0.0.1:8400/v1)")
     sp = p.add_subparsers(dest="cmd", metavar="command")
 
     def add(name, fn, help_):
@@ -524,6 +542,11 @@ def parser() -> argparse.ArgumentParser:
     s = add("suites", cmd_suites, "list built-in benchmark suites")
     s.add_argument("--json", action="store_true")
 
+    s = add("prompt", cmd_prompt, "print the brief that gets an agent using small models in its loop, and MCP setup")
+    s.add_argument("--client", choices=list(agents.CLIENTS), help="only show setup for this agent")
+    s.add_argument("--brief-only", action="store_true", help="just the brief, e.g. to append to CLAUDE.md")
+    s.add_argument("--json", action="store_true")
+
     s = add("bench", cmd_bench, "benchmark local models on a suite or your own samples")
     s.add_argument("models", nargs="+")
     s.add_argument("--suite")
@@ -543,6 +566,7 @@ def parser() -> argparse.ArgumentParser:
     s.add_argument("--system")
     s.add_argument("--max-tokens", type=int, default=512)
     s.add_argument("--json-mode", action="store_true")
+    s.add_argument("--labels", help="comma-separated answer set, e.g. allow,ask,deny (needed for decision models)")
     s.add_argument("--json", action="store_true")
 
     s = add("recommend", cmd_recommend, "find, test and pick the smallest model good enough for a task")

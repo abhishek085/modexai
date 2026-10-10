@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from . import config, hardware, ledger, recipes, shadow
+from . import agents, config, hardware, ledger, recipes, shadow
 from .backends import Backend, BackendError, OllamaBackend, get_backend
 from .bench import ModelResult, run_benchmark, verdict
 from .install import install as _install
@@ -26,7 +26,7 @@ class Context:
     @property
     def backend(self) -> Backend:
         if self._backend is None:
-            self._backend = get_backend("ollama")
+            self._backend = get_backend()
         return self._backend
 
     @property
@@ -58,6 +58,10 @@ def _model_card(m, installed: set[str], task: str | None = None) -> dict[str, An
         "license": m.license,
         "installed": is_tag_installed(m.ollama_tag, installed),
     }
+    if m.kind == "decision":
+        d["kind"] = "decision"
+        d["run_with"] = (f"osj serve --pull {m.source['repo']}, then the osj backend (MODEXAI_BACKEND=osj). "
+                         "Answers closed questions only: pass labels.")
     if m.benchmarks:
         d["benchmarks"] = {k: {"score": v["score"], "p50_ms": v.get("p50_ms"), "hardware": v.get("hardware")}
                            for k, v in m.benchmarks.items() if not task or k == task or task in k}
@@ -90,14 +94,19 @@ def search(ctx: Context, query: str = "", task: str | None = None, max_size_gb: 
            installed_only: bool = False, limit: int = 10) -> dict[str, Any]:
     inst = ctx.installed()
     budget = max_size_gb if max_size_gb is not None else hardware.memory_budget_gb()
-    found = ctx.registry.search(query, task=task or None, max_size_gb=budget, installed=inst,
-                                installed_only=installed_only, limit=limit)
+    found = ctx.registry.search(query, task=task or None, max_size_gb=budget, kind=("chat", "decision"),
+                                installed=inst, installed_only=installed_only, limit=limit)
     return {
         "query": query, "task": task, "max_size_gb": budget,
         "models": [_model_card(m, inst, task) for m in found],
         "known_tasks": list(ctx.registry.tasks())[:30],
         "hint": "Benchmark candidates on your own samples with benchmark_models before delegating.",
     }
+
+
+def agent_setup(client: str | None = None) -> dict[str, Any]:
+    """The brief that teaches an agent to put small models in its loop, plus MCP setup per client."""
+    return agents.setup(client)
 
 
 def suites() -> dict[str, Any]:
@@ -174,6 +183,10 @@ def benchmark(ctx: Context, models: list[str], suite: str | None = None, task: s
 
 def install(ctx: Context, model: str, progress=None) -> dict[str, Any]:
     m = ctx.registry.get(model)
+    if m is not None and m.kind == "decision":
+        raise BackendError(f"{m.id} is a decision model, served by open-spark-jev rather than installed into "
+                           f"Ollama: run `osj serve --pull {m.source['repo']}` and use the osj backend "
+                           "(see docs/decision-models.md)")
     if not isinstance(ctx.backend, OllamaBackend):
         raise BackendError("install_model needs the Ollama backend")
     if m is None:
@@ -188,7 +201,7 @@ def install(ctx: Context, model: str, progress=None) -> dict[str, Any]:
 
 
 def ask(ctx: Context, prompt: str, model: str | None = None, task: str | None = None, system: str | None = None,
-        max_tokens: int = 512, json_mode: bool = False) -> dict[str, Any]:
+        max_tokens: int = 512, json_mode: bool = False, labels: list[str] | None = None) -> dict[str, Any]:
     hire = shadow.hired_model(task) if task else None
     if model is None:
         if not hire:
@@ -198,14 +211,20 @@ def ask(ctx: Context, prompt: str, model: str | None = None, task: str | None = 
         system = system or hire.get("system")
         json_mode = json_mode or bool(hire.get("json_mode"))
     tag, _ = ctx.resolve(model)
+    item = None
+    if labels:
+        item = {"check": {"type": "label", "labels": labels}}
+        if ctx.backend.name != "osj":
+            system = (system + "\n\n" if system else "") + f"Reply with exactly one label from: {', '.join(labels)}."
     msgs = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
-    gen = ctx.backend.generate(tag, msgs, max_tokens=max_tokens, json_mode=json_mode)
+    gen = ctx.backend.generate(tag, msgs, max_tokens=max_tokens, json_mode=json_mode, item=item)
     from .checks import clean
     ledger.log(tag, gen.prompt_tokens, gen.completion_tokens, gen.latency_ms, task)
     pin, pout = config.baseline_price()
     return {
         "model": tag,
         "output": clean(gen.text),
+        **({"confidence": round(gen.confidence, 4)} if gen.confidence is not None else {}),
         "latency_ms": round(gen.latency_ms),
         "tokens": {"in": gen.prompt_tokens, "out": gen.completion_tokens},
         "est_cloud_cost_avoided_usd": round((gen.prompt_tokens * pin + gen.completion_tokens * pout) / 1e6, 6),
@@ -235,20 +254,26 @@ def recommend(ctx: Context, task: str, samples: list[dict] | None = None, max_si
     inst = ctx.installed()
     budget = max_size_gb if max_size_gb is not None else hardware.memory_budget_gb()
     picks: list[str] = []
+    kind = "decision" if ctx.backend.name == "osj" else "chat"
+
+    def runs_here(tag: str) -> bool:
+        m = ctx.registry.get(tag)
+        return (m.kind if m else "chat") == kind
+
     # 1) what other people's recipes say works for this task on hardware like this
     for r in recipes.find(recipes.load_index() + recipes.load_local(), task=s.task if s.builtin else task, limit=20):
         tag = r["model"]["tag"]
         size = r["model"].get("size_gb") or 0
-        if tag not in picks and (not size or size <= budget):
+        if tag not in picks and (not size or size <= budget) and runs_here(tag):
             picks.append(tag)
     # 2) registry specialists + generalists that fit
-    for m in ctx.registry.search(task=s.task if s.builtin else None, max_size_gb=budget, installed=inst):
+    for m in ctx.registry.search(task=s.task if s.builtin else None, max_size_gb=budget, kind=kind, installed=inst):
         if m.ollama_tag not in picks:
             picks.append(m.ollama_tag)
     installed_first = sorted(picks, key=lambda t: (not is_tag_installed(t, inst), picks.index(t)))
     chosen = installed_first[:candidates]
     installed_now = []
-    if auto_install:
+    if auto_install and kind == "chat":  # decision models are pulled by `osj serve`, not here
         for t in chosen:
             if not is_tag_installed(t, inst):
                 install(ctx, t, progress)

@@ -51,7 +51,11 @@ claude mcp add modexai -- uvx --from git+https://github.com/abhishek085/modexai 
 ```
 
 …and ask: *"Which local model can handle our ticket triage? Test the top candidates on these 30 examples."*
-([Cursor, VS Code, Codex, Claude Desktop →](docs/mcp.md))
+([Cursor, Codex, VS Code, Hermes, OpenClaw →](docs/agents.md))
+
+Then hand your agent the brief — `modexai prompt`, or in Claude Code
+`/mcp__modexai__small_models_in_my_loop`. It has the agent audit its own loop for the steps a small
+model can take over, instead of sending every one of them to a frontier API.
 
 Or drive it yourself:
 
@@ -159,9 +163,17 @@ approved. No telemetry, no accounts. → [docs/privacy.md](docs/privacy.md)
 `export_training_data` · `try_recipe` · `share_recipe` · `savings_report` · `system_info` ·
 `list_benchmark_suites` → [reference](docs/mcp.md)
 
-Nine built-in suites — ticket triage, JSON extraction, prompt injection, execution-graded text-to-SQL,
-tool calling, fact-checking, math, PII redaction, moderation — or bring your own `{prompt, expected}`
+Ten built-in suites — ticket triage, JSON extraction, prompt injection, execution-graded text-to-SQL,
+tool calling, tool-call gating, fact-checking, math, PII redaction, moderation — or bring your own `{prompt, expected}`
 JSONL. → [docs/suites.md](docs/suites.md)
+
+## Decision models
+
+Most of what an agent decides in its loop is choosing, not writing: *run this tool call? which queue?
+is this tool output trying to hijack me?* System One decision models such as
+[spark-s1](https://huggingface.co/abhishek085/spark-s1-4b-v6) answer those in one forward pass with a
+probability per option. They are listed in the exchange and benchmarked like everything else, with
+`--backend osj`. → [docs/decision-models.md](docs/decision-models.md)
 
 ## Run it on your machine, share what you find
 

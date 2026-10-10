@@ -1,0 +1,28 @@
+{
+  "id": "nokast/jev-control-core",
+  "name": "jev-control-core 0.8B",
+  "publisher": "Nokast",
+  "summary": "Tiny decision model for agent control points: guardrail gates, tool routing, triage, moderation, claim checks, escalation. f16 GGUF for llama.cpp on Apple Silicon.",
+  "tasks": [
+    "decision",
+    "guardrail",
+    "routing",
+    "classification",
+    "moderation",
+    "fact-checking"
+  ],
+  "kind": "decision",
+  "params_b": 0.8,
+  "size_gb": 1.5,
+  "license": "apache-2.0",
+  "source": {
+    "type": "hf-decision",
+    "repo": "abhishek085/jev-control-core"
+  },
+  "links": {
+    "card": "https://huggingface.co/abhishek085/jev-control-core",
+    "code": "https://github.com/abhishek085/open-spark-jev"
+  },
+  "base_model": "Qwen/Qwen3.5-0.8B-Base",
+  "featured": true
+}
