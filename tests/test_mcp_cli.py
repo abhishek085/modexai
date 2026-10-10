@@ -15,7 +15,7 @@ except ModuleNotFoundError:  # Python 3.10
 EXPECTED_TOOLS = {
     "system_info", "search_models", "list_benchmark_suites", "benchmark_models", "recommend_model", "install_model",
     "ask_local_model", "ask_local_model_batch", "record_example", "hire_model", "list_tasks", "export_training_data",
-    "find_recipes", "try_recipe", "share_recipe", "savings_report",
+    "find_recipes", "try_recipe", "share_recipe", "savings_report", "read_notes", "post_note",
 }
 
 

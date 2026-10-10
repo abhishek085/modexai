@@ -2,9 +2,10 @@
 
     registry/models/*.json   one listing per model (where to get it, how to install it)
     registry/recipes/*.json  one recipe per finding (what worked, where, how well)
+    registry/notes/*.json    one note per thing an agent said about a model, recipe or task
 
-→ ``src/modexai/data/registry.json`` and ``src/modexai/data/recipes.json`` (bundled with the package,
-served from GitHub raw and GitHub Pages).
+→ ``src/modexai/data/{registry,recipes,notes}.json`` (bundled with the package, served from GitHub raw
+and GitHub Pages).
 """
 
 from __future__ import annotations
@@ -16,12 +17,14 @@ from typing import Any
 
 import httpx
 
+from . import notes as nts
 from . import recipes as rec
 from .registry import Model, validate_listing
 
 ROOT = Path(__file__).resolve().parents[2]
 LISTINGS = ROOT / "registry" / "models"
 RECIPES = ROOT / "registry" / "recipes"
+NOTES = ROOT / "registry" / "notes"
 OUT = Path(__file__).parent / "data"
 
 
@@ -96,6 +99,23 @@ def build(check: bool = False, refresh_sizes: bool = False, console=None) -> int
         if not errs:
             recipes.append(d)
 
+    talk: list[dict[str, Any]] = []
+    for p in sorted(NOTES.glob("*.json")):
+        d = json.loads(p.read_text(encoding="utf-8"))
+        errs = nts.validate(d)
+        if p.stem != d.get("id"):
+            errs.append(f"file name must be {d.get('id')}.json")
+        problems += [f"notes/{p.name}: {e}" for e in errs]
+        if not errs:
+            talk.append(d)
+    known = {d["id"] for d in listings} | {r["id"] for r in recipes}
+    note_ids = {n["id"] for n in talk}
+    for n in talk:
+        if not n["on"].startswith("task:") and n["on"] not in known:
+            problems.append(f"notes/{n['id']}.json: 'on' points at {n['on']}, which isn't a listed model or recipe")
+        if n.get("reply_to") and n["reply_to"] not in note_ids:
+            problems.append(f"notes/{n['id']}.json: replies to {n['reply_to']}, which isn't in the index")
+
     if problems:
         for pr in problems:
             say(f"[red]✗[/] {pr}" if console else f"x {pr}")
@@ -113,6 +133,7 @@ def build(check: bool = False, refresh_sizes: bool = False, console=None) -> int
         for r in mine:
             by_suite.setdefault(r["eval"]["suite"].split("@")[0], []).append(r)
         d = dict(d)
+        d["ollama_tag"] = tag  # the local name; the static site has no Python to derive it
         d["benchmarks"] = {s: _summarise(rs) for s, rs in sorted(by_suite.items())}
         models_out.append(d)
 
@@ -125,9 +146,12 @@ def build(check: bool = False, refresh_sizes: bool = False, console=None) -> int
     updated = max([r["created"] for r in recipes] or ["2026-01-01"])
     reg_doc = {"schema": "modexai.registry/1", "updated": updated, "models": models_out}
     rec_doc = {"schema": "modexai.recipes/1", "updated": updated, "recipes": recipes_out}
+    talk.sort(key=lambda n: (n["created"], n["id"]), reverse=True)
+    notes_doc = {"schema": "modexai.notes/1", "notes": talk}
     new = {
         OUT / "registry.json": json.dumps(reg_doc, indent=2, ensure_ascii=False) + "\n",
         OUT / "recipes.json": json.dumps(rec_doc, indent=2, ensure_ascii=False) + "\n",
+        OUT / "notes.json": json.dumps(notes_doc, indent=2, ensure_ascii=False) + "\n",
     }
     stale = [p for p, text in new.items() if not p.exists() or p.read_text(encoding="utf-8") != text]
     if check:
@@ -135,10 +159,10 @@ def build(check: bool = False, refresh_sizes: bool = False, console=None) -> int
             for p in stale:
                 say(f"out of date: {p.relative_to(ROOT)} — run `modexai registry`")
             return 1
-        say(f"registry ok: {len(models_out)} models, {len(recipes_out)} recipes")
+        say(f"registry ok: {len(models_out)} models, {len(recipes_out)} recipes, {len(talk)} notes")
         return 0
     OUT.mkdir(exist_ok=True)
     for p, text in new.items():
         p.write_text(text, encoding="utf-8")
-    say(f"built {len(models_out)} models, {len(recipes_out)} recipes → {OUT.relative_to(ROOT)}")
+    say(f"built {len(models_out)} models, {len(recipes_out)} recipes, {len(talk)} notes → {OUT.relative_to(ROOT)}")
     return 0

@@ -29,3 +29,6 @@ video/.remotion/
 .vscode/
 .idea/
 *.train.jsonl
+
+# the project doesn't track a lockfile; uv run creates one
+uv.lock
