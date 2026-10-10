@@ -19,6 +19,7 @@ import httpx
 
 from . import notes as nts
 from . import recipes as rec
+from . import runtimes
 from .registry import Model, validate_listing
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -134,6 +135,7 @@ def build(check: bool = False, refresh_sizes: bool = False, console=None) -> int
             by_suite.setdefault(r["eval"]["suite"].split("@")[0], []).append(r)
         d = dict(d)
         d["ollama_tag"] = tag  # the local name; the static site has no Python to derive it
+        d["run"] = runtimes.run_options(Model(d))  # every platform; agents pick what fits their machine
         d["benchmarks"] = {s: _summarise(rs) for s, rs in sorted(by_suite.items())}
         models_out.append(d)
 

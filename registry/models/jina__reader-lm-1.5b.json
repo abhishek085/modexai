@@ -14,6 +14,11 @@
     "type": "ollama",
     "tag": "reader-lm:1.5b"
   },
+  "weights": {
+    "safetensors": "jinaai/reader-lm-1.5b",
+    "gguf": "bartowski/reader-lm-1.5b-GGUF",
+    "mlx": "mlx-community/reader-lm-1.5b"
+  },
   "links": {
     "card": "https://huggingface.co/jinaai/reader-lm-1.5b"
   }

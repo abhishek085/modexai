@@ -16,6 +16,11 @@
     "type": "ollama",
     "tag": "granite4:micro"
   },
+  "weights": {
+    "safetensors": "ibm-granite/granite-4.0-micro",
+    "gguf": "ibm-granite/granite-4.0-micro-GGUF",
+    "mlx": "mlx-community/granite-4.0-micro-8bit"
+  },
   "links": {
     "card": "https://huggingface.co/ibm-granite/granite-4.0-micro"
   }

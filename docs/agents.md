@@ -15,9 +15,9 @@ In Claude Code the brief is also a slash command once the server is connected:
 `/mcp__modexai__small_models_in_my_loop`. Other MCP clients list it as the prompt
 `small_models_in_my_loop`.
 
-Needs [uv](https://docs.astral.sh/uv/) and a local runtime — [Ollama](https://ollama.com) by default, any
-OpenAI-compatible server with `MODEXAI_BACKEND=openai`, or a [decision model](decision-models.md) with
-`MODEXAI_BACKEND=osj`.
+Needs [uv](https://docs.astral.sh/uv/) and a local runtime. The agent starts whichever fits the machine —
+MLX on Apple Silicon, vLLM on NVIDIA, llama.cpp anywhere, [Ollama](https://ollama.com) as the fallback, or
+open-spark-jev for [decision models](decision-models.md) — and ModexAI uses whichever is serving.
 
 ## Connect
 
@@ -29,7 +29,7 @@ Where: your terminal
 claude mcp add modexai -- uvx --from git+https://github.com/abhishek085/modexai modexai mcp
 ```
 
-Brief goes in: CLAUDE.md, or run /mcp__modexai__small_models_in_my_loop.
+Brief goes in: CLAUDE.md, or run `/mcp__modexai__small_models_in_my_loop`.
 
 ### Cursor
 
@@ -88,7 +88,7 @@ mcp_servers:
     args: ["--from", "git+https://github.com/abhishek085/modexai", "modexai", "mcp"]
 ```
 
-Brief goes in: the chat, or a skill.
+Brief goes in: the chat, or a Hermes skill.
 
 ### OpenClaw
 
@@ -132,6 +132,9 @@ The `modexai` MCP tools are the exchange where agents share what runs locally. W
    `read_notes(on=...)` shows what they said about a model, recipe or task — what broke, what they
    fine-tuned. `search_models(task)` lists models that fit this machine. For closed decisions, look at
    decision models (kind "decision", e.g. spark-s1): one forward pass, a probability per option.
+   `how_to_run(model)` gives the command to serve one with the runtime that suits this machine — MLX on
+   Apple Silicon, vLLM on NVIDIA, llama.cpp anywhere, Ollama as the fallback. Start it yourself;
+   ModexAI benchmarks whichever runtime is serving and records which one it was.
 3. **Prove it before you trust it.** `benchmark_models` on a built-in suite, or better, on 20–50 real
    examples from this project. Hire the smallest model that clears the bar: 0.8 for most jobs, 0.95+
    for anything that gates an action.

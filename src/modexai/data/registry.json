@@ -19,10 +19,73 @@
         "type": "ollama",
         "tag": "deepseek-r1:1.5b"
       },
+      "weights": {
+        "safetensors": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+        "gguf": "unsloth/DeepSeek-R1-Distill-Qwen-1.5B-GGUF",
+        "mlx": "mlx-community/DeepSeek-R1-Distill-Qwen-1.5B-4bit"
+      },
       "links": {
         "card": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
       },
       "ollama_tag": "deepseek-r1:1.5b",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/DeepSeek-R1-Distill-Qwen-1.5B-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/DeepSeek-R1-Distill-Qwen-1.5B-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf unsloth/DeepSeek-R1-Distill-Qwen-1.5B-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "unsloth/DeepSeek-R1-Distill-Qwen-1.5B-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull deepseek-r1:1.5b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "deepseek-r1:1.5b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -41,10 +104,59 @@
         "type": "ollama",
         "tag": "sqlcoder:7b"
       },
+      "weights": {
+        "safetensors": "defog/sqlcoder-7b-2",
+        "gguf": "QuantFactory/sqlcoder-7b-2-GGUF"
+      },
       "links": {
         "card": "https://huggingface.co/defog/sqlcoder-7b-2"
       },
       "ollama_tag": "sqlcoder:7b",
+      "run": [
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve defog/sqlcoder-7b-2 --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "defog/sqlcoder-7b-2"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf QuantFactory/sqlcoder-7b-2-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "QuantFactory/sqlcoder-7b-2-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull sqlcoder:7b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "sqlcoder:7b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -64,10 +176,47 @@
         "type": "ollama",
         "tag": "embeddinggemma"
       },
+      "weights": {
+        "safetensors": "google/embeddinggemma-300m",
+        "gguf": "ggml-org/embeddinggemma-300M-GGUF",
+        "gated": true
+      },
       "links": {
         "card": "https://huggingface.co/google/embeddinggemma-300m"
       },
       "ollama_tag": "embeddinggemma",
+      "run": [
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf ggml-org/embeddinggemma-300M-GGUF --port 8080 --embedding",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "ggml-org/embeddinggemma-300M-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull embeddinggemma",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "embeddinggemma"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -86,10 +235,74 @@
         "type": "ollama",
         "tag": "functiongemma"
       },
+      "weights": {
+        "safetensors": "google/functiongemma-270m-it",
+        "gguf": "ggml-org/functiongemma-270m-it-GGUF",
+        "mlx": "mlx-community/functiongemma-270m-it-4bit",
+        "gated": true
+      },
       "links": {
         "card": "https://huggingface.co/google/functiongemma-270m-it"
       },
       "ollama_tag": "functiongemma",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/functiongemma-270m-it-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/functiongemma-270m-it-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve google/functiongemma-270m-it --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "google/functiongemma-270m-it"
+          },
+          "note": "pip install vllm. Accept the licence on Hugging Face and run `hf auth login` first."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf ggml-org/functiongemma-270m-it-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "ggml-org/functiongemma-270m-it-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull functiongemma",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "functiongemma"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "tool-calling": {
           "score": 0.3333,
@@ -119,10 +332,74 @@
         "type": "ollama",
         "tag": "gemma3:1b"
       },
+      "weights": {
+        "safetensors": "google/gemma-3-1b-it",
+        "gguf": "ggml-org/gemma-3-1b-it-GGUF",
+        "mlx": "mlx-community/gemma-3-1b-it-4bit",
+        "gated": true
+      },
       "links": {
         "card": "https://huggingface.co/google/gemma-3-1b-it"
       },
       "ollama_tag": "gemma3:1b",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/gemma-3-1b-it-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/gemma-3-1b-it-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve google/gemma-3-1b-it --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "google/gemma-3-1b-it"
+          },
+          "note": "pip install vllm. Accept the licence on Hugging Face and run `hf auth login` first."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf ggml-org/gemma-3-1b-it-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "ggml-org/gemma-3-1b-it-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull gemma3:1b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "gemma3:1b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "content-moderation": {
           "score": 0.0,
@@ -223,10 +500,74 @@
         "type": "ollama",
         "tag": "gemma3:270m"
       },
+      "weights": {
+        "safetensors": "google/gemma-3-270m-it",
+        "gguf": "ggml-org/gemma-3-270m-it-GGUF",
+        "mlx": "mlx-community/gemma-3-270m-it-4bit",
+        "gated": true
+      },
       "links": {
         "card": "https://huggingface.co/google/gemma-3-270m"
       },
       "ollama_tag": "gemma3:270m",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/gemma-3-270m-it-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/gemma-3-270m-it-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve google/gemma-3-270m-it --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "google/gemma-3-270m-it"
+          },
+          "note": "pip install vllm. Accept the licence on Hugging Face and run `hf auth login` first."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf ggml-org/gemma-3-270m-it-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "ggml-org/gemma-3-270m-it-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull gemma3:270m",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "gemma3:270m"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "content-moderation": {
           "score": 0.5,
@@ -327,10 +668,74 @@
         "type": "ollama",
         "tag": "medgemma:4b"
       },
+      "weights": {
+        "safetensors": "google/medgemma-4b-it",
+        "gguf": "unsloth/medgemma-4b-it-GGUF",
+        "mlx": "mlx-community/medgemma-4b-it-4bit",
+        "gated": true
+      },
       "links": {
         "card": "https://huggingface.co/google/medgemma-4b-it"
       },
       "ollama_tag": "medgemma:4b",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/medgemma-4b-it-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/medgemma-4b-it-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve google/medgemma-4b-it --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "google/medgemma-4b-it"
+          },
+          "note": "pip install vllm. Accept the licence on Hugging Face and run `hf auth login` first."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf unsloth/medgemma-4b-it-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "unsloth/medgemma-4b-it-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull medgemma:4b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "medgemma:4b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -350,10 +755,60 @@
         "type": "ollama",
         "tag": "shieldgemma:2b"
       },
+      "weights": {
+        "safetensors": "google/shieldgemma-2b",
+        "gguf": "QuantFactory/shieldgemma-2b-GGUF",
+        "gated": true
+      },
       "links": {
         "card": "https://huggingface.co/google/shieldgemma-2b"
       },
       "ollama_tag": "shieldgemma:2b",
+      "run": [
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve google/shieldgemma-2b --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "google/shieldgemma-2b"
+          },
+          "note": "pip install vllm. Accept the licence on Hugging Face and run `hf auth login` first."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf QuantFactory/shieldgemma-2b-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "QuantFactory/shieldgemma-2b-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull shieldgemma:2b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "shieldgemma:2b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -372,10 +827,73 @@
         "type": "ollama",
         "tag": "smollm2:1.7b"
       },
+      "weights": {
+        "safetensors": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "gguf": "unsloth/SmolLM2-1.7B-Instruct-GGUF",
+        "mlx": "mlx-community/SmolLM2-1.7B-Instruct"
+      },
       "links": {
         "card": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct"
       },
       "ollama_tag": "smollm2:1.7b",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/SmolLM2-1.7B-Instruct --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/SmolLM2-1.7B-Instruct"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve HuggingFaceTB/SmolLM2-1.7B-Instruct --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "HuggingFaceTB/SmolLM2-1.7B-Instruct"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf unsloth/SmolLM2-1.7B-Instruct-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "unsloth/SmolLM2-1.7B-Instruct-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull smollm2:1.7b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "smollm2:1.7b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "content-moderation": {
           "score": 0.5714,
@@ -478,10 +996,59 @@
         "type": "ollama",
         "tag": "granite3-guardian:2b"
       },
+      "weights": {
+        "safetensors": "ibm-granite/granite-guardian-3.0-2b",
+        "gguf": "QuantFactory/granite-guardian-3.0-2b-GGUF"
+      },
       "links": {
         "card": "https://huggingface.co/ibm-granite/granite-guardian-3.0-2b"
       },
       "ollama_tag": "granite3-guardian:2b",
+      "run": [
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve ibm-granite/granite-guardian-3.0-2b --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "ibm-granite/granite-guardian-3.0-2b"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf QuantFactory/granite-guardian-3.0-2b-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "QuantFactory/granite-guardian-3.0-2b-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull granite3-guardian:2b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "granite3-guardian:2b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -500,10 +1067,73 @@
         "type": "ollama",
         "tag": "granite4:350m"
       },
+      "weights": {
+        "safetensors": "ibm-granite/granite-4.0-350m",
+        "gguf": "ibm-granite/granite-4.0-350m-GGUF",
+        "mlx": "mlx-community/granite-4.0-350m-4bit"
+      },
       "links": {
         "card": "https://huggingface.co/ibm-granite/granite-4.0-350m"
       },
       "ollama_tag": "granite4:350m",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/granite-4.0-350m-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/granite-4.0-350m-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve ibm-granite/granite-4.0-350m --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "ibm-granite/granite-4.0-350m"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf ibm-granite/granite-4.0-350m-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "ibm-granite/granite-4.0-350m-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull granite4:350m",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "granite4:350m"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "content-moderation": {
           "score": 0.6429,
@@ -606,10 +1236,73 @@
         "type": "ollama",
         "tag": "granite4:micro"
       },
+      "weights": {
+        "safetensors": "ibm-granite/granite-4.0-micro",
+        "gguf": "ibm-granite/granite-4.0-micro-GGUF",
+        "mlx": "mlx-community/granite-4.0-micro-8bit"
+      },
       "links": {
         "card": "https://huggingface.co/ibm-granite/granite-4.0-micro"
       },
       "ollama_tag": "granite4:micro",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/granite-4.0-micro-8bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/granite-4.0-micro-8bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve ibm-granite/granite-4.0-micro --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "ibm-granite/granite-4.0-micro"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf ibm-granite/granite-4.0-micro-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "ibm-granite/granite-4.0-micro-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull granite4:micro",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "granite4:micro"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "content-moderation": {
           "score": 0.9286,
@@ -710,10 +1403,73 @@
         "type": "ollama",
         "tag": "reader-lm:1.5b"
       },
+      "weights": {
+        "safetensors": "jinaai/reader-lm-1.5b",
+        "gguf": "bartowski/reader-lm-1.5b-GGUF",
+        "mlx": "mlx-community/reader-lm-1.5b"
+      },
       "links": {
         "card": "https://huggingface.co/jinaai/reader-lm-1.5b"
       },
       "ollama_tag": "reader-lm:1.5b",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/reader-lm-1.5b --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/reader-lm-1.5b"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve jinaai/reader-lm-1.5b --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "jinaai/reader-lm-1.5b"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf bartowski/reader-lm-1.5b-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "bartowski/reader-lm-1.5b-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull reader-lm:1.5b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "reader-lm:1.5b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -733,10 +1489,60 @@
         "type": "ollama",
         "tag": "llama-guard3:1b"
       },
+      "weights": {
+        "safetensors": "meta-llama/Llama-Guard-3-1B",
+        "gguf": "QuantFactory/Llama-Guard-3-1B-GGUF",
+        "gated": true
+      },
       "links": {
         "card": "https://huggingface.co/meta-llama/Llama-Guard-3-1B"
       },
       "ollama_tag": "llama-guard3:1b",
+      "run": [
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve meta-llama/Llama-Guard-3-1B --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "meta-llama/Llama-Guard-3-1B"
+          },
+          "note": "pip install vllm. Accept the licence on Hugging Face and run `hf auth login` first."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf QuantFactory/Llama-Guard-3-1B-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "QuantFactory/Llama-Guard-3-1B-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull llama-guard3:1b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "llama-guard3:1b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "content-moderation": {
           "score": 0.9286,
@@ -768,10 +1574,73 @@
         "type": "ollama",
         "tag": "phi4-mini"
       },
+      "weights": {
+        "safetensors": "microsoft/Phi-4-mini-instruct",
+        "gguf": "unsloth/Phi-4-mini-instruct-GGUF",
+        "mlx": "mlx-community/Phi-4-mini-instruct-4bit"
+      },
       "links": {
         "card": "https://huggingface.co/microsoft/Phi-4-mini-instruct"
       },
       "ollama_tag": "phi4-mini",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/Phi-4-mini-instruct-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/Phi-4-mini-instruct-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve microsoft/Phi-4-mini-instruct --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "microsoft/Phi-4-mini-instruct"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf unsloth/Phi-4-mini-instruct-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "unsloth/Phi-4-mini-instruct-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull phi4-mini",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "phi4-mini"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "content-moderation": {
           "score": 0.8571,
@@ -872,10 +1741,59 @@
         "type": "ollama",
         "tag": "duckdb-nsql:7b"
       },
+      "weights": {
+        "safetensors": "motherduckdb/DuckDB-NSQL-7B-v0.1",
+        "gguf": "motherduckdb/DuckDB-NSQL-7B-v0.1-GGUF"
+      },
       "links": {
         "card": "https://huggingface.co/motherduckdb/DuckDB-NSQL-7B-v0.1"
       },
       "ollama_tag": "duckdb-nsql:7b",
+      "run": [
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve motherduckdb/DuckDB-NSQL-7B-v0.1 --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "motherduckdb/DuckDB-NSQL-7B-v0.1"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf motherduckdb/DuckDB-NSQL-7B-v0.1-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "motherduckdb/DuckDB-NSQL-7B-v0.1-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull duckdb-nsql:7b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "duckdb-nsql:7b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -899,6 +1817,9 @@
         "type": "hf-decision",
         "repo": "abhishek085/jev-control-core"
       },
+      "weights": {
+        "safetensors": "abhishek085/jev-control-core"
+      },
       "links": {
         "card": "https://huggingface.co/abhishek085/jev-control-core",
         "code": "https://github.com/abhishek085/open-spark-jev"
@@ -906,6 +1827,21 @@
       "base_model": "Qwen/Qwen3.5-0.8B-Base",
       "featured": true,
       "ollama_tag": "jev-control-core",
+      "run": [
+        {
+          "runtime": "osj",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "osj serve --pull abhishek085/jev-control-core",
+          "then": {
+            "backend": "osj",
+            "base_url": "http://127.0.0.1:8400/v1",
+            "model": "jev-control-core"
+          },
+          "note": "open-spark-jev: pip install it from https://github.com/abhishek085/open-spark-jev. Needs an NVIDIA GPU."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -927,6 +1863,9 @@
         "repo": "abhishek085/nokast-secureRAG-0.5B",
         "ollama_tag": "nokast-securerag:0.5b"
       },
+      "weights": {
+        "safetensors": "abhishek085/nokast-secureRAG-0.5B"
+      },
       "links": {
         "card": "https://huggingface.co/abhishek085/nokast-secureRAG-0.5B"
       },
@@ -945,6 +1884,36 @@
         }
       },
       "ollama_tag": "nokast-securerag:0.5b",
+      "run": [
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve abhishek085/nokast-secureRAG-0.5B --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "abhishek085/nokast-secureRAG-0.5B"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "modexai install nokast/securerag-0.5b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "nokast-securerag:0.5b"
+          },
+          "note": "Downloads the safetensors and imports them into Ollama."
+        }
+      ],
       "benchmarks": {
         "prompt-injection": {
           "score": 0.95,
@@ -976,6 +1945,9 @@
         "type": "hf-decision",
         "repo": "abhishek085/spark-s1-4b-v6-nvfp4"
       },
+      "weights": {
+        "nvfp4": "abhishek085/spark-s1-4b-v6-nvfp4"
+      },
       "links": {
         "card": "https://huggingface.co/abhishek085/spark-s1-4b-v6-nvfp4",
         "code": "https://github.com/abhishek085/open-spark-jev"
@@ -983,6 +1955,21 @@
       "base_model": "Qwen/Qwen3.5-4B",
       "featured": true,
       "ollama_tag": "spark-s1-4b-v6-nvfp4",
+      "run": [
+        {
+          "runtime": "osj",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "osj serve --pull abhishek085/spark-s1-4b-v6-nvfp4",
+          "then": {
+            "backend": "osj",
+            "base_url": "http://127.0.0.1:8400/v1",
+            "model": "spark-s1-4b-v6-nvfp4"
+          },
+          "note": "open-spark-jev: pip install it from https://github.com/abhishek085/open-spark-jev. Needs an NVIDIA Blackwell GPU (e.g. DGX Spark)."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -1004,6 +1991,9 @@
         "type": "hf-decision",
         "repo": "abhishek085/spark-s1-4b-v6"
       },
+      "weights": {
+        "safetensors": "abhishek085/spark-s1-4b-v6"
+      },
       "links": {
         "card": "https://huggingface.co/abhishek085/spark-s1-4b-v6",
         "code": "https://github.com/abhishek085/open-spark-jev"
@@ -1011,6 +2001,21 @@
       "base_model": "Qwen/Qwen3.5-4B",
       "featured": true,
       "ollama_tag": "spark-s1-4b-v6",
+      "run": [
+        {
+          "runtime": "osj",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "osj serve --pull abhishek085/spark-s1-4b-v6",
+          "then": {
+            "backend": "osj",
+            "base_url": "http://127.0.0.1:8400/v1",
+            "model": "spark-s1-4b-v6"
+          },
+          "note": "open-spark-jev: pip install it from https://github.com/abhishek085/open-spark-jev. Needs an NVIDIA GPU."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -1032,6 +2037,9 @@
         "type": "hf-decision",
         "repo": "abhishek085/spark-s1-4b-v8-nvfp4"
       },
+      "weights": {
+        "nvfp4": "abhishek085/spark-s1-4b-v8-nvfp4"
+      },
       "links": {
         "card": "https://huggingface.co/abhishek085/spark-s1-4b-v8-nvfp4",
         "code": "https://github.com/abhishek085/open-spark-jev"
@@ -1039,6 +2047,21 @@
       "base_model": "Qwen/Qwen3.5-4B",
       "featured": true,
       "ollama_tag": "spark-s1-4b-v8-nvfp4",
+      "run": [
+        {
+          "runtime": "osj",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "osj serve --pull abhishek085/spark-s1-4b-v8-nvfp4",
+          "then": {
+            "backend": "osj",
+            "base_url": "http://127.0.0.1:8400/v1",
+            "model": "spark-s1-4b-v8-nvfp4"
+          },
+          "note": "open-spark-jev: pip install it from https://github.com/abhishek085/open-spark-jev. Needs an NVIDIA Blackwell GPU (e.g. DGX Spark)."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -1058,10 +2081,46 @@
         "type": "ollama",
         "tag": "nomic-embed-text"
       },
+      "weights": {
+        "safetensors": "nomic-ai/nomic-embed-text-v1.5",
+        "gguf": "nomic-ai/nomic-embed-text-v1.5-GGUF"
+      },
       "links": {
         "card": "https://huggingface.co/nomic-ai/nomic-embed-text-v1.5"
       },
       "ollama_tag": "nomic-embed-text",
+      "run": [
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf nomic-ai/nomic-embed-text-v1.5-GGUF --port 8080 --embedding",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "nomic-ai/nomic-embed-text-v1.5-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull nomic-embed-text",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "nomic-embed-text"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -1080,10 +2139,59 @@
         "type": "ollama",
         "tag": "nuextract"
       },
+      "weights": {
+        "safetensors": "numind/NuExtract",
+        "gguf": "bartowski/NuExtract-GGUF"
+      },
       "links": {
         "card": "https://huggingface.co/numind/NuExtract"
       },
       "ollama_tag": "nuextract",
+      "run": [
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve numind/NuExtract --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "numind/NuExtract"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf bartowski/NuExtract-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "bartowski/NuExtract-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull nuextract",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "nuextract"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "json-extraction": {
           "score": 0.6875,
@@ -1113,10 +2221,73 @@
         "type": "ollama",
         "tag": "qwen2.5-coder:1.5b"
       },
+      "weights": {
+        "safetensors": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+        "gguf": "Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF",
+        "mlx": "mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit"
+      },
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen2.5-Coder-1.5B-Instruct"
       },
       "ollama_tag": "qwen2.5-coder:1.5b",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve Qwen/Qwen2.5-Coder-1.5B-Instruct --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull qwen2.5-coder:1.5b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "qwen2.5-coder:1.5b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "text-to-sql": {
           "score": 0.6667,
@@ -1147,10 +2318,73 @@
         "type": "ollama",
         "tag": "qwen3:0.6b"
       },
+      "weights": {
+        "safetensors": "Qwen/Qwen3-0.6B",
+        "gguf": "ggml-org/Qwen3-0.6B-GGUF",
+        "mlx": "mlx-community/Qwen3-0.6B-4bit"
+      },
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen3-0.6B"
       },
       "ollama_tag": "qwen3:0.6b",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/Qwen3-0.6B-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/Qwen3-0.6B-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve Qwen/Qwen3-0.6B --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "Qwen/Qwen3-0.6B"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf ggml-org/Qwen3-0.6B-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "ggml-org/Qwen3-0.6B-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull qwen3:0.6b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "qwen3:0.6b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "content-moderation": {
           "score": 0.7143,
@@ -1254,10 +2488,73 @@
         "type": "ollama",
         "tag": "qwen3:1.7b"
       },
+      "weights": {
+        "safetensors": "Qwen/Qwen3-1.7B",
+        "gguf": "ggml-org/Qwen3-1.7B-GGUF",
+        "mlx": "mlx-community/Qwen3-1.7B-4bit"
+      },
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen3-1.7B"
       },
       "ollama_tag": "qwen3:1.7b",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/Qwen3-1.7B-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/Qwen3-1.7B-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve Qwen/Qwen3-1.7B --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "Qwen/Qwen3-1.7B"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf ggml-org/Qwen3-1.7B-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "ggml-org/Qwen3-1.7B-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull qwen3:1.7b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "qwen3:1.7b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "content-moderation": {
           "score": 0.9286,
@@ -1362,10 +2659,73 @@
         "type": "ollama",
         "tag": "qwen3:4b-instruct"
       },
+      "weights": {
+        "safetensors": "Qwen/Qwen3-4B-Instruct-2507",
+        "gguf": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+        "mlx": "mlx-community/Qwen3-4B-Instruct-2507-4bit"
+      },
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507"
       },
       "ollama_tag": "qwen3:4b-instruct",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/Qwen3-4B-Instruct-2507-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve Qwen/Qwen3-4B-Instruct-2507 --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "Qwen/Qwen3-4B-Instruct-2507"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf unsloth/Qwen3-4B-Instruct-2507-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "unsloth/Qwen3-4B-Instruct-2507-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull qwen3:4b-instruct",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "qwen3:4b-instruct"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "content-moderation": {
           "score": 1.0,
@@ -1467,10 +2827,46 @@
         "type": "ollama",
         "tag": "qwen3-embedding:0.6b"
       },
+      "weights": {
+        "safetensors": "Qwen/Qwen3-Embedding-0.6B",
+        "gguf": "Qwen/Qwen3-Embedding-0.6B-GGUF"
+      },
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B"
       },
       "ollama_tag": "qwen3-embedding:0.6b",
+      "run": [
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf Qwen/Qwen3-Embedding-0.6B-GGUF --port 8080 --embedding",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "Qwen/Qwen3-Embedding-0.6B-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull qwen3-embedding:0.6b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "qwen3-embedding:0.6b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {}
     },
     {
@@ -1490,10 +2886,73 @@
         "type": "ollama",
         "tag": "qwen3.5:0.8b"
       },
+      "weights": {
+        "safetensors": "Qwen/Qwen3.5-0.8B",
+        "gguf": "ggml-org/Qwen3.5-0.8B-GGUF",
+        "mlx": "mlx-community/Qwen3.5-0.8B-4bit"
+      },
       "links": {
         "card": "https://huggingface.co/Qwen/Qwen3.5-0.8B"
       },
       "ollama_tag": "qwen3.5:0.8b",
+      "run": [
+        {
+          "runtime": "mlx-lm",
+          "platforms": [
+            "apple-silicon"
+          ],
+          "command": "mlx_lm.server --model mlx-community/Qwen3.5-0.8B-4bit --port 8081",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8081/v1",
+            "model": "mlx-community/Qwen3.5-0.8B-4bit"
+          },
+          "note": "pip install mlx-lm. Usually the fastest option on a Mac."
+        },
+        {
+          "runtime": "vllm",
+          "platforms": [
+            "cuda"
+          ],
+          "command": "vllm serve Qwen/Qwen3.5-0.8B --port 8000",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8000/v1",
+            "model": "Qwen/Qwen3.5-0.8B"
+          },
+          "note": "pip install vllm."
+        },
+        {
+          "runtime": "llama.cpp",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "llama-server -hf ggml-org/Qwen3.5-0.8B-GGUF --port 8080 --jinja",
+          "then": {
+            "backend": "openai",
+            "base_url": "http://127.0.0.1:8080/v1",
+            "model": "ggml-org/Qwen3.5-0.8B-GGUF"
+          },
+          "note": "Runs anywhere; picks a sensible quantisation by default."
+        },
+        {
+          "runtime": "ollama",
+          "platforms": [
+            "apple-silicon",
+            "cuda",
+            "cpu"
+          ],
+          "command": "ollama pull qwen3.5:0.8b",
+          "then": {
+            "backend": "ollama",
+            "base_url": "http://127.0.0.1:11434",
+            "model": "qwen3.5:0.8b"
+          },
+          "note": "The easy fallback. Runs anywhere."
+        }
+      ],
       "benchmarks": {
         "content-moderation": {
           "score": 0.7143,

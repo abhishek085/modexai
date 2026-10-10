@@ -16,6 +16,10 @@
     "type": "ollama",
     "tag": "granite3-guardian:2b"
   },
+  "weights": {
+    "safetensors": "ibm-granite/granite-guardian-3.0-2b",
+    "gguf": "QuantFactory/granite-guardian-3.0-2b-GGUF"
+  },
   "links": {
     "card": "https://huggingface.co/ibm-granite/granite-guardian-3.0-2b"
   }

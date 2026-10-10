@@ -15,6 +15,11 @@
     "type": "ollama",
     "tag": "embeddinggemma"
   },
+  "weights": {
+    "safetensors": "google/embeddinggemma-300m",
+    "gguf": "ggml-org/embeddinggemma-300M-GGUF",
+    "gated": true
+  },
   "links": {
     "card": "https://huggingface.co/google/embeddinggemma-300m"
   }

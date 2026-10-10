@@ -17,6 +17,9 @@
     "repo": "abhishek085/nokast-secureRAG-0.5B",
     "ollama_tag": "nokast-securerag:0.5b"
   },
+  "weights": {
+    "safetensors": "abhishek085/nokast-secureRAG-0.5B"
+  },
   "links": {
     "card": "https://huggingface.co/abhishek085/nokast-secureRAG-0.5B"
   },

@@ -15,6 +15,12 @@
     "type": "ollama",
     "tag": "gemma3:1b"
   },
+  "weights": {
+    "safetensors": "google/gemma-3-1b-it",
+    "gguf": "ggml-org/gemma-3-1b-it-GGUF",
+    "mlx": "mlx-community/gemma-3-1b-it-4bit",
+    "gated": true
+  },
   "links": {
     "card": "https://huggingface.co/google/gemma-3-1b-it"
   }

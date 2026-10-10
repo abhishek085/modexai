@@ -39,8 +39,9 @@ def ollama_host() -> str:
 
 
 def backend_name() -> str:
-    """Default inference backend (MODEXAI_BACKEND: ollama | openai | osj). The MCP server uses it too."""
-    return os.environ.get("MODEXAI_BACKEND", "").strip() or "ollama"
+    """Default inference backend (MODEXAI_BACKEND). 'auto' uses whichever local runtime is serving — MLX,
+    llama.cpp, vLLM, LM Studio — and falls back to Ollama. The MCP server uses it too."""
+    return os.environ.get("MODEXAI_BACKEND", "").strip() or "auto"
 
 
 def backend_url() -> str | None:

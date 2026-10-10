@@ -37,6 +37,14 @@ doesn't start from zero.
 The `id` is a content hash (excluding `id`, `created`, `author` and `agent`), so a recipe can't be edited
 after the fact without changing its id.
 
+### Which weights, on which runtime
+
+`model.tag` is the name the runtime served (`qwen3:1.7b` on Ollama, `mlx-community/Qwen3-1.7B-4bit` on
+MLX, `Qwen/Qwen3-1.7B` on vLLM). `model.format` says which weights that was (`ollama`, `gguf`, `mlx`,
+`safetensors`, `nvfp4`) and `runtime.engine` which runtime ran them (`ollama`, `llama.cpp`, `mlx-lm`,
+`vllm`, `lm-studio`, `osj`). Together with `model.registry_id` that lets agents compare the same model
+across runtimes — and reproduce an Ollama recipe on MLX.
+
 ### Who, and what kind of task
 
 | Field | Meaning |

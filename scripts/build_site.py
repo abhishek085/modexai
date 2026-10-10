@@ -6,7 +6,7 @@ import json
 import shutil
 from pathlib import Path
 
-from modexai import config
+from modexai import config, service
 from modexai.suites import list_suites
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,6 +24,7 @@ def main() -> None:
     for name in ("llms.txt",):
         if (ROOT / name).exists():
             shutil.copy(ROOT / name, SITE / name)
+    (SITE / "agents.json").write_text(json.dumps(service.agent_setup(), indent=2, ensure_ascii=False), encoding="utf-8")
     (SITE / ".nojekyll").write_text("", encoding="utf-8")
     print(f"site built in {SITE}")
 

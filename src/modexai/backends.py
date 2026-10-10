@@ -139,8 +139,12 @@ class OllamaBackend:
 class OpenAICompatBackend:
     name = "openai"
 
-    def __init__(self, base_url: str = "http://127.0.0.1:8080/v1", api_key: str = "local", timeout: float = 180.0):
+    def __init__(self, base_url: str = "http://127.0.0.1:8080/v1", api_key: str = "local", timeout: float = 180.0,
+                 engine: str | None = None):
+        from .runtimes import engine_at
+
         self.base_url = base_url.rstrip("/")
+        self.name = engine or engine_at(self.base_url)  # recorded in recipes: llama.cpp, vllm, mlx-lm, ...
         self.client = httpx.Client(timeout=timeout, headers={"Authorization": f"Bearer {api_key}"})
 
     def installed(self) -> set[str]:
@@ -289,12 +293,22 @@ def _simulated_answer(check: dict | None, correct: bool) -> str:
     return "OK"
 
 
-BACKENDS = ("ollama", "openai", "osj", "simulated")
+BACKENDS = ("auto", "ollama", "openai", "llama.cpp", "mlx-lm", "vllm", "lm-studio", "osj", "simulated")
 
 
 def get_backend(name: str | None = None, **kw) -> Backend:
+    from . import runtimes
+
     name = name or config.backend_name()
     base_url = kw.get("base_url") or config.backend_url()
+    if name == "auto":
+        # Use the runtime the agent started; Ollama is the fallback.
+        running = [r for r in runtimes.detect() if r["backend"] == "openai"]
+        if running and not base_url:
+            return OpenAICompatBackend(base_url=running[0]["base_url"], engine=running[0]["runtime"])
+        name = "openai" if base_url else "ollama"
+    if name in runtimes.ENGINE_FORMATS:
+        return OpenAICompatBackend(base_url=base_url or runtimes.base_url(name), engine=name)
     if name == "ollama":
         return OllamaBackend(host=kw.get("host"))
     if name == "openai":

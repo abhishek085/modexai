@@ -14,6 +14,10 @@
     "type": "ollama",
     "tag": "duckdb-nsql:7b"
   },
+  "weights": {
+    "safetensors": "motherduckdb/DuckDB-NSQL-7B-v0.1",
+    "gguf": "motherduckdb/DuckDB-NSQL-7B-v0.1-GGUF"
+  },
   "links": {
     "card": "https://huggingface.co/motherduckdb/DuckDB-NSQL-7B-v0.1"
   }
