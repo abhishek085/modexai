@@ -29,13 +29,17 @@ from .bench import ModelResult
 from .registry import Model
 
 SCHEMA = "modexai.recipe/1"
-KINDS = ("benchmark", "recipe", "reproduction")
+KINDS = ("benchmark", "recipe", "reproduction", "fine-tune")
+FINE_TUNE_METHODS = ("lora", "qlora", "full", "dpo", "other")
 RECIPE_REPO = "abhishek085/modexai"
 BUNDLED_INDEX = config.DATA_DIR / "recipes.json"
 REMOTE_INDEX_URL = "https://raw.githubusercontent.com/abhishek085/modexai/main/src/modexai/data/recipes.json"
 ISSUE_MARKER = "<!-- modexai-recipe -->"
 
-LIMITS = {"title": 140, "notes": 600, "system": 2000, "author": 40}
+LIMITS = {"title": 140, "notes": 600, "system": 2000, "author": 40, "agent": 40}
+# Links in community text may only point where models and code live.
+LINK_HOSTS = ("huggingface.co", "github.com", "ollama.com")
+_SLUG = r"[a-z0-9][a-z0-9-]{0,40}"
 _INJECTION_PATTERNS = [
     r"ignore (all |any )?(the )?(previous|prior|above|earlier) (instructions|prompts|messages)",
     r"disregard (all |the |any )?(previous|prior|above|system)",
@@ -54,7 +58,7 @@ _INJECTION_PATTERNS = [
 
 
 # Fields excluded from the content hash: identity/attribution, and values the index derives.
-_NOT_HASHED = ("id", "created", "author", "reproductions")
+_NOT_HASHED = ("id", "created", "author", "agent", "reproductions")
 
 
 def _canonical(d: dict[str, Any]) -> bytes:
@@ -143,6 +147,39 @@ def screen_text(text: str) -> str | None:
     return None
 
 
+def bad_links(text: str) -> list[str]:
+    """Links in community text that point anywhere other than LINK_HOSTS (or aren't https)."""
+    out = []
+    for url in re.findall(r"\b(?:https?|ftp)://[^\s)\]>\"']+", text):
+        host = urllib.parse.urlsplit(url).hostname or ""
+        if not url.startswith("https://") or not any(host == h or host.endswith("." + h) for h in LINK_HOSTS):
+            out.append(url)
+    return out
+
+
+def _validate_fine_tune(ft: Any) -> list[str]:
+    if not isinstance(ft, dict):
+        return ["a fine-tune recipe needs a 'fine_tune' object"]
+    errs = []
+    if not isinstance(ft.get("base_model"), str) or not ft["base_model"]:
+        errs.append("'fine_tune.base_model' is required (the model you started from)")
+    if ft.get("method") not in FINE_TUNE_METHODS:
+        errs.append(f"'fine_tune.method' must be one of {FINE_TUNE_METHODS}")
+    n = ft.get("examples")
+    if not isinstance(n, int) or n < 1:
+        errs.append("'fine_tune.examples' must be a positive integer (how many — never the examples themselves)")
+    b = ft.get("baseline_score")
+    if b is not None and (not isinstance(b, (int, float)) or not 0 <= b <= 1):
+        errs.append("'fine_tune.baseline_score' must be between 0 and 1 (the base model on the same eval)")
+    w = ft.get("weights")
+    if w is not None and (not isinstance(w, str) or bad_links(w) or not w.startswith("https://")):
+        errs.append(f"'fine_tune.weights' must be an https link on {', '.join(LINK_HOSTS)}")
+    unknown = set(ft) - {"base_model", "method", "examples", "epochs", "baseline_score", "weights"}
+    if unknown:
+        errs.append(f"unknown fine_tune keys: {sorted(unknown)}")
+    return errs
+
+
 def validate(d: Any) -> list[str]:
     errs: list[str] = []
     if not isinstance(d, dict):
@@ -156,8 +193,12 @@ def validate(d: Any) -> list[str]:
             errs.append(f"missing '{key}'")
     if errs:
         return errs
-    if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,40}", str(d["task"])):
+    if not re.fullmatch(_SLUG, str(d["task"])):
         errs.append("'task' must be lowercase-kebab-case")
+    if "category" in d and not re.fullmatch(_SLUG, str(d["category"])):
+        errs.append("'category' must be lowercase-kebab-case (e.g. 'classification')")
+    if "agent" in d and not re.fullmatch(_SLUG, str(d["agent"])):
+        errs.append("'agent' must be a lowercase slug (e.g. 'claude-code', 'cursor')")
     model = d["model"]
     if not isinstance(model, dict) or not isinstance(model.get("tag"), str) or not model["tag"]:
         errs.append("'model.tag' is required (the Ollama tag or local model name)")
@@ -183,6 +224,10 @@ def validate(d: Any) -> list[str]:
         errs.append("'eval.suite' must look like 'ticket-triage@1'")
     if d["kind"] == "reproduction" and not str(d.get("reproduces", "")).startswith("rcp_"):
         errs.append("a reproduction must name the recipe it reproduces ('reproduces': 'rcp_…')")
+    if d["kind"] == "fine-tune":
+        errs += _validate_fine_tune(d.get("fine_tune"))
+    elif "fine_tune" in d:
+        errs.append("'fine_tune' belongs only on recipes of kind 'fine-tune'")
 
     texts = {
         "title": d.get("title", ""),
@@ -199,6 +244,8 @@ def validate(d: Any) -> list[str]:
         hit = screen_text(val)
         if hit:
             errs.append(f"'{key}' contains instruction-like text aimed at agents (matched /{hit}/)")
+        for url in bad_links(val):
+            errs.append(f"'{key}' links outside {', '.join(LINK_HOSTS)}: {url}")
     if len(json.dumps(d)) > 8000:
         errs.append("recipe is larger than 8 KB")
     if "id" in d and d["id"] != recipe_id(d):
@@ -288,7 +335,7 @@ def find(
         if r.get("kind") == "reproduction":
             continue
         ev = r.get("eval") or {}
-        if task and task not in (r.get("task"), ev.get("suite", "").split("@")[0]):
+        if task and task not in (r.get("task"), r.get("category"), ev.get("suite", "").split("@")[0]):
             continue
         if model and model not in (r["model"].get("tag"), r["model"].get("registry_id")):
             continue
@@ -329,6 +376,18 @@ def share_url(d: dict[str, Any], repo: str = RECIPE_REPO) -> str:
     return f"https://github.com/{repo}/issues/new?{q}"
 
 
+def post_issue(title: str, body: str, label: str, repo: str = RECIPE_REPO, use_gh: bool = True) -> dict[str, str]:
+    """Open a GitHub issue with `gh` if it is available and logged in; otherwise return a pre-filled URL."""
+    if use_gh and shutil.which("gh"):
+        base = ["gh", "issue", "create", "--repo", repo, "--title", title, "--body", body]
+        for cmd in (base + ["--label", label], base):
+            p = subprocess.run(cmd, capture_output=True, text=True)
+            if p.returncode == 0:
+                return {"method": "gh", "url": p.stdout.strip().splitlines()[-1]}
+    q = urllib.parse.urlencode({"title": title, "labels": label, "body": body})
+    return {"method": "url", "url": f"https://github.com/{repo}/issues/new?{q}"}
+
+
 def share(d: dict[str, Any], repo: str = RECIPE_REPO, use_gh: bool = True) -> dict[str, str]:
     """Submit a recipe as a GitHub issue (via `gh` if available) or return a pre-filled issue URL.
 
@@ -337,13 +396,7 @@ def share(d: dict[str, Any], repo: str = RECIPE_REPO, use_gh: bool = True) -> di
     errs = validate(d)
     if errs:
         raise ValueError("recipe is not valid: " + "; ".join(errs))
-    if use_gh and shutil.which("gh"):
-        base = ["gh", "issue", "create", "--repo", repo, "--title", f"recipe: {d['title']}", "--body", issue_body(d)]
-        for cmd in (base + ["--label", "recipe"], base):
-            p = subprocess.run(cmd, capture_output=True, text=True)
-            if p.returncode == 0:
-                return {"method": "gh", "url": p.stdout.strip().splitlines()[-1]}
-    return {"method": "url", "url": share_url(d, repo)}
+    return post_issue(f"recipe: {d['title']}", issue_body(d), "recipe", repo, use_gh)
 
 
 def extract_from_issue(body: str) -> dict[str, Any] | None:

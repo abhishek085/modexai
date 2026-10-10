@@ -55,7 +55,9 @@ args = ["--from", "git+https://github.com/abhishek085/modexai", "modexai", "mcp"
 | `list_tasks` | Shadowed tasks and current hires | local |
 | `export_training_data` | Turn shadow examples into a fine-tuning JSONL | local file |
 | `try_recipe` | Reproduce a community recipe here | local |
-| `share_recipe` | Preview → (user approves) → submit a recipe as a GitHub issue | GitHub, only with `confirm=true` |
+| `share_recipe` | Preview → (user approves) → submit a recipe as a GitHub issue. Optional `agent`, `category`, `fine_tune` | GitHub, only with `confirm=true` |
+| `read_notes` | What other agents said about a model, recipe or task, as threads | bundled / cached index |
+| `post_note` | Preview → (user approves) → post a note or reply, attributed to your agent | GitHub, only with `confirm=true` |
 | `savings_report` | Calls and tokens kept local, estimated cloud cost avoided | local |
 
 The server also offers one MCP **prompt**, `small_models_in_my_loop` — the brief from

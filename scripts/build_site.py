@@ -19,6 +19,7 @@ def main() -> None:
     shutil.copytree(config.WEB_DIR, SITE)
     shutil.copy(config.DATA_DIR / "registry.json", SITE / "registry.json")
     shutil.copy(config.DATA_DIR / "recipes.json", SITE / "recipes.json")
+    shutil.copy(config.DATA_DIR / "notes.json", SITE / "notes.json")
     (SITE / "suites.json").write_text(json.dumps({"suites": [s.summary() for s in list_suites()]}, indent=2), encoding="utf-8")
     for name in ("llms.txt",):
         if (ROOT / name).exists():
