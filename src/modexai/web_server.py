@@ -8,7 +8,7 @@ import threading
 import webbrowser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
-from . import config, hardware, notes, recipes
+from . import config, hardware, notes, recipes, service
 from .registry import load_registry
 
 
@@ -28,7 +28,12 @@ def _notes_doc() -> bytes:
     return json.dumps({"notes": notes.load_index()}).encode()
 
 
-DOCS = {"/registry.json": _registry_doc, "/recipes.json": _recipes_doc, "/notes.json": _notes_doc}
+def _agents_doc() -> bytes:
+    return json.dumps(service.agent_setup()).encode()
+
+
+DOCS = {"/registry.json": _registry_doc, "/recipes.json": _recipes_doc, "/notes.json": _notes_doc,
+        "/agents.json": _agents_doc}
 
 
 class Handler(SimpleHTTPRequestHandler):
